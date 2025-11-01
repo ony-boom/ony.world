@@ -45,8 +45,10 @@ in
     installPhase = ''
       runHook preInstall
 
-      mkdir -p $out/var
-      cp -r build/* $out/var
+      dist=$out/var/www/${pname}
+
+      mkdir -p $dist
+      cp -r build/* $dist
 
       runHook postInstall
     '';
