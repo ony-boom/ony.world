@@ -5,6 +5,8 @@
 	import LanguageSwitcher from '$components/language-switcher.svelte';
 	import ThemeSwitch from '$components/theme-switch.svelte';
 
+	import { dev } from '$app/environment';
+
 	let { children } = $props();
 </script>
 
@@ -13,11 +15,13 @@
 
 	<link href="https://api.fontshare.com/v2/css?f[]=general-sans@1&display=swap" rel="stylesheet" />
 
-	<script
-		defer
-		src="https://umami.ony.world/script.js"
-		data-website-id="90b3ae53-99b3-4f30-a940-49a210c8504b"
-	></script>
+	{#if !dev}
+		<script
+			defer
+			src="https://umami.ony.world/script.js"
+			data-website-id="90b3ae53-99b3-4f30-a940-49a210c8504b"
+		></script>
+	{/if}
 
 	<title>Ony &bull; Software developer</title>
 	<meta name="description" content={m.description()} />
