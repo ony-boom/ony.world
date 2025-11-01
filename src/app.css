@@ -1,0 +1,57 @@
+@import "tailwindcss";
+
+@plugin '@tailwindcss/typography';
+
+:root {
+	--c-fg: light-dark(theme("colors.stone.950"), theme("colors.stone.50"));
+	--c-bg: light-dark(theme("colors.stone.50"), theme("colors.stone.900"));
+	--c-muted: light-dark(theme("colors.stone.600"), theme("colors.stone.400"));
+	--c-border: light-dark(theme("colors.stone.400"), theme("colors.stone.500"));
+	--ff-sans: "General Sans", sans-serif;
+}
+
+@theme {
+	--font-sans: var(--ff-sans);
+	--color-fg: var(--c-fg);
+	--color-bg: var(--c-bg);
+	--color-muted: var(--c-muted);
+}
+
+@layer base {
+	html {
+		color-scheme: light dark;
+	}
+}
+
+@layer components {
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6 {
+		@apply font-medium;
+	}
+
+	strong {
+		font-weight: 500;
+	}
+
+	a {
+		transition: text-decoration 250ms;
+		text-decoration: underline solid 1px var(--c-border);
+
+		&:hover {
+			text-decoration-color: var(--c-fg);
+		}
+	}
+
+	p {
+		max-width: 70ch;
+		line-height: 1.5em;
+
+		&:not(:last-of-type) {
+			@apply mb-3;
+		}
+	}
+}
