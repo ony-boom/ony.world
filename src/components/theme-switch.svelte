@@ -28,6 +28,6 @@
 	});
 </script>
 
-<button onclick={switchTheme}>
+<button class="hover:bg-muted/5" onclick={switchTheme}>
 	<Icon font-size={20} icon="lucide:sun-moon" />
 </button>

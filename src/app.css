@@ -37,6 +37,10 @@
 		font-weight: 500;
 	}
 
+	button {
+		@apply p-2 rounded-md;
+	}
+
 	a {
 		transition: text-decoration 250ms;
 		text-decoration: underline solid 1px var(--c-border);

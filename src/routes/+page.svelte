@@ -21,7 +21,7 @@
 	];
 </script>
 
-<div class="container mx-auto">
+<div class="container mt-8 mx-auto">
 	<div class="space-y-1">
 		<h1 class="text-xl">Ony Lovasoa</h1>
 		<p class="text-muted">{m.jobTitle()} &bull; Antananarivo, Madagascar</p>
