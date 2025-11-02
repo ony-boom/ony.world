@@ -18,7 +18,8 @@ jobs:
         authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
     - name: Build and push to cachix
       run: |
-        nix build --no-link --print-out-path .#default | cachix push ony-boom
+        set -euo pipefail
+        nix build --no-link --print-out-paths .#default | cachix push ony-boom
 
   trigger-deploy:
     runs-on: ubuntu-latest
