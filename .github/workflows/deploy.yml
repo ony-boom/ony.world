@@ -21,34 +21,34 @@ jobs:
         set -euo pipefail
         nix build --no-link --print-out-paths .#default | cachix push ony-boom
 
-  trigger-deploy:
-    runs-on: ubuntu-latest
-    needs: cache
-    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
-    
-    steps:
-      - name: Trigger VPS Deployment
-        run: |
-          APP_NAME="ony-world"
-          URL="https://api.github.com/repos/ony-boom/os/dispatches"
-          
-          echo "::notice title=Triggering Deployment::Triggering deployment for $APP_NAME after successful cache"
-          
-          curl -X POST \
-            -H "Authorization: token ${{ secrets.VPS_DEPLOY_TOKEN }}" \
-            -H "Accept: application/vnd.github.v3+json" \
-            -H "Content-Type: application/json" \
-            $URL \
-            -d '{
-              "event_type": "app-updated",
-              "client_payload": {
-                "app_name": "'$APP_NAME'",
-                "commit": "${{ github.sha }}",
-                "author": "${{ github.actor }}",
-                "repo_url": "${{ github.event.repository.html_url }}",
-                "commit_message": "${{ github.event.head_commit.message }}"
-              }
-            }'
-          
-          echo "::notice title=Success::VPS deployment triggered successfully"
-          echo "Check deployment status at: https://github.com/ony-boom/os/actions"
+trigger-deploy:
+  runs-on: ubuntu-latest
+  needs: cache
+  if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+  env:
+    TARGET_REPO: ony-boom/remote-os
+    APP_NAME: ony-world
+
+  steps:
+    - name: Trigger VPS Deployment
+      run: |
+        set -euo pipefail
+        URL="https://api.github.com/repos/${TARGET_REPO}/dispatches"
+        echo "::notice title=Triggering Deployment::Triggering deployment for $APP_NAME after successful cache"
+
+        curl -X POST \
+          -H "Authorization: token ${{ secrets.VPS_DEPLOY_TOKEN }}" \
+          -H "Accept: application/vnd.github.v3+json" \
+          -H "Content-Type: application/json" \
+          "$URL" \
+          -d '{
+            "event_type": "app-updated",
+            "client_payload": {
+              "app_name": "'$APP_NAME'",
+              "commit": "${{ github.sha }}",
+              "author": "${{ github.actor }}",
+              "repo_url": "${{ github.event.repository.html_url }}",
+              "commit_message": "${{ github.event.head_commit.message }}"
+            }
+          }'
+
