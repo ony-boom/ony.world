@@ -1,4 +1,5 @@
 <script lang="ts">
+	import Text from '$components/text.svelte';
 	import { m } from '$lib/paraglide/messages';
 
 	const LINKS = [
@@ -21,7 +22,7 @@
 	];
 </script>
 
-<div class="container mt-8 mx-auto">
+<div class="container mx-auto mt-8">
 	<div class="space-y-1">
 		<h1 class="text-xl">Ony Lovasoa</h1>
 		<p class="text-muted">{m.jobTitle()} &bull; Antananarivo, Madagascar</p>
@@ -29,8 +30,8 @@
 
 	<div class="mt-8 space-y-8">
 		<section>
-			<p>{@html m.index_intro()}</p>
-			<p>{@html m.index_cta()}</p>
+			<Text tradKey="index_intro" asHtml />
+			<Text tradKey="index_cta" asHtml />
 		</section>
 
 		<section class="space-y-2">
