@@ -35,8 +35,7 @@
 		</section>
 
 		<section class="space-y-2">
-			<h2>{m.index_linksTitle()}</h2>
-
+			<Text tradKey="index_linksTitle" as="h2" />
 			<ul class="space-y-1">
 				{#each LINKS as link}
 					<li>

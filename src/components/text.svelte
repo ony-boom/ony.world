@@ -1,13 +1,14 @@
-<script lang="ts">
+<script lang="ts" generics="Tag extends keyof HTMLElementTagNameMap">
 	import { m } from '$lib/paraglide/messages';
+	import type { SvelteHTMLElements } from 'svelte/elements';
 
-	type Props<ElementName extends keyof HTMLElementTagNameMap = 'p'> = {
-		as?: ElementName;
+	type Props = {
+		as?: Tag;
 		tradKey: keyof typeof m;
 		asHtml?: boolean;
-	} & Partial<HTMLElementTagNameMap[ElementName]>;
+	} & Partial<SvelteHTMLElements[Tag]>;
 
-	let { as = 'p', tradKey, asHtml = false, ...resProps }: Props = $props();
+	let { as, tradKey, asHtml = false, ...resProps }: Props = $props();
 
 	let text = $state('');
 
@@ -16,7 +17,7 @@
 	});
 </script>
 
-<svelte:element this={as} {...resProps as any}>
+<svelte:element this={as ?? 'p'} {...resProps}>
 	{#if asHtml}
 		{@html text}
 	{:else}

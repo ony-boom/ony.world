@@ -10,9 +10,19 @@
 				localStorage.getItem('theme') ??
 				(window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
 			document.documentElement.style.setProperty('color-scheme', theme);
+
+			// Prevent FOUC
+			document.addEventListener('DOMContentLoaded', () => {
+				setTimeout(() => {
+					document.body.classList.remove('opacity-0');
+				}, 250);
+			});
 		</script>
 	</head>
-	<body data-sveltekit-preload-data="hover" class="bg-bg font-sans text-fg">
+	<body
+		data-sveltekit-preload-data="hover"
+		class="bg-bg font-sans text-fg opacity-0 transition-opacity"
+	>
 		<div style="display: contents">%sveltekit.body%</div>
 	</body>
 </html>
