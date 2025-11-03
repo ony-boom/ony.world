@@ -7,7 +7,7 @@
 		fr: 'Français'
 	};
 
-	let selected = $state(getLocale());
+	let selected = getLocale();
 
 	function onChange() {
 		if (browser) {
@@ -17,13 +17,16 @@
 </script>
 
 <select
+	bind:value={selected}
 	onchange={onChange}
 	class="min-w-20"
 	name="lang-switcher"
 	id="lang-switcher"
-	bind:value={selected}
 >
-	{#each Object.entries(localesMap) as locale}
-		<option value={locale[0]}>{locale[1]}</option>
+	{#each Object.entries(localesMap) as localeEntry}
+		{@const locale = localeEntry[0]}
+		{@const localelabel = localeEntry[1]}
+
+		<option value={locale}>{localelabel}</option>
 	{/each}
 </select>
