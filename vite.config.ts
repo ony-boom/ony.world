@@ -11,5 +11,14 @@ export default defineConfig({
 			project: './project.inlang',
 			outdir: './src/lib/paraglide'
 		})
-	]
+	],
+	server: {
+		proxy: {
+			'/media/videos': {
+				target: 'https://ony.world',
+				changeOrigin: true,
+				secure: false // only if your dev machine doesn't trust the VPS SSL cert
+			}
+		}
+	}
 });

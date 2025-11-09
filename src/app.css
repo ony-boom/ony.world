@@ -1,13 +1,11 @@
-@import "tailwindcss";
-
-@plugin '@tailwindcss/typography';
+@import 'tailwindcss';
 
 :root {
-	--c-fg: light-dark(theme("colors.stone.950"), theme("colors.stone.50"));
-	--c-bg: light-dark(theme("colors.stone.50"), theme("colors.stone.900"));
-	--c-muted: light-dark(theme("colors.stone.600"), theme("colors.stone.400"));
-	--c-border: light-dark(theme("colors.stone.400"), theme("colors.stone.500"));
-	--ff-sans: "General Sans", sans-serif;
+	--c-fg: light-dark(theme('colors.stone.950'), theme('colors.stone.50'));
+	--c-bg: light-dark(theme('colors.stone.50'), theme('colors.stone.900'));
+	--c-muted: light-dark(theme('colors.stone.600'), theme('colors.stone.400'));
+	--c-border: light-dark(theme('colors.stone.400'), theme('colors.stone.500'));
+	--ff-sans: 'General Sans', sans-serif;
 }
 
 @theme {
@@ -23,6 +21,10 @@
 	}
 }
 
+@utility container {
+	@apply mx-auto max-w-lg px-6 sm:px-0;
+}
+
 @layer components {
 	h1,
 	h2,
@@ -34,20 +36,33 @@
 	}
 
 	strong {
-		font-weight: 500;
+		@apply font-medium;
+	}
+
+	select {
+		@apply rounded-md p-2 transition hover:bg-muted/5;
 	}
 
 	button {
-		@apply p-2 rounded-md;
+		@apply inline-flex items-center justify-center gap-2 rounded-md p-2;
+
+		&.link {
+			@apply rounded-none p-0;
+		}
 	}
 
-	a {
+	a,
+	button.link {
 		transition: text-decoration 250ms;
 		text-decoration: underline solid 1px var(--c-border);
 
 		&:hover {
 			text-decoration-color: var(--c-fg);
 		}
+	}
+
+	ul {
+		@apply list-disc space-y-1 pl-4;
 	}
 
 	p {

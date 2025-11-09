@@ -14,14 +14,13 @@
 		as?: Tag;
 		tradKey: keyof typeof m;
 		asHtml?: boolean;
-	} & HTMLAttributes<HTMLElement>;
+	} & HTMLAttributes<HTMLElementTagNameMap[TextTags]>;
 
 	let { as = 'p' as Tag, tradKey, asHtml = false, ...resProps }: Props = $props();
 
 	let text = $state('');
 
 	$effect(() => {
-		// text does not update unless I do this, gotta find a better way
 		text = m[tradKey]();
 	});
 </script>

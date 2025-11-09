@@ -29,5 +29,5 @@
 </script>
 
 <button class="hover:bg-muted/5" onclick={switchTheme}>
-	<Icon font-size={20} icon="lucide:sun-moon" />
+	<Icon font-size={20} icon="material-symbols:contrast" />
 </button>

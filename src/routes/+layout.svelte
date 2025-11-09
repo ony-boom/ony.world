@@ -6,6 +6,7 @@
 	import ThemeSwitch from '$components/theme-switch.svelte';
 
 	import { dev } from '$app/environment';
+	import BackButton from '$components/back-button.svelte';
 
 	let { children } = $props();
 </script>
@@ -27,12 +28,19 @@
 	<meta name="description" content={m.description()} />
 </svelte:head>
 
-<main class="px-4">
+<main class="space-y-2">
 	<header class="sticky top-0 py-4">
-		<nav class="container mx-auto flex items-center justify-end gap-4 text-sm text-muted">
-			<LanguageSwitcher />
-			<ThemeSwitch />
+		<nav class="container flex items-center justify-between text-sm text-muted">
+			<div>
+				<BackButton class="hover:text-fg" />
+			</div>
+			<div class="flex items-center gap-4">
+				<LanguageSwitcher />
+				<ThemeSwitch />
+			</div>
 		</nav>
 	</header>
-	{@render children()}
+	<div class="container">
+		{@render children()}
+	</div>
 </main>
