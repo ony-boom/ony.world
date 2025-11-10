@@ -10,5 +10,8 @@ export const load: PageLoad = async ({ params }) => {
 		throw error(404);
 	}
 
-	return projects;
+	return {
+		...projects,
+		availableLanguages: projects.availableLanguages
+	};
 };

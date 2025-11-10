@@ -7,14 +7,23 @@
 
 	import { dev } from '$app/environment';
 	import BackButton from '$components/back-button.svelte';
+	import { page } from '$app/state';
 
 	let { children } = $props();
+
+	const isProjectsPage = $derived(page.route.id === '/projects/[slug]');
+	const availableLanguages = $derived(isProjectsPage ? page.data?.availableLanguages : undefined);
 </script>
 
 <svelte:head>
 	<link rel="icon" href={favicon} />
 
-	<link href="https://api.fontshare.com/v2/css?f[]=general-sans@1&display=swap" rel="stylesheet" />
+	<link rel="preconnect" href="https://fonts.googleapis.com" />
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
+	<link
+		href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+		rel="stylesheet"
+	/>
 
 	{#if !dev}
 		<script
@@ -29,13 +38,13 @@
 </svelte:head>
 
 <main class="space-y-2">
-	<header class="sticky top-0 py-4">
+	<header class="sticky top-0 bg-bg py-4">
 		<nav class="container flex items-center justify-between text-sm text-muted">
 			<div>
 				<BackButton class="hover:text-fg" />
 			</div>
 			<div class="flex items-center gap-4">
-				<LanguageSwitcher />
+				<LanguageSwitcher {availableLanguages} />
 				<ThemeSwitch />
 			</div>
 		</nav>

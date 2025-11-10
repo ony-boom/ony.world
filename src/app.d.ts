@@ -1,5 +1,6 @@
 // See https://svelte.dev/docs/kit/types#app.d.ts
 
+import type { Locale } from '$lib/paraglide/runtime';
 import type { Component } from 'svelte';
 
 // for information about these interfaces
@@ -21,6 +22,7 @@ declare global {
 
 		interface BlogPost {
 			Component: Component;
+			availableLanguages?: Locale[];
 			metadata: {
 				path: string;
 				slug: string;

@@ -26,7 +26,6 @@ export async function loadContent(
 			fr: import.meta.glob('/src/content/posts/fr/*.{md,svx,svelte.md}')
 		}
 	} as const;
-
 	const selected = modules[type]?.[locale] ?? {};
 
 	const loadItem = async (path: string, resolver: App.MdsvexResolver): Promise<App.BlogPost> => {
@@ -34,8 +33,19 @@ export async function loadContent(
 		const metadata = (post as unknown as App.MdsvexFile).metadata;
 		const slug = slugFromPath(path);
 
+		// Check which languages have this slug
+		const enPaths = Object.keys(modules[type]?.en ?? {});
+		const frPaths = Object.keys(modules[type]?.fr ?? {});
+		const hasEn = enPaths.some((p) => slugFromPath(p) === slug);
+		const hasFr = frPaths.some((p) => slugFromPath(p) === slug);
+
+		const availableLanguages: Locale[] = [];
+		if (hasEn) availableLanguages.push('en');
+		if (hasFr) availableLanguages.push('fr');
+
 		return {
 			Component: post.default,
+			availableLanguages,
 			metadata: {
 				...metadata,
 				slug,
@@ -48,7 +58,6 @@ export async function loadContent(
 	if (slug) {
 		const entry = Object.entries(selected).find(([path]) => slugFromPath(path) === slug);
 		if (!entry) return null;
-
 		const [path, resolver] = entry;
 		return await loadItem(path, resolver as App.MdsvexResolver);
 	}
@@ -56,14 +65,12 @@ export async function loadContent(
 	const contentPromises = Object.entries(selected).map(([path, resolver]) =>
 		loadItem(path, resolver as App.MdsvexResolver)
 	);
-
 	const content = await Promise.all(contentPromises);
-
 	return content
 		.filter((c) => c.metadata.published)
 		.toSorted((a, b) => (new Date(a.metadata.date) > new Date(b.metadata.date) ? -1 : 1));
 }
 
-export async function loadContentBySlug(type: ContentType, slug: string, locale: Locale = 'en') {
+export function loadContentBySlug(type: ContentType, slug: string, locale: Locale = 'en') {
 	return loadContent(type, locale, slug);
 }

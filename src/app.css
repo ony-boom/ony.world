@@ -5,7 +5,7 @@
 	--c-bg: light-dark(theme('colors.stone.50'), theme('colors.stone.900'));
 	--c-muted: light-dark(theme('colors.stone.600'), theme('colors.stone.400'));
 	--c-border: light-dark(theme('colors.stone.400'), theme('colors.stone.500'));
-	--ff-sans: 'General Sans', sans-serif;
+	--ff-sans: Inter, sans-serif;
 }
 
 @theme {
