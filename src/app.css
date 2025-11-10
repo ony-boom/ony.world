@@ -5,7 +5,7 @@
 	--c-bg: light-dark(theme('colors.stone.50'), theme('colors.stone.900'));
 	--c-muted: light-dark(theme('colors.stone.600'), theme('colors.stone.400'));
 	--c-border: light-dark(theme('colors.stone.400'), theme('colors.stone.500'));
-	--ff-sans: Inter, sans-serif;
+	--ff-sans: 'Inter Variable', sans-serif;
 }
 
 @theme {
@@ -32,11 +32,11 @@
 	h4,
 	h5,
 	h6 {
-		@apply font-medium;
+		font-weight: 600;
 	}
 
 	strong {
-		@apply font-medium;
+		font-weight: 600;
 	}
 
 	select {
