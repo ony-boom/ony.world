@@ -27,7 +27,7 @@
 	<p class="text-muted">{m.jobTitle()} &bull; Antananarivo, Madagascar</p>
 </div>
 
-<div class="mt-8 space-y-8">
+<div class="mt-6 space-y-6">
 	<section>
 		<Text tradKey="index_intro" asHtml />
 		<Text tradKey="index_cta" asHtml />

@@ -1,6 +1,9 @@
 <script lang="ts">
 	import { browser } from '$app/environment';
 	import Icon from '@iconify/svelte';
+	import type { SvelteHTMLElements } from 'svelte/elements';
+
+	let { children, ...props }: SvelteHTMLElements['button'] = $props();
 
 	type Theme = 'light' | 'dark';
 
@@ -28,6 +31,6 @@
 	});
 </script>
 
-<button class="hover:bg-muted/5" onclick={switchTheme}>
+<button class={['hover:bg-muted/5', props.class]} onclick={switchTheme}>
 	<Icon font-size={20} icon="material-symbols:contrast" />
 </button>

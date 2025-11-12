@@ -1,11 +1,12 @@
 <script lang="ts">
 	import { locales, getLocale, setLocale, type Locale } from '$lib/paraglide/runtime';
+	import type { SvelteHTMLElements } from 'svelte/elements';
 
-	interface Props {
+	type Props = {
 		availableLanguages?: Locale[];
-	}
+	} & SvelteHTMLElements['select'];
 
-	let { availableLanguages = [...locales] }: Props = $props();
+	let { availableLanguages = [...locales], ...props }: Props = $props();
 
 	const localesMap: Record<(typeof locales)[number], string> = {
 		en: 'English',
@@ -28,7 +29,13 @@
 	});
 </script>
 
-<select bind:value class="min-w-20" name="lang-switcher" id="lang-switcher">
+<select
+	{...props}
+	bind:value
+	class={['min-w-20', props.class]}
+	name="lang-switcher"
+	id="lang-switcher"
+>
 	{#each Object.entries(localesMap) as localeEntry}
 		{@const locale = localeEntry[0]}
 		{@const localelabel = localeEntry[1]}

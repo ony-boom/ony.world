@@ -13,7 +13,7 @@
 <h1 class="text-lg">
 	{title}
 </h1>
-<span class="text-muted">{formattedDate}</span>
+<span class="text-muted text-sm">{formattedDate}</span>
 
 <article class="mt-6 space-y-4">
 	<Component />

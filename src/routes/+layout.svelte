@@ -33,19 +33,19 @@
 	<meta name="description" content={m.description()} />
 </svelte:head>
 
-<main class="space-y-2">
+<main class="space-y-6">
 	<header class="sticky top-0 bg-bg py-4">
 		<nav class="container flex items-center justify-between text-sm text-muted">
 			<div>
 				<BackButton class="hover:text-fg" />
 			</div>
 			<div class="flex items-center gap-4">
-				<LanguageSwitcher {availableLanguages} />
-				<ThemeSwitch />
+				<LanguageSwitcher class="hover:text-fg" {availableLanguages} />
+				<ThemeSwitch class="hover:text-fg" />
 			</div>
 		</nav>
 	</header>
-	<div class="container">
+	<div class="container pb-8">
 		{@render children()}
 	</div>
 </main>

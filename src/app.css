@@ -1,10 +1,12 @@
 @import 'tailwindcss';
 
 :root {
-	--c-fg: light-dark(theme('colors.stone.950'), theme('colors.stone.50'));
+	--c-fg: light-dark(theme('colors.stone.900'), theme('colors.stone.50'));
 	--c-bg: light-dark(theme('colors.stone.50'), theme('colors.stone.900'));
+	--c-surface: light-dark(theme('colors.stone.100'), theme('colors.stone.800'));
 	--c-muted: light-dark(theme('colors.stone.600'), theme('colors.stone.400'));
 	--c-border: light-dark(theme('colors.stone.400'), theme('colors.stone.500'));
+	/* --c-code-bg: light-dark(theme('colors.stone.200'), theme('colors.stone.800')); */
 	--ff-sans: 'Inter Variable', sans-serif;
 }
 
@@ -12,7 +14,10 @@
 	--font-sans: var(--ff-sans);
 	--color-fg: var(--c-fg);
 	--color-bg: var(--c-bg);
+	--color-border: var(--c-border);
+	--color-code-bg: var(--c-code-bg);
 	--color-muted: var(--c-muted);
+	--color-surface: var(--c-surface);
 }
 
 @layer base {
@@ -22,7 +27,7 @@
 }
 
 @utility container {
-	@apply mx-auto max-w-lg px-6 sm:px-0;
+	@apply mx-auto max-w-2xl px-6 sm:px-0;
 }
 
 @layer components {
@@ -59,6 +64,23 @@
 		&:hover {
 			text-decoration-color: var(--c-fg);
 		}
+
+		&[href^='http'] {
+			&:hover {
+				&::after {
+					color: var(--c-fg);
+				}
+			}
+			&::after {
+				color: var(--c-border);
+				margin-left: 4px;
+				font-size: 14px;
+				font-weight: 200;
+				display: inline-block;
+				content: '\2197';
+				transition: color 250ms;
+			}
+		}
 	}
 
 	ul {
@@ -70,7 +92,15 @@
 		line-height: 1.5em;
 
 		&:not(:last-of-type) {
-			@apply mb-3;
+			@apply mb-2;
 		}
+
+		code {
+			@apply rounded border border-border/50 bg-surface px-1;
+		}
+	}
+
+	pre {
+		@apply rounded p-4 font-mono;
 	}
 }

@@ -3,20 +3,20 @@ title: 'My music server'
 description: 'A music server/player similar to Subsonic,Navindrome'
 date: '2025-11-05'
 published: true
-coverUrl: /media/videos/mms-preview.mp4
+coverUrl: /videos/mms-preview.mp4
 coverType: "video"
 ---
 
-I've always liked being in control of my music, I mean not using thrid party services to play/listen to my music.
+<video controls muted>
+    <source src="/videos/mms-preview.mp4" type="video/mp4" />
+</video>
 
-I don't know, there's some aesthetic with having a walkman or IPOD, I've always wanted to have one them but I could'nt afford.
+**MMS** (My Music Server), as the name imply is a simple music server.
+I made it because there are any music player that actually fits my need.
+It's not the best, but it's mine and works well for me. 
 
-![Walkman](https://retrospekt.com/cdn/shop/files/PC-VR-1299_2.jpg?v=1699302825&width=3000)
+To put it simple, I wanted to have all of my music in the same place.
+Yes, yes, yes... I know Spotify,Deezer,Tidal and so on exist but I don't want that... okay!
+I'm a dev and I, instead of just using them, created my own.
 
-Since then, I was obssesd with music player.
-
-I used Windows before and on windows there's [musicbee](https://getmusicbee.com/), and dang I love it, it have everything.
-
-But windows as OS... Meh, for me at least it's so bad, I hate windows. Then I switched to linux and I don't regret it but yes, yes, musicbee is not supported on linux.
-
-## Why not make one
+I learned a lot making it and I don't regret. Sure there's a lot to improve and some of my choices when making it was wrong. For example I load all songs at the start and store them all inside `indexDB` (don't judge 😒, I know it's bad).
