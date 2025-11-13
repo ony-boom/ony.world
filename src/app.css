@@ -1,22 +1,15 @@
 @import 'tailwindcss';
 
 :root {
-	--c-fg: light-dark(theme('colors.stone.900'), theme('colors.stone.50'));
-	--c-bg: light-dark(theme('colors.stone.50'), theme('colors.stone.900'));
-	--c-surface: light-dark(theme('colors.stone.100'), theme('colors.stone.800'));
-	--c-muted: light-dark(theme('colors.stone.600'), theme('colors.stone.400'));
-	--c-border: light-dark(theme('colors.stone.400'), theme('colors.stone.500'));
-	/* --c-code-bg: light-dark(theme('colors.stone.200'), theme('colors.stone.800')); */
 	--ff-sans: 'Inter Variable', sans-serif;
 }
 
 @theme {
 	--font-sans: var(--ff-sans);
-	--color-fg: var(--c-fg);
-	--color-bg: var(--c-bg);
-	--color-border: var(--c-border);
-	--color-code-bg: var(--c-code-bg);
-	--color-muted: var(--c-muted);
+	--color-fg: var(--md-sys-color-on-background);
+	--color-bg: var(--md-sys-color-background);
+	--color-primary: var(--md-sys-color-primary);
+	--color-border: var(--md-sys-color-outline);
 	--color-surface: var(--c-surface);
 }
 
@@ -45,7 +38,7 @@
 	}
 
 	select {
-		@apply rounded-md p-2 transition hover:bg-muted/5;
+		@apply rounded-md p-2 transition hover:bg-primary/5;
 	}
 
 	button {
@@ -58,21 +51,21 @@
 
 	a,
 	button.link {
+		@apply underline decoration-border;
 		transition: text-decoration 250ms;
-		text-decoration: underline solid 1px var(--c-border);
 
 		&:hover {
-			text-decoration-color: var(--c-fg);
+			@apply decoration-fg;
 		}
 
 		&[href^='http'] {
 			&:hover {
 				&::after {
-					color: var(--c-fg);
+					@apply text-fg;
 				}
 			}
 			&::after {
-				color: var(--c-border);
+				@apply text-border;
 				margin-left: 4px;
 				font-size: 14px;
 				font-weight: 200;
@@ -96,7 +89,7 @@
 		}
 
 		code {
-			@apply rounded border border-border/50 bg-surface px-1;
+			@apply rounded border border-border bg-surface px-1;
 		}
 	}
 

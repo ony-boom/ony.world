@@ -24,7 +24,7 @@
 
 <div class="space-y-1">
 	<h1 class="text-lg">Ony Lovasoa</h1>
-	<p class="text-muted">{m.jobTitle()} &bull; Antananarivo, Madagascar</p>
+	<p class="text-border">{m.jobTitle()} &bull; Antananarivo, Madagascar</p>
 </div>
 
 <div class="mt-6 space-y-6">
@@ -41,7 +41,7 @@
 				<a href="/projects">Projects</a>
 			</li>
 
-			<li class="pointer-events-none text-muted">
+			<li class="pointer-events-none text-border">
 				<!-- TODO: Replace href link with /posts when available -->
 				<a class="line-through" href="/">Blog</a>
 				<em>(<Text as="span" tradKey="commingSoon" />)</em>

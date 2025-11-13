@@ -5,19 +5,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		%sveltekit.head%
 
-		<script>
-			const theme =
-				localStorage.getItem('theme') ??
-				(window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-			document.documentElement.style.setProperty('color-scheme', theme);
-
-			// Prevent FOUC
-			document.addEventListener('DOMContentLoaded', () => {
-				setTimeout(() => {
-					document.body.classList.remove('opacity-0');
-				}, 250);
-			});
-		</script>
+    <script src="/theme-init.js"></script>
 	</head>
 	<body
 		data-sveltekit-preload-data="hover"

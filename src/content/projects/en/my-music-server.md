@@ -3,12 +3,12 @@ title: 'My music server'
 description: 'A music server/player similar to Subsonic,Navindrome'
 date: '2025-11-05'
 published: true
-coverUrl: /videos/mms-preview.mp4
+coverUrl: https://file.ony.world/videos/ony.world/mms-preview.mp4
 coverType: "video"
 ---
 
 <video controls muted>
-    <source src="/videos/mms-preview.mp4" type="video/mp4" />
+    <source src="https://file.ony.world/videos/ony.world/mms-preview.mp4" type="video/mp4" />
 </video>
 
 **MMS** (My Music Server), as the name imply is a simple music server.
