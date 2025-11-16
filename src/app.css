@@ -6,10 +6,12 @@
 
 @theme {
 	--font-sans: var(--ff-sans);
-	--color-fg: var(--md-sys-color-on-background);
-	--color-bg: var(--md-sys-color-background);
+	--color-fg: var(--md-sys-color-on-surface);
+	--color-bg: var(--md-sys-color-surface);
+	--color-muted: var(--md-sys-color-on-surface-variant);
 	--color-primary: var(--md-sys-color-primary);
 	--color-border: var(--md-sys-color-outline);
+	--color-dim: var(--md-sys-color-outline);
 	--color-surface: var(--c-surface);
 }
 
@@ -65,7 +67,7 @@
 				}
 			}
 			&::after {
-				@apply text-border;
+				@apply text-muted;
 				margin-left: 4px;
 				font-size: 14px;
 				font-weight: 200;
@@ -77,7 +79,7 @@
 	}
 
 	ul {
-		@apply list-disc space-y-1 pl-4;
+		@apply space-y-1;
 	}
 
 	p {

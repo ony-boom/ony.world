@@ -4,7 +4,7 @@
 	let { data }: PageProps = $props();
 </script>
 
-<ul class="mt-4 list-none p-0">
+<ul class="mt-4 list-none">
 	{#each data.projects as project}
 		{@const { metadata } = project}
 		<li class="space-y-2">
@@ -16,7 +16,7 @@
 				</span>
 			</div>
 
-			<p class="text-border">
+			<p class="text-muted">
 				{metadata.description}
 			</p>
 

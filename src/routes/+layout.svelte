@@ -39,7 +39,7 @@
 
 <main class="space-y-6">
 	<header class="sticky top-0 bg-bg py-4">
-		<nav class="container flex items-center justify-between text-sm text-border">
+		<nav class="container flex items-center justify-between text-sm text-muted">
 			<div>
 				<BackButton class="hover:text-fg" />
 			</div>
