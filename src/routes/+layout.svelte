@@ -37,8 +37,8 @@
 	{/if}
 </svelte:head>
 
-<main class="space-y-6">
-	<header class="sticky top-0 bg-bg py-4">
+<main class="space-y-8">
+	<header class="sticky top-0 backdrop-blur-md border-b border-border/15 bg-bg/80 py-3">
 		<nav class="container flex items-center justify-between text-sm text-muted">
 			<div>
 				<BackButton class="hover:text-fg" />

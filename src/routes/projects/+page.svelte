@@ -16,7 +16,7 @@
 				</span>
 			</div>
 
-			<p class="text-muted">
+			<p class="text-dim">
 				{metadata.description}
 			</p>
 

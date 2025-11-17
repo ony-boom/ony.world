@@ -4,6 +4,9 @@ import { sveltekit } from '@sveltejs/kit/vite';
 import { defineConfig } from 'vite';
 
 export default defineConfig({
+  preview: {
+    allowedHosts: ["maki.tempel-goblin.ts.net"],
+  },
 	plugins: [
 		tailwindcss(),
 		sveltekit(),
@@ -11,15 +14,5 @@ export default defineConfig({
 			project: './project.inlang',
 			outdir: './src/lib/paraglide'
 		})
-	],
-	server: {
-		proxy: {
-			'/videos': {
-				target: 'https://file.ony.world/videos/ony.world',
-				changeOrigin: true,
-				secure: false,
-				rewrite: (path) => path.replace(/^\/videos/, '')
-			}
-		}
-	}
+	]
 });

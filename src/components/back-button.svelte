@@ -14,14 +14,18 @@
 		return '/';
 	});
 
-	let hidden = $derived(page.url.pathname === '/');
+	let isHome = $derived(page.url.pathname === '/');
 </script>
 
 <a
 	{...props}
 	href={backPath}
-	class={['flex cursor-pointer items-center gap-1', hidden && 'hidden', props.class]}
+	class={['flex cursor-pointer items-center gap-1', isHome && 'no-underline', props.class]}
 >
-	<Icon icon="material-symbols:arrow-back" />
-	<span>back</span>
+	{#if isHome}
+		<span class="text-lg"> ~ </span>
+	{:else}
+		<Icon icon="material-symbols:arrow-back" />
+		<span>back</span>
+	{/if}
 </a>
