@@ -18,32 +18,32 @@
 	});
 </script>
 
-<li {...props} class={['ms-4']}>
+<li {...props} class={['ms-6']}>
 	<div
 		class={[
-			'absolute mt-[7px] -ml-[22.6px] h-3 w-3 rounded-full border border-bg',
-			isNow ? 'bg-primary' : 'bg-dim'
+			'absolute mt-4 -ml-6 h-px w-4',
+      isNow ? 'bg-fg' : 'bg-muted'
 		]}
 	></div>
 
 	{#if isNow}
-		<time class="mb-1 text-xs text-primary">
+		<time class="mb-1 text-xs">
 			<Text as="span" tradKey="exp_nowLabel" />
 			<span class="capitalize">({formatDate(nowDate, { showDay: true })})</span>
 		</time>
 	{:else}
-		<time class="mb-1 text-xs text-dim capitalize">
+		<time class="mb-1 text-muted-fg text-xs capitalize">
 			{dates.from.getFullYear()} - {formatDate(dates.to, { showDay: false })}
 		</time>
 	{/if}
 
-	<h3 class="mb-1 font-semibold text-muted">
+	<h3 class="mb-1">
 		{title}
 		{#if place}
 			- <a target="_blank" href={place.link}>{place.name}</a>
 		{/if}
 	</h3>
-	<p class="text-base text-dim">
+	<p class="text-base text-muted-fg">
 		{description}
 	</p>
 </li>

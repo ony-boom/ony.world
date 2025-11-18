@@ -4,7 +4,7 @@
 
 	let { data }: PageProps = $props();
 	const { title, date } = data.metadata;
-	const { Component } = data;
+	const { Component: Post } = data;
 
 	const formattedDate = formatDate(date);
 </script>
@@ -12,8 +12,8 @@
 <h1 class="text-lg">
 	{title}
 </h1>
-<span class="text-sm text-muted">{formattedDate}</span>
+<time class="text-sm capitalize text-muted-fg">{formattedDate}</time>
 
 <article class="mt-6 space-y-4">
-	<Component />
+	<Post />
 </article>

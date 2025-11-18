@@ -4,22 +4,19 @@
 	let { data }: PageProps = $props();
 </script>
 
-<ul class="mt-4 list-none">
+<ul class="mt-4 space-y-8 list-none">
 	{#each data.projects as project}
 		{@const { metadata } = project}
-		<li class="space-y-2">
-			<div class="flex items-center justify-between">
-				<span>
-					<a href={`/projects/${metadata.slug}`}>
-						{metadata.title}
-					</a>
-				</span>
+		<li class="space-y-4">
+			<div>
+				<a class="font-[500]" href={`/projects/${metadata.slug}`}>
+					{metadata.title}
+				</a>
+
+				<p class="text-muted-fg">
+					{metadata.description}
+				</p>
 			</div>
-
-			<p class="text-dim">
-				{metadata.description}
-			</p>
-
 			{#if metadata.coverUrl}
 				{#if metadata.coverType === 'image'}
 					<img src={metadata.coverUrl} alt={metadata.title} />

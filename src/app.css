@@ -1,27 +1,57 @@
 @import 'tailwindcss';
 
 :root {
-	--ff-sans: 'Inter Variable', sans-serif;
+	--bg: light-dark(theme(--color-stone-50), theme(--color-stone-950));
+	--fg: light-dark(theme(--color-stone-800), theme(--color-stone-200));
+	--muted-fg: light-dark(theme(--color-stone-600), theme(--color-stone-400));
+	--muted: light-dark(theme(--color-stone-300), theme(--color-stone-700));
+
+	--ff-sans: 'General Sans', sans-serif;
 }
 
 @theme {
 	--font-sans: var(--ff-sans);
-	--color-fg: var(--md-sys-color-on-surface);
-	--color-bg: var(--md-sys-color-surface);
-	--color-muted: var(--md-sys-color-on-surface-variant);
-	--color-primary: var(--md-sys-color-primary);
-	--color-border: var(--md-sys-color-outline);
-	--color-dim: var(--md-sys-color-outline);
-	--color-surface: var(--c-surface);
+
+	--color-bg: var(--bg);
+	--color-fg: var(--fg);
+	--color-muted: var(--muted);
+	--color-muted-fg: var(--muted-fg);
 }
 
 ::selection {
-	@apply bg-(--md-sys-color-surface-variant);
+	@apply bg-fg/10;
 }
 
 @layer base {
 	html {
+		@apply bg-bg text-fg;
 		color-scheme: light dark;
+	}
+
+	body {
+		@apply font-sans;
+	}
+
+	article {
+		h2,
+		h3,
+		h4,
+		h5,
+		h6 {
+			@apply mt-6! mb-3! underline underline-offset-3;
+		}
+
+		h2 {
+			@apply text-lg;
+		}
+
+		ul {
+			@apply list-inside list-disc;
+		}
+
+		ol {
+			@apply list-inside list-decimal;
+		}
 	}
 }
 
@@ -36,15 +66,15 @@
 	h4,
 	h5,
 	h6 {
-		font-weight: 600;
+		font-weight: 500;
 	}
 
 	strong {
-		font-weight: 600;
+		font-weight: 500;
 	}
 
 	select {
-		@apply rounded-md p-2 transition hover:bg-primary/5;
+		@apply rounded-md p-2 transition;
 	}
 
 	button {
@@ -57,7 +87,7 @@
 
 	a,
 	button.link {
-		@apply underline decoration-border;
+		@apply underline decoration-muted;
 		transition: text-decoration 250ms;
 
 		&:hover {
@@ -72,17 +102,23 @@
 	p {
 		max-width: 70ch;
 		line-height: 1.5em;
+		@apply leading-relaxed;
 
 		&:not(:last-of-type) {
-			@apply mb-2;
+			@apply mb-3;
 		}
 
 		code {
-			@apply rounded border border-border bg-surface px-1;
+			@apply rounded border border-muted px-1;
 		}
 	}
 
 	pre {
-		@apply rounded p-4 font-mono;
+		@apply rounded border border-muted p-4 font-mono;
+	}
+
+	video,
+	img {
+		@apply mx-auto;
 	}
 }

@@ -10,6 +10,6 @@
 	}
 </script>
 
-<button class={['hover:bg-primary/5', props.class]} onclick={switchTheme}>
-	<Icon font-size={20} icon="material-symbols:contrast" />
+<button class={[props.class]} onclick={switchTheme}>
+	<Icon font-size={18} icon="lucide:sun-moon" />
 </button>

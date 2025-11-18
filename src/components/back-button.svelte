@@ -2,6 +2,7 @@
 	import { page } from '$app/state';
 	import Icon from '@iconify/svelte';
 	import type { SvelteHTMLElements } from 'svelte/elements';
+	import Text from './text.svelte';
 
 	let props: Omit<SvelteHTMLElements['a'], 'href'> = $props();
 
@@ -20,12 +21,12 @@
 <a
 	{...props}
 	href={backPath}
-	class={['flex cursor-pointer items-center gap-1', isHome && 'no-underline', props.class]}
+	class={['flex cursor-pointer items-center gap-1', isHome && 'hidden', props.class]}
 >
-	{#if isHome}
-		<span class="text-lg"> ~ </span>
-	{:else}
-		<Icon icon="material-symbols:arrow-back" />
-		<span>back</span>
-	{/if}
+	<!-- {#if isHome} -->
+	<!-- <span class="text-lg"> ~ </span> -->
+	<!-- {:else} -->
+	<Icon icon="lucide:arrow-left" />
+	<Text as="span" tradKey="back" />
+	<!-- {/if} -->
 </a>

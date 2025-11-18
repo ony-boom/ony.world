@@ -5,7 +5,7 @@ const theme =
 	(window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
 
 function updateTheme(newTheme) {
-  document.documentElement.style.setProperty('color-scheme', newTheme);
+  document.documentElement.style.setProperty("color-scheme", newTheme);
   localStorage.setItem(THEME_KEY, newTheme);
 }
 

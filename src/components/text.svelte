@@ -8,6 +8,7 @@
 
 <script lang="ts" generics="Tag extends TextTags">
 	import { m } from '$lib/paraglide/messages';
+	import { onMount } from 'svelte';
 	import type { HTMLAttributes } from 'svelte/elements';
 
 	type Props = {
@@ -20,7 +21,7 @@
 
 	let text = $state('');
 
-	$effect(() => {
+	onMount(() => {
 		text = m[tradKey]();
 	});
 </script>

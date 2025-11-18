@@ -3,15 +3,16 @@
 	"description": "Bonjour, je m'appelle Ony et je conçois des logiciels.",
 	"jobTitle": "Développeur informatiques",
 	"commingSoon": "bientôt",
+	"back": "retour",
 
 	"index_internalLinksTitle": "D'ici",
 
 	"index_intro": "Bonjour, je m'appelle <strong>Ony</strong> et je <strong>crée des logiciels</strong> simples, utiles et faciles à utiliser.",
 	"index_cta": "Si vous avez besoin d'aide pour votre site web, développement front-end, JavaScript full-stack ou back-end avec Go, n'hésitez pas à <a href=\"mailto:ony@ony.world\"><strong>me contacter</strong></a>. Je suis actuellement à la recherche de nouveaux projets.",
 	"index_linksTitle": "Autres liens et contacts",
-	"index_expTitle": "Expériences",
+	"index_expTitle": "Plus sur moi",
 
-  "exp_nowLabel": "En ce moment",
+	"exp_nowLabel": "En ce moment",
 	"exp_nowTitle": "Une petite pause, pour apprendre et essayer de nouvelles choses",
 	"exp_nowDesc": "Je passe mon temps à contribuer à des projets open source, à participer à des rencontres locales et à expérimenter les workflows NixOS et DevOps, tout en cherchant la prochaine étape.",
 

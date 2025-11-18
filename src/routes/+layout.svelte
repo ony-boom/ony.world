@@ -1,6 +1,4 @@
 <script lang="ts">
-	import '@fontsource-variable/inter/wght.css';
-
 	import '../app.css';
 
 	import favicon from '$lib/assets/favicon.ico';
@@ -11,15 +9,16 @@
 	import { dev } from '$app/environment';
 	import BackButton from '$components/back-button.svelte';
 	import { page } from '$app/state';
-	import { applyColorVariables } from '$lib/theme';
+	import { initThemeToggle } from '$lib/theme';
+	import { onMount } from 'svelte';
 
 	let { children } = $props();
 
 	const isProjectsPage = $derived(page.route.id === '/projects/[slug]');
 	const availableLanguages = $derived(isProjectsPage ? page.data?.availableLanguages : undefined);
 
-	$effect(() => {
-		applyColorVariables();
+	onMount(() => {
+		initThemeToggle();
 	});
 </script>
 
@@ -37,15 +36,15 @@
 	{/if}
 </svelte:head>
 
-<main class="space-y-8">
-	<header class="sticky top-0 backdrop-blur-md border-b border-border/15 bg-bg/80 py-3">
-		<nav class="container flex items-center justify-between text-sm text-muted">
+<main class="space-y-8 md:space-y-12">
+	<header class="sticky top-0 border-b border-muted/20 bg-bg/80 backdrop-blur-md">
+		<nav class="container flex items-center justify-between py-3 text-sm">
 			<div>
 				<BackButton class="hover:text-fg" />
 			</div>
-			<div class="flex items-center gap-4">
+			<div class="flex items-center gap-4 text-muted-fg">
 				<LanguageSwitcher class="hover:text-fg" {availableLanguages} />
-				<ThemeSwitch class="hover:text-fg" />
+				<ThemeSwitch class="-mt-1.5 hover:text-fg" />
 			</div>
 		</nav>
 	</header>
