@@ -1,22 +1,55 @@
 import { mdsvex } from 'mdsvex';
 import adapter from '@sveltejs/adapter-static';
 import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
+import { escapeSvelte } from 'mdsvex';
+import { createHighlighter } from 'shiki';
+import rehypeExternalLinks from 'rehype-external-links';
+
+/** @type {import("shiki").BundledTheme} */
+const highlightTheme = 'kanagawa-dragon';
+
+const mdsvexExtentions = ['.svx', '.md'];
+const highlighter = await createHighlighter({
+	langs: ['javascript', 'typescript', 'tsx', 'jsx'],
+	themes: [highlightTheme]
+});
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
-	// Consult https://svelte.dev/docs/kit/integrations
-	// for more information about preprocessors
-	preprocess: [vitePreprocess(), mdsvex()],
+	preprocess: [
+		vitePreprocess(),
+		mdsvex({
+			extensions: mdsvexExtentions,
+			rehypePlugins: [
+				[
+					rehypeExternalLinks,
+					{
+						target: '_blank',
+						rel: ['noopener', 'noreferrer']
+					}
+				]
+			],
+			highlight: {
+				highlighter: async (code, lang = 'text') => {
+					return escapeSvelte(
+						highlighter.codeToHtml(code, {
+							lang,
+							theme: highlightTheme,
+							tabindex: null
+						})
+					);
+				}
+			}
+		})
+	],
 	kit: {
-		// adapter-auto only supports some environments, see https://svelte.dev/docs/kit/adapter-auto for a list.
-		// If your environment is not supported, or you settled on a specific environment, switch out the adapter.
-		// See https://svelte.dev/docs/kit/adapters for more information about adapters.
 		adapter: adapter(),
 		alias: {
-			$components: './src/components'
+			$components: './src/components',
+			$content: './src/content'
 		}
 	},
-	extensions: ['.svelte', '.svx']
+	extensions: ['.svelte', ...mdsvexExtentions]
 };
 
 export default config;

@@ -1,4 +1,5 @@
 <script lang="ts">
+	import ExperienceList from '$components/experiences/experience-list.svelte';
 	import Text from '$components/text.svelte';
 	import { m } from '$lib/paraglide/messages';
 
@@ -22,28 +23,46 @@
 	];
 </script>
 
-<div class="container mx-auto mt-8">
-	<div class="space-y-1">
-		<h1 class="text-xl">Ony Lovasoa</h1>
-		<p class="text-muted">{m.jobTitle()} &bull; Antananarivo, Madagascar</p>
-	</div>
+<div class="space-y-1">
+	<h1 class="text-lg">Ony</h1>
+	<p class="text-muted-fg">{m.jobTitle()} &bull; Antananarivo, Madagascar</p>
+</div>
 
-	<div class="mt-8 space-y-8">
-		<section>
-			<Text tradKey="index_intro" asHtml />
-			<Text tradKey="index_cta" asHtml />
-		</section>
+<div class="mt-6 space-y-8">
+	<section>
+		<Text tradKey="index_intro" asHtml />
+		<Text tradKey="index_cta" asHtml />
+	</section>
 
-		<section class="space-y-2">
-			<Text tradKey="index_linksTitle" as="h2" />
-			<ul class="space-y-1">
-				{#each LINKS as link}
-					<li>
-						<a href={link.url} target={link.url.startsWith('/') ? '_self' : '_blank'}>{link.name}</a
-						>
-					</li>
-				{/each}
-			</ul>
-		</section>
-	</div>
+	<section class="space-y-2">
+		<Text tradKey="index_expTitle" as="h2" />
+		<ExperienceList />
+	</section>
+
+	<section class="space-y-2">
+		<Text tradKey="index_internalLinksTitle" as="h2" />
+
+		<ul>
+			<li>
+				<a href="/projects">Projects</a>
+			</li>
+
+			<li class="pointer-events-none text-muted-fg">
+				<!-- TODO: Replace href link with /posts when available -->
+				<a class="line-through" href="/">Blog</a>
+				<em>(<Text as="span" tradKey="commingSoon" />)</em>
+			</li>
+		</ul>
+	</section>
+
+	<section class="space-y-2">
+		<Text tradKey="index_linksTitle" as="h2" />
+		<ul>
+			{#each LINKS as link}
+				<li>
+					<a href={link.url} target={link.url.startsWith('/') ? '_self' : '_blank'}>{link.name}</a>
+				</li>
+			{/each}
+		</ul>
+	</section>
 </div>

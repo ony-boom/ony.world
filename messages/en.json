@@ -2,8 +2,21 @@
 	"$schema": "https://inlang.com/schema/inlang-message-format",
 	"description": "Hello, I'm Ony, and I make software.",
 	"jobTitle": "Software developer",
+	"commingSoon": "comming soon",
+  "back": "back",
+
+	"index_internalLinksTitle": "From here",
 
 	"index_intro": "Hi, I'm <strong>Ony</strong>, and I <strong>make</strong> simple, useful, and easy-to-use <strong>software</strong>.",
 	"index_cta": "If you're looking for help with your website, frontend engineering, fullstack JavaScript, or backend with Go, feel free to <a href=\"mailto:ony@ony.world\"><strong>reach out</strong></a>. I'm currently taking on new projects.",
-	"index_linksTitle": "More links and contacts"
+	"index_linksTitle": "More links and contacts",
+	"index_expTitle": "More about me",
+
+	"exp_nowLabel": "Now",
+
+	"exp_nowTitle": "A little break, learning and trying new things",
+	"exp_nowDesc": "Spending time contributing to open-source projects, attending local meetups, and experimenting with NixOS and DevOps workflows as I look for what's next.",
+
+	"exp_bocasayTitle": "Frontend developer",
+	"exp_interTitle": "Intern"
 }

@@ -1,26 +1,62 @@
-@import "tailwindcss";
-
-@plugin '@tailwindcss/typography';
+@import 'tailwindcss';
 
 :root {
-	--c-fg: light-dark(theme("colors.stone.950"), theme("colors.stone.50"));
-	--c-bg: light-dark(theme("colors.stone.50"), theme("colors.stone.900"));
-	--c-muted: light-dark(theme("colors.stone.600"), theme("colors.stone.400"));
-	--c-border: light-dark(theme("colors.stone.400"), theme("colors.stone.500"));
-	--ff-sans: "General Sans", sans-serif;
+	--bg: light-dark(theme(--color-stone-50), theme(--color-stone-950));
+	--fg: light-dark(theme(--color-stone-800), theme(--color-stone-200));
+	--muted-fg: light-dark(theme(--color-stone-600), theme(--color-stone-400));
+	--muted: light-dark(theme(--color-stone-300), theme(--color-stone-700));
+
+	--ff-sans: 'General Sans', sans-serif;
 }
 
 @theme {
 	--font-sans: var(--ff-sans);
-	--color-fg: var(--c-fg);
-	--color-bg: var(--c-bg);
-	--color-muted: var(--c-muted);
+
+	--color-bg: var(--bg);
+	--color-fg: var(--fg);
+	--color-muted: var(--muted);
+	--color-muted-fg: var(--muted-fg);
+}
+
+::selection {
+	@apply bg-fg/10;
 }
 
 @layer base {
 	html {
+		@apply bg-bg text-fg;
 		color-scheme: light dark;
 	}
+
+	body {
+		@apply font-sans;
+	}
+
+	article {
+		h2,
+		h3,
+		h4,
+		h5,
+		h6 {
+			@apply mt-6! mb-3! underline underline-offset-3;
+		}
+
+		h2 {
+			@apply text-lg;
+		}
+
+		ul {
+			@apply list-inside list-disc;
+		}
+
+		ol {
+			@apply list-inside list-decimal;
+		}
+	}
+}
+
+@utility container {
+	@apply mx-auto max-w-2xl px-6 sm:px-0;
 }
 
 @layer components {
@@ -30,32 +66,59 @@
 	h4,
 	h5,
 	h6 {
-		@apply font-medium;
+		font-weight: 500;
 	}
 
 	strong {
 		font-weight: 500;
 	}
 
-	button {
-		@apply p-2 rounded-md;
+	select {
+		@apply rounded-md p-2 transition;
 	}
 
-	a {
+	button {
+		@apply inline-flex items-center justify-center gap-2 rounded-md p-2;
+
+		&.link {
+			@apply rounded-none p-0;
+		}
+	}
+
+	a,
+	button.link {
+		@apply underline decoration-muted;
 		transition: text-decoration 250ms;
-		text-decoration: underline solid 1px var(--c-border);
 
 		&:hover {
-			text-decoration-color: var(--c-fg);
+			@apply decoration-fg;
 		}
+	}
+
+	ul {
+		@apply space-y-1;
 	}
 
 	p {
 		max-width: 70ch;
 		line-height: 1.5em;
+		@apply leading-relaxed;
 
 		&:not(:last-of-type) {
 			@apply mb-3;
 		}
+
+		code {
+			@apply rounded border border-muted px-1;
+		}
+	}
+
+	pre {
+		@apply rounded border border-muted p-4 font-mono;
+	}
+
+	video,
+	img {
+		@apply mx-auto;
 	}
 }
