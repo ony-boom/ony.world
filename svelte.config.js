@@ -43,7 +43,12 @@ const config = {
 		})
 	],
 	kit: {
-		adapter: adapter(),
+		adapter: adapter({
+			pages: 'build',
+			assets: 'build',
+			precompress: false,
+			strict: false
+		}),
 		alias: {
 			$components: './src/components',
 			$content: './src/content'
