@@ -57,7 +57,7 @@
 
 	<section class="space-y-2">
 		<Text tradKey="index_linksTitle" as="h2" />
-		<ul>
+		<ul class="flex gap-4">
 			{#each LINKS as link}
 				<li>
 					<a href={link.url} target={link.url.startsWith('/') ? '_self' : '_blank'}>{link.name}</a>

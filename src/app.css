@@ -1,10 +1,10 @@
 @import 'tailwindcss';
 
 :root {
-	--bg: light-dark(theme(--color-stone-50), theme(--color-stone-950));
-	--fg: light-dark(theme(--color-stone-800), theme(--color-stone-200));
-	--muted-fg: light-dark(theme(--color-stone-600), theme(--color-stone-400));
-	--muted: light-dark(theme(--color-stone-300), theme(--color-stone-700));
+	--bg: light-dark(theme(--color-neutral-50), theme(--color-neutral-950));
+	--fg: light-dark(theme(--color-neutral-950), theme(--color-neutral-100));
+	--muted-fg: light-dark(theme(--color-neutral-600), theme(--color-neutral-400));
+	--muted: light-dark(theme(--color-neutral-400), theme(--color-neutral-500));
 
 	--ff-sans: 'General Sans', sans-serif;
 }
@@ -87,11 +87,11 @@
 
 	a,
 	button.link {
-		@apply underline decoration-muted;
-		transition: text-decoration 250ms;
+		@apply underline underline-offset-2 decoration-muted;
+		transition: color text-decoration 250ms;
 
 		&:hover {
-			@apply decoration-fg;
+			@apply text-fg decoration-fg;
 		}
 	}
 
