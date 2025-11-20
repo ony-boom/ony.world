@@ -1,4 +1,6 @@
 <script lang="ts">
+	import '@fontsource-variable/inter';
+
 	import '../app.css';
 
 	import favicon from '$lib/assets/favicon.ico';
@@ -37,7 +39,7 @@
 </svelte:head>
 
 <main class="space-y-8 md:space-y-12">
-	<header class="sticky top-0 border-b border-muted/20 bg-bg/80 backdrop-blur-md">
+	<header class="sticky top-0 border-b border-muted/10 bg-bg/80 backdrop-blur-md">
 		<nav class="container flex items-center justify-between py-3 text-sm">
 			<div>
 				<BackButton class="hover:text-fg" />

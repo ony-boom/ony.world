@@ -2,11 +2,14 @@
 
 :root {
 	--bg: light-dark(theme(--color-neutral-50), theme(--color-neutral-950));
-	--fg: light-dark(theme(--color-neutral-950), theme(--color-neutral-100));
+	--fg: light-dark(theme(--color-neutral-950), theme(--color-neutral-50));
 	--muted-fg: light-dark(theme(--color-neutral-600), theme(--color-neutral-400));
 	--muted: light-dark(theme(--color-neutral-400), theme(--color-neutral-500));
 
-	--ff-sans: 'General Sans', sans-serif;
+	/* maybe I'll change this one day */
+	--primary: light-dark(theme(--color-neutral-950), theme(--color-neutral-50));
+
+	--ff-sans: 'Inter Variable', sans-serif;
 }
 
 @theme {
@@ -16,6 +19,7 @@
 	--color-fg: var(--fg);
 	--color-muted: var(--muted);
 	--color-muted-fg: var(--muted-fg);
+	--color-primary: var(--primary);
 }
 
 ::selection {
@@ -29,7 +33,7 @@
 	}
 
 	body {
-		@apply font-sans;
+		@apply font-sans font-light;
 	}
 
 	article {
@@ -87,7 +91,7 @@
 
 	a,
 	button.link {
-		@apply underline underline-offset-2 decoration-muted;
+		@apply underline decoration-muted underline-offset-2;
 		transition: color text-decoration 250ms;
 
 		&:hover {

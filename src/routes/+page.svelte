@@ -34,15 +34,15 @@
 		<Text tradKey="index_cta" asHtml />
 	</section>
 
-	<section class="space-y-2">
+	<section class="space-y-3">
 		<Text tradKey="index_expTitle" as="h2" />
 		<ExperienceList />
 	</section>
 
-	<section class="space-y-2">
+	<section class="space-y-3">
 		<Text tradKey="index_internalLinksTitle" as="h2" />
 
-		<ul>
+		<ul class="list-inside list-disc">
 			<li>
 				<a href="/projects">Projects</a>
 			</li>
@@ -55,7 +55,7 @@
 		</ul>
 	</section>
 
-	<section class="space-y-2">
+	<section class="space-y-3">
 		<Text tradKey="index_linksTitle" as="h2" />
 		<ul class="flex gap-4">
 			{#each LINKS as link}

@@ -19,25 +19,20 @@
 </script>
 
 <li {...props} class={['ms-6']}>
-	<div
-		class={[
-			'absolute mt-4 -ml-6 h-px w-4',
-      isNow ? 'bg-fg' : 'bg-muted'
-		]}
-	></div>
+	<div class={['absolute mt-4 -ml-6 h-px w-4', isNow ? 'bg-primary' : 'bg-muted']}></div>
 
 	{#if isNow}
-		<time class="mb-1 text-xs">
+		<time class="mb-1 text-xs text-primary">
 			<Text as="span" tradKey="exp_nowLabel" />
 			<span class="capitalize">({formatDate(nowDate, { showDay: true })})</span>
 		</time>
 	{:else}
-		<time class="mb-1 text-muted-fg text-xs capitalize">
+		<time class="mb-1 text-xs text-muted-fg capitalize">
 			{dates.from.getFullYear()} - {formatDate(dates.to, { showDay: false })}
 		</time>
 	{/if}
 
-	<h3 class="mb-1">
+	<h3 class={["mb-1"]}>
 		{title}
 		{#if place}
 			- <a target="_blank" href={place.link}>{place.name}</a>

@@ -3,7 +3,7 @@
 	import ExperienceItem from './experience-item.svelte';
 </script>
 
-<ol class="space-y-6 border-s border-muted">
+<ol class="space-y-4">
 	{#each experiences as exp}
 		<ExperienceItem {...exp} />
 	{/each}
