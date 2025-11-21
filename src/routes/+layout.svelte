@@ -39,8 +39,8 @@
 </svelte:head>
 
 <main class="space-y-8 md:space-y-12">
-	<header class="sticky z-0 top-0 border-b border-muted/10 bg-bg/80 backdrop-blur-md">
-		<nav class="container flex items-center justify-between px-3 py-3 text-sm lg:px-0">
+	<header class="sticky z-10 top-0 border-b border-muted/10 bg-bg/80 backdrop-blur-md">
+		<nav class="container flex items-center justify-between px-6 py-3 text-sm lg:px-0">
 			<div>
 				<BackButton class="hover:text-fg" />
 			</div>
@@ -50,7 +50,7 @@
 			</div>
 		</nav>
 	</header>
-	<div class="container px-3 lg:px-0 pb-8">
+	<div class="container px-6 lg:px-0 pb-8">
 		{@render children()}
 	</div>
 </main>
