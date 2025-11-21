@@ -10,7 +10,7 @@ const highlightTheme = 'kanagawa-dragon';
 
 const mdsvexExtentions = ['.svx', '.md'];
 const highlighter = await createHighlighter({
-	langs: ['javascript', 'typescript', 'tsx', 'jsx'],
+	langs: ['javascript', 'typescript', 'tsx', 'jsx', 'nix'],
 	themes: [highlightTheme]
 });
 

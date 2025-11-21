@@ -42,7 +42,7 @@
 		h4,
 		h5,
 		h6 {
-			@apply mt-6! mb-3! underline underline-offset-3;
+			@apply mt-6! mb-3!;
 		}
 
 		h2 {
@@ -109,7 +109,7 @@
 		@apply leading-relaxed;
 
 		&:not(:last-of-type) {
-			@apply mb-3;
+			@apply mb-2;
 		}
 
 		code {
@@ -124,5 +124,6 @@
 	video,
 	img {
 		@apply mx-auto;
+    z-index: 0;
 	}
 }
