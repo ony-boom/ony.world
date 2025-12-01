@@ -9,15 +9,8 @@ function updateTheme(newTheme) {
   localStorage.setItem(THEME_KEY, newTheme);
 }
 
-// Prevent FOUC
-document.addEventListener('DOMContentLoaded', () => {
-	setTimeout(() => {
-		document.body.classList.remove('opacity-0');
-	}, 250);
-});
 
 updateTheme(theme);
-
 
 window.theme = theme;
 window.updateTheme = updateTheme;

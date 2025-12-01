@@ -39,14 +39,14 @@
 </svelte:head>
 
 <main class="space-y-8 md:space-y-12">
-	<header class="sticky z-10 top-0 border-b border-muted/10 bg-bg/80 backdrop-blur-md">
+	<header class="sticky z-10 top-0  bg-bg">
 		<nav class="container flex items-center justify-between px-6 py-3 text-sm lg:px-0">
 			<div>
 				<BackButton class="hover:text-fg" />
 			</div>
 			<div class="flex items-center gap-4 text-muted-fg">
 				<LanguageSwitcher class="hover:text-fg" {availableLanguages} />
-				<ThemeSwitch class="-mt-1.5 hover:text-fg" />
+				<ThemeSwitch class="-mt-1.5 min-w-9 hover:text-fg" />
 			</div>
 		</nav>
 	</header>
