@@ -32,7 +32,7 @@
 <select
 	{...props}
 	bind:value
-	class={['min-w-20', props.class]}
+	class={["outline-0", props.class]}
 	name="lang-switcher"
 	id="lang-switcher"
 >

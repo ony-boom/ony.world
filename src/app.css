@@ -3,7 +3,7 @@
 :root {
 	--bg: light-dark(theme(--color-neutral-50), theme(--color-neutral-950));
 	--fg: light-dark(theme(--color-neutral-950), theme(--color-neutral-50));
-	--muted-fg: light-dark(theme(--color-neutral-600), theme(--color-neutral-400));
+	--muted-fg: --alpha(var(--fg) / 60%);
 	--muted: light-dark(theme(--color-neutral-400), theme(--color-neutral-500));
 
 	/* maybe I'll change this one day */
@@ -60,7 +60,7 @@
 }
 
 @utility container {
-	@apply mx-auto max-w-2xl px-6 sm:px-0;
+	@apply mx-auto max-w-xl px-6 sm:px-0;
 }
 
 @layer components {

@@ -6,7 +6,7 @@
 	import favicon from '$lib/assets/favicon.ico';
 	import { m } from '$lib/paraglide/messages';
 	import LanguageSwitcher from '$components/language-switcher.svelte';
-	import ThemeSwitch from '$components/theme-switch.svelte';
+	// import ThemeSwitch from '$components/theme-switch.svelte';
 
 	import { dev } from '$app/environment';
 	import BackButton from '$components/back-button.svelte';
@@ -39,18 +39,18 @@
 </svelte:head>
 
 <main class="space-y-8 md:space-y-12">
-	<header class="sticky z-10 top-0  bg-bg">
+	<header class="sticky top-0 z-10 bg-bg/70 backdrop-blur-lg">
 		<nav class="container flex items-center justify-between px-6 py-3 text-sm lg:px-0">
 			<div>
 				<BackButton class="hover:text-fg" />
 			</div>
-			<div class="flex items-center gap-4 text-muted-fg">
+			<div class="flex items-center gap-2 text-muted-fg">
 				<LanguageSwitcher class="hover:text-fg" {availableLanguages} />
-				<ThemeSwitch class="-mt-1.5 min-w-9 hover:text-fg" />
+				<!-- <ThemeSwitch class="hover:text-fg" /> -->
 			</div>
 		</nav>
 	</header>
-	<div class="container px-6 lg:px-0 pb-8">
+	<div class="container px-6 pb-8 lg:px-0">
 		{@render children()}
 	</div>
 </main>

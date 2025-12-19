@@ -48,7 +48,6 @@
 			</li>
 
 			<li class="pointer-events-none text-muted-fg">
-				<!-- TODO: Replace href link with /posts when available -->
 				<a class="line-through" href="/">Blog</a>
 				<em>(<Text as="span" tradKey="commingSoon" />)</em>
 			</li>

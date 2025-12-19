@@ -7,13 +7,14 @@ settings:
 importers:
 
   .:
-    devDependencies:
+    dependencies:
       '@fontsource-variable/inter':
         specifier: ^5.2.8
         version: 5.2.8
-      '@iconify/svelte':
-        specifier: ^5.0.2
-        version: 5.0.2(svelte@5.43.2)
+      '@fontsource/jetbrains-mono':
+        specifier: ^5.2.8
+        version: 5.2.8
+    devDependencies:
       '@inlang/paraglide-js':
         specifier: ^2.4.0
         version: 2.4.0
@@ -230,13 +231,8 @@ packages:
   '@fontsource-variable/inter@5.2.8':
     resolution: {integrity: sha512-kOfP2D+ykbcX/P3IFnokOhVRNoTozo5/JxhAIVYLpea/UBmCQ/YWPBfWIDuBImXX/15KH+eKh4xpEUyS2sQQGQ==}
 
-  '@iconify/svelte@5.0.2':
-    resolution: {integrity: sha512-1iWUT+1veS/QOAzKDG0NPgBtJYGoJqEPwF97voTm8jw6PQ6yU0hL73lEwFoTGMrZmatLvh9cjRBmeSHHaltmrg==}
-    peerDependencies:
-      svelte: '>4.0.0'
-
-  '@iconify/types@2.0.0':
-    resolution: {integrity: sha512-+wluvCrRhXrhyOmRDJ3q8mux9JkKy5SJ/v8ol2tu4FVjyYvtEzkc/3pK15ET6RKg4b4w4BmTk1+gsCUhf21Ykg==}
+  '@fontsource/jetbrains-mono@5.2.8':
+    resolution: {integrity: sha512-6w8/SG4kqvIMu7xd7wt6x3idn1Qux3p9N62s6G3rfldOUYHpWcc2FKrqf+Vo44jRvqWj2oAtTHrZXEP23oSKwQ==}
 
   '@inlang/paraglide-js@2.4.0':
     resolution: {integrity: sha512-T/m9uoev574/1JrhCnPcgK1xnAwkVMgaDev4LFthnmID8ubX2xjboSGO3IztwXWwO0aJoT1UJr89JCwjbwgnJQ==}
@@ -1225,12 +1221,7 @@ snapshots:
 
   '@fontsource-variable/inter@5.2.8': {}
 
-  '@iconify/svelte@5.0.2(svelte@5.43.2)':
-    dependencies:
-      '@iconify/types': 2.0.0
-      svelte: 5.43.2
-
-  '@iconify/types@2.0.0': {}
+  '@fontsource/jetbrains-mono@5.2.8': {}
 
   '@inlang/paraglide-js@2.4.0':
     dependencies:

@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { page } from '$app/state';
-	import Icon from '@iconify/svelte';
 	import type { SvelteHTMLElements } from 'svelte/elements';
 	import Text from './text.svelte';
 
@@ -26,7 +25,6 @@
 	<!-- {#if isHome} -->
 	<!-- <span class="text-lg"> ~ </span> -->
 	<!-- {:else} -->
-	<Icon icon="lucide:arrow-left" />
 	<Text as="span" tradKey="back" />
 	<!-- {/if} -->
 </a>
