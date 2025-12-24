@@ -1,23 +1,17 @@
 <script lang="ts">
-	import '@fontsource-variable/inter';
-
 	import '../app.css';
 
 	import favicon from '$lib/assets/favicon.ico';
-	import { m } from '$lib/paraglide/messages';
-	import LanguageSwitcher from '$components/language-switcher.svelte';
-	// import ThemeSwitch from '$components/theme-switch.svelte';
 
 	import { dev } from '$app/environment';
-	import BackButton from '$components/back-button.svelte';
-	import { page } from '$app/state';
 	import { initThemeToggle } from '$lib/theme';
 	import { onMount } from 'svelte';
+	import Breadcrumbs from '$components/breadcrumbs.svelte';
+	import { page } from '$app/state';
+	import ThemeSwitch from '$components/theme-switch.svelte';
 
 	let { children } = $props();
-
-	const isProjectsPage = $derived(page.route.id === '/projects/[slug]');
-	const availableLanguages = $derived(isProjectsPage ? page.data?.availableLanguages : undefined);
+	const pageTitle = $derived(page.data?.pageTitle);
 
 	onMount(() => {
 		initThemeToggle();
@@ -27,8 +21,9 @@
 <svelte:head>
 	<link rel="icon" href={favicon} />
 	<title>Ony &bull; Software developer</title>
-	<meta name="description" content={m.description()} />
+	<meta name="description" content="" />
 
+	<link href="https://api.fontshare.com/v2/css?f[]=sentient@1&display=swap" rel="stylesheet" />
 	{#if !dev}
 		<script
 			defer
@@ -38,19 +33,14 @@
 	{/if}
 </svelte:head>
 
-<main class="space-y-8 md:space-y-12">
-	<header class="sticky top-0 z-10 bg-bg/70 backdrop-blur-lg">
-		<nav class="container flex items-center justify-between px-6 py-3 text-sm lg:px-0">
-			<div>
-				<BackButton class="hover:text-fg" />
-			</div>
-			<div class="flex items-center gap-2 text-muted-fg">
-				<LanguageSwitcher class="hover:text-fg" {availableLanguages} />
-				<!-- <ThemeSwitch class="hover:text-fg" /> -->
-			</div>
-		</nav>
+<main class="space-y-8 py-12 sm:py-20 md:py-32">
+	<header class="sticky top-0 z-10 bg-bg/90 backdrop-blur-md">
+		<div class="container flex items-center justify-between py-4">
+			<Breadcrumbs {pageTitle} />
+			<ThemeSwitch class="text-sm" />
+		</div>
 	</header>
-	<div class="container px-6 pb-8 lg:px-0">
+	<div class="container">
 		{@render children()}
 	</div>
 </main>

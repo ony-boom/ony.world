@@ -8,7 +8,7 @@ import type { Component } from 'svelte';
 declare global {
 	interface Window {
 		theme: Theme;
-    updateTheme: (newTheme: Theme) => void;
+		updateTheme: (newTheme: Theme) => void;
 	}
 	namespace App {
 		// interface Error {}
@@ -27,7 +27,6 @@ declare global {
 
 		interface BlogPost {
 			Component: Component;
-			availableLanguages?: Locale[];
 			metadata: {
 				path: string;
 				slug: string;

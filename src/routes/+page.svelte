@@ -1,67 +1,21 @@
-<script lang="ts">
-	import ExperienceList from '$components/experiences/experience-list.svelte';
-	import Text from '$components/text.svelte';
-	import { m } from '$lib/paraglide/messages';
-
-	const LINKS = [
-		{
-			name: 'Email',
-			url: 'mailto:ony@ony.world'
-		},
-		{
-			name: 'Github',
-			url: 'https://github.com/ony-boom'
-		},
-		{
-			name: 'Linkedin',
-			url: 'https://www.linkedin.com/in/ony-boom/'
-		},
-		{
-			name: 'X (Twitter)',
-			url: 'https://x.com/ony_lovasoa'
-		}
-	];
+<script>
+	import Footer from '$components/footer.svelte';
 </script>
 
-<div class="space-y-1">
-	<h1 class="text-lg">Ony</h1>
-	<p class="text-muted-fg">{m.jobTitle()} &bull; Antananarivo, Madagascar</p>
-</div>
+<section>
+	<p>
+		Hi, I'm <a href="/about"> Ony </a>, and I <span class="text-primary">make</span>
+		simple, useful, and easy-to-use
+		<a href="/projects"> software </a>.
+	</p>
 
-<div class="mt-6 space-y-8">
-	<section>
-		<Text tradKey="index_intro" asHtml />
-		<Text tradKey="index_cta" asHtml />
-	</section>
+	<!-- <p>Sometimes <a href="/posts"> I write </a>, on almost about everything.</p> -->
 
-	<section class="space-y-3">
-		<Text tradKey="index_expTitle" as="h2" />
-		<ExperienceList />
-	</section>
+	<p>
+		If you're looking for help with your website, frontend engineering, fullstack JavaScript, or
+		backend with Go, feel free to <a href="mailto:ony@ony.world"><span>reach out</span></a>. I'm
+		currently taking on new projects.
+	</p>
+</section>
 
-	<section class="space-y-3">
-		<Text tradKey="index_internalLinksTitle" as="h2" />
-
-		<ul class="list-inside list-disc">
-			<li>
-				<a href="/projects">Projects</a>
-			</li>
-
-			<li class="pointer-events-none text-muted-fg">
-				<a class="line-through" href="/">Blog</a>
-				<em>(<Text as="span" tradKey="commingSoon" />)</em>
-			</li>
-		</ul>
-	</section>
-
-	<section class="space-y-3">
-		<Text tradKey="index_linksTitle" as="h2" />
-		<ul class="flex gap-4">
-			{#each LINKS as link}
-				<li>
-					<a href={link.url} target={link.url.startsWith('/') ? '_self' : '_blank'}>{link.name}</a>
-				</li>
-			{/each}
-		</ul>
-	</section>
-</div>
+<Footer class="mt-8" />

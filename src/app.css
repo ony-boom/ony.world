@@ -1,23 +1,29 @@
 @import 'tailwindcss';
 
 :root {
-	--bg: light-dark(theme(--color-neutral-50), theme(--color-neutral-950));
-	--fg: light-dark(theme(--color-neutral-950), theme(--color-neutral-50));
-	--muted-fg: --alpha(var(--fg) / 60%);
-	--muted: light-dark(theme(--color-neutral-400), theme(--color-neutral-500));
+	--light: hsl(28.24, 68%, 98.1%);
+	--dark: hsl(0, 0%, 7.02%);
+
+	--bg: light-dark(var(--light), var(--dark));
+	--fg: light-dark(var(--dark), var(--light));
+
+	--muted: --alpha(var(--fg) / 40%);
+	--muted-fg: --alpha(var(--fg) / 50%);
+	--border: --alpha(var(--fg) / 10%);
 
 	/* maybe I'll change this one day */
-	--primary: light-dark(theme(--color-neutral-950), theme(--color-neutral-50));
+	--primary: light-dark(hsl(27.79, 66.67%, 40%), hsl(27.96, 67.32%, 70%));
 
-	--ff-sans: 'Inter Variable', sans-serif;
+	--ff-serif: 'Sentient', serif;
 }
 
 @theme {
-	--font-sans: var(--ff-sans);
+	--font-serif: var(--ff-serif);
 
 	--color-bg: var(--bg);
 	--color-fg: var(--fg);
 	--color-muted: var(--muted);
+	--color-border: var(--border);
 	--color-muted-fg: var(--muted-fg);
 	--color-primary: var(--primary);
 }
@@ -30,10 +36,33 @@
 	html {
 		@apply bg-bg text-fg;
 		color-scheme: light dark;
+
+		--noise-opacity: 0.1;
+
+		&[style='color-scheme: dark;'] {
+			--noise-opacity: 0.5;
+		}
+
+		.noise {
+			position: fixed;
+			z-index: -10;
+
+			&::after {
+				content: '';
+				height: 400vh;
+				width: 400vw;
+				top: calc(50% - 400vh / 2);
+				left: calc(50% - 400vw / 2);
+				position: absolute;
+				background-image: url('/images/noise.webp');
+				animation: grain 8s steps(10) infinite;
+				opacity: var(--noise-opacity);
+			}
+		}
 	}
 
 	body {
-		@apply font-sans font-light;
+		@apply font-serif;
 	}
 
 	article {
@@ -60,23 +89,10 @@
 }
 
 @utility container {
-	@apply mx-auto max-w-xl px-6 sm:px-0;
+	@apply mx-auto max-w-lg px-6 sm:px-0;
 }
 
 @layer components {
-	h1,
-	h2,
-	h3,
-	h4,
-	h5,
-	h6 {
-		font-weight: 500;
-	}
-
-	strong {
-		font-weight: 500;
-	}
-
 	select {
 		@apply rounded-md p-2 transition;
 	}
@@ -91,11 +107,18 @@
 
 	a,
 	button.link {
-		@apply underline decoration-muted underline-offset-2;
+		@apply text-primary underline decoration-muted underline-offset-2;
 		transition: color text-decoration 250ms;
 
 		&:hover {
-			@apply text-fg decoration-fg;
+			@apply decoration-primary;
+		}
+
+		&.ghost-link {
+			@apply text-muted-fg;
+			&:hover {
+				@apply text-primary decoration-primary;
+			}
 		}
 	}
 
@@ -104,16 +127,14 @@
 	}
 
 	p {
-		max-width: 70ch;
-		line-height: 1.5em;
-		@apply leading-relaxed;
-
+		line-height: 1.7em;
+    text-wrap: pretty;
 		&:not(:last-of-type) {
-			@apply mb-2;
+			@apply mb-4;
 		}
 
 		code {
-			@apply rounded border border-muted px-1;
+			@apply border border-muted/50 px-1;
 		}
 	}
 
@@ -124,6 +145,22 @@
 	video,
 	img {
 		@apply mx-auto;
-    z-index: 0;
+		z-index: 0;
+	}
+
+	.drop-cap {
+		@supports (initial-letter: 2) {
+			&::first-letter {
+				initial-letter: 2;
+        margin: 4px;
+				color: var(--primary);
+			}
+		}
+
+		@supports not (initial-letter: 2) {
+			&::first-letter {
+				@apply mx-1 float-start pt-2.5 text-6xl text-primary;
+			}
+		}
 	}
 }

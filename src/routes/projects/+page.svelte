@@ -4,28 +4,17 @@
 	let { data }: PageProps = $props();
 </script>
 
-<ul class="mt-4 space-y-8 list-none">
+<ul class="mt-4 list-none space-y-4">
 	{#each data.projects as project}
 		{@const { metadata } = project}
-		<li class="space-y-4">
-			<div>
-				<a class="font-[500]" href={`/projects/${metadata.slug}`}>
-					{metadata.title}
-				</a>
+		<li>
+			<a class="font-medium" href={`/projects/${metadata.slug}`}>
+				{metadata.title}
+			</a>
 
-				<p class="text-muted-fg">
-					{metadata.description}
-				</p>
-			</div>
-			{#if metadata.coverUrl}
-				{#if metadata.coverType === 'image'}
-					<img src={metadata.coverUrl} alt={metadata.title} />
-				{:else}
-					<video autoplay loop muted>
-						<source src={metadata.coverUrl} type="video/mp4" />
-					</video>
-				{/if}
-			{/if}
+			<p class="text-muted-fg">
+				{metadata.description}
+			</p>
 		</li>
 	{:else}
 		<p>¯\_(ツ)_/¯</p>

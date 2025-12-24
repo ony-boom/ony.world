@@ -1,11 +1,10 @@
 import type { PageLoad } from './$types';
 import { loadContentBySlug } from '$lib/content';
 import { error } from '@sveltejs/kit';
-import { getLocale } from '$lib/paraglide/runtime';
 
 export const load: PageLoad = async ({ params }) => {
 	const { slug } = params;
-	const projects = await loadContentBySlug('projects', slug, getLocale());
+	const projects = await loadContentBySlug('projects', slug);
 
 	if (!projects) {
 		throw error(404);
@@ -13,6 +12,6 @@ export const load: PageLoad = async ({ params }) => {
 
 	return {
 		...projects,
-		availableLanguages: projects.availableLanguages
+		pageTitle: projects.metadata.title
 	};
 };
