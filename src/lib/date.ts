@@ -1,5 +1,3 @@
-import { getLocale } from './paraglide/runtime';
-
 type FormatDateOptions = {
 	showDay?: boolean;
 	dateStyle?: Intl.DateTimeFormatOptions['dateStyle'];
@@ -7,7 +5,7 @@ type FormatDateOptions = {
 };
 
 export function formatDate(dateLike: string | Date, options: FormatDateOptions = {}) {
-	const locale = getLocale();
+	const locale = navigator.language;
 	const date = typeof dateLike === 'string' ? new Date(dateLike) : dateLike;
 
 	const { showDay = true, dateStyle = 'long', timeStyle } = options;
