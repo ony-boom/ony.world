@@ -159,7 +159,7 @@
 
 		@supports not (initial-letter: 2) {
 			&::first-letter {
-				@apply mx-1 float-start pt-2.5 text-6xl text-primary;
+				@apply mr-2 float-start pt-2.5 text-6xl text-primary;
 			}
 		}
 	}
