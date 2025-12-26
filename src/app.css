@@ -11,7 +11,6 @@
 	--muted-fg: --alpha(var(--fg) / 50%);
 	--border: --alpha(var(--fg) / 10%);
 
-	/* maybe I'll change this one day */
 	--primary: light-dark(hsl(27.79, 66.67%, 40%), hsl(27.96, 67.32%, 70%));
 
 	--ff-serif: 'Sentient', serif;
