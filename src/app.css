@@ -77,12 +77,21 @@
 			@apply text-lg;
 		}
 
-		ul {
-			@apply list-inside list-disc;
-		}
-
+		ul,
 		ol {
-			@apply list-inside list-decimal;
+			@apply list-inside pl-1;
+
+			&:is(ul) {
+				@apply list-disc;
+			}
+
+			&:is(ol) {
+				@apply list-decimal;
+			}
+
+			li::marker {
+				@apply text-muted-fg;
+			}
 		}
 	}
 }
@@ -127,7 +136,7 @@
 
 	p {
 		line-height: 1.7em;
-    text-wrap: pretty;
+		text-wrap: pretty;
 		&:not(:last-of-type) {
 			@apply mb-4;
 		}
@@ -151,14 +160,14 @@
 		@supports (initial-letter: 2) {
 			&::first-letter {
 				initial-letter: 2;
-        margin: 4px;
+				margin: 4px;
 				color: var(--primary);
 			}
 		}
 
 		@supports not (initial-letter: 2) {
 			&::first-letter {
-				@apply mr-2 float-start pt-2.5 text-6xl text-primary;
+				@apply float-start mr-2 pt-2.5 text-5xl text-primary;
 			}
 		}
 	}
