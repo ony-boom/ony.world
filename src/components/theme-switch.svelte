@@ -11,9 +11,10 @@
 </script>
 
 <button
+	id="theme-toggle"
 	class={[
 		props.class,
-		'cursor-pointer bg-transparent text-muted-fg hover:bg-muted/10 hover:text-primary'
+		'cursor-pointer bg-transparent text-muted-fg outline outline-transparent transition-colors hover:bg-muted/10 hover:text-primary focus:outline-primary/40'
 	]}
 	onclick={switchTheme}
 >

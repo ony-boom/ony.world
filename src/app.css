@@ -130,7 +130,7 @@
 	}
 
 	pre {
-		@apply rounded border border-muted p-4 font-mono;
+		@apply overflow-auto border border-muted/50 p-4 font-mono;
 	}
 
 	video,

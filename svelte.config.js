@@ -5,13 +5,10 @@ import { escapeSvelte } from 'mdsvex';
 import { createHighlighter } from 'shiki';
 import rehypeExternalLinks from 'rehype-external-links';
 
-/** @type {import("shiki").BundledTheme} */
-const highlightTheme = 'kanagawa-dragon';
-
 const mdsvexExtentions = ['.svx', '.md'];
 const highlighter = await createHighlighter({
-	langs: ['javascript', 'typescript', 'tsx', 'jsx', 'nix'],
-	themes: [highlightTheme]
+	langs: ['javascript', 'typescript', 'tsx', 'jsx', 'nix', 'css'],
+	themes: ['vitesse-light', 'vitesse-dark']
 });
 
 /** @type {import('@sveltejs/kit').Config} */
@@ -34,8 +31,12 @@ const config = {
 					return escapeSvelte(
 						highlighter.codeToHtml(code, {
 							lang,
-							theme: highlightTheme,
-							tabindex: null
+							themes: {
+								dark: 'vitesse-dark',
+								light: 'vitesse-light'
+							},
+							tabindex: null,
+							defaultColor: 'light-dark()'
 						})
 					);
 				}
