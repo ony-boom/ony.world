@@ -36,6 +36,7 @@ declare global {
 				published: boolean;
 				coverUrl?: string;
 				coverType?: 'image' | 'video';
+				tags?: string[];
 			};
 		}
 	}

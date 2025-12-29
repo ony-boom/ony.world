@@ -1,8 +1,8 @@
-import type { PageLoad } from './$types';
+import type { LayoutLoad } from './$types';
 import { loadContentBySlug } from '$lib/content';
 import { error } from '@sveltejs/kit';
 
-export const load: PageLoad = async ({ params }) => {
+export const load: LayoutLoad = async ({ params }) => {
 	const { slug } = params;
 	const projects = await loadContentBySlug('projects', slug);
 
@@ -12,6 +12,8 @@ export const load: PageLoad = async ({ params }) => {
 
 	return {
 		...projects,
-		pageTitle: projects.metadata.title
+		pageDescription: projects.metadata.description,
+		pageTitle: projects.metadata.title,
+		pageTitlePrefix: "Ony's Projects"
 	};
 };

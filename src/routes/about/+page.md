@@ -17,5 +17,5 @@ I’m a big **Linux enthusiast** too. I don’t claim to know everything about i
 If you’d like to see what I’ve been working on:
 
 * [Browse my projects](/projects)
-<!-- - Read my notes and experiments -->
+* [Read my notes and experiments](/posts)
 

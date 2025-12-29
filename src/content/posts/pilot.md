@@ -3,6 +3,7 @@ title: 'Pilot'
 description: 'Starting point'
 date: '2025-12-27'
 published: true
+tags: ["slice-of-life"]
 ---
 <p class="drop-cap">
 I’ve been watching a lot of old shows lately, and I noticed that many of them name their first episode <a target="_blank" href="https://en.wikipedia.org/wiki/Television_pilot#Premise_pilot">Pilot</a>.

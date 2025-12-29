@@ -3,6 +3,7 @@ title: "CSS's light-dark function"
 description: 'A simple way to handle color schemes'
 date: '2025-12-28'
 published: true
+tags: ["code", "css"]
 ---
 
 <p class="drop-cap">

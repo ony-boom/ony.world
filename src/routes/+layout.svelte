@@ -12,6 +12,8 @@
 
 	let { children } = $props();
 	const pageTitle = $derived(page.data?.pageTitle);
+	const pageTitlePrefix = $derived(page.data?.pageTitlePrefix);
+	const pageDescription = $derived(page.data?.pageDescription);
 
 	onMount(() => {
 		initThemeToggle();
@@ -20,8 +22,11 @@
 
 <svelte:head>
 	<link rel="icon" href={favicon} />
-	<title>Ony &bull; Software developer</title>
-	<meta name="description" content="" />
+	<title>
+		{pageTitlePrefix ? `${pageTitlePrefix} | ` : ''}
+		{pageTitle ?? "Ony ∙ Software developer"}
+	</title>
+	<meta name="description" content={pageDescription ?? "Hello, I'm Ony, and I make software"} />
 
 	<link href="https://api.fontshare.com/v2/css?f[]=sentient@1&display=swap" rel="stylesheet" />
 	{#if !dev}
