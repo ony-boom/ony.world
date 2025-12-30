@@ -5,6 +5,8 @@ export const load: PageLoad = async () => {
 	const posts = await loadContent('posts');
 
 	return {
-		posts
+		posts,
+		pageTitle: 'Posts',
+		pageDescription: "All my notes and experiments"
 	};
 };

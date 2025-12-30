@@ -11,9 +11,13 @@
 	import ThemeSwitch from '$components/theme-switch.svelte';
 
 	let { children } = $props();
+
 	const pageTitle = $derived(page.data?.pageTitle);
 	const pageTitlePrefix = $derived(page.data?.pageTitlePrefix);
 	const pageDescription = $derived(page.data?.pageDescription);
+	const pageType = $derived(page.data?.pageType ?? 'website');
+	const pageImage = $derived(page.data?.pageImage);
+	const pageUrl = $derived(page.url.href);
 
 	onMount(() => {
 		initThemeToggle();
@@ -24,9 +28,9 @@
 	<link rel="icon" href={favicon} />
 	<title>
 		{pageTitlePrefix ? `${pageTitlePrefix} | ` : ''}
-		{pageTitle ?? "Ony ∙ Software developer"}
+		{pageTitle}
 	</title>
-	<meta name="description" content={pageDescription ?? "Hello, I'm Ony, and I make software"} />
+	<meta name="description" content={pageDescription} />
 
 	<link href="https://api.fontshare.com/v2/css?f[]=sentient@1&display=swap" rel="stylesheet" />
 	{#if !dev}
@@ -36,6 +40,13 @@
 			data-website-id="90b3ae53-99b3-4f30-a940-49a210c8504b"
 		></script>
 	{/if}
+
+	<!-- og tag -->
+	<meta property="og:title" content={pageTitle} />
+	<meta property="og:description" content={pageDescription} />
+	<meta property="og:image" content={pageImage} />
+	<meta property="og:type" content={pageType} />
+	<meta property="og:url" content={pageUrl} />
 </svelte:head>
 
 <main class="space-y-8 py-12 sm:py-20 md:py-32">
