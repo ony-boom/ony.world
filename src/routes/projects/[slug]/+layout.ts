@@ -14,6 +14,7 @@ export const load: LayoutLoad = async ({ params }) => {
 		...projects,
 		pageDescription: projects.metadata.description,
 		pageTitle: projects.metadata.title,
+		pageType: 'article',
 		pageTitlePrefix: "Ony's Projects"
 	};
 };
