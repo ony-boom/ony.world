@@ -20,6 +20,7 @@
 	const pageUrl = $derived(page.url.href);
 
 	onMount(() => {
+		console.log(pageImage);
 		initThemeToggle();
 	});
 </script>
