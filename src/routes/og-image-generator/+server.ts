@@ -1,8 +1,31 @@
 import { ImageResponse } from '@ethercorps/sveltekit-og';
 import { error, type RequestHandler } from '@sveltejs/kit';
-import type { Component } from 'svelte';
+import OgImage from '$components/og-image.svelte';
+import { CustomFont, resolveFonts } from '@ethercorps/sveltekit-og/fonts';
+import path from 'node:path';
+import fs from 'node:fs/promises';
 
-const ogComponents = import.meta.glob('../**/og-image.svelte', { eager: false });
+const sentientFont = new CustomFont(
+	'Sentient',
+	async () => {
+		const fontFilePath = path.resolve(
+			import.meta.dirname,
+			'..',
+			'..',
+			'lib',
+			'assets',
+			'fonts',
+			'Sentient-Bold.ttf'
+		);
+		const fontFile = await fs.readFile(fontFilePath);
+		return fontFile.buffer;
+	},
+
+	{
+		weight: 700,
+		style: 'normal'
+	}
+);
 
 export const GET: RequestHandler = async ({ url }) => {
 	let requestedPath = url.searchParams.get('path');
@@ -13,28 +36,20 @@ export const GET: RequestHandler = async ({ url }) => {
 
 	requestedPath = requestedPath.replace(/^\//, '').replace(/\/$/, '');
 
-	const importKey = `..${requestedPath}/og-image.svelte`;
-	const loader = ogComponents[importKey];
+	const pageTitle = url.searchParams.get('title');
+	const pageDescription = url.searchParams.get('description');
+	const extra = url.searchParams.get('extra')?.replace(' |', '');
+	const resolvedFontOptions = await resolveFonts([sentientFont]);
 
-	if (!loader) {
-		return error(404);
-	}
+	const ogImageParams = {
+		width: 1200,
+		height: 630,
+		fonts: resolvedFontOptions
+	};
 
-	// const OgComponent = ((await loader()) as any).default as Component;
-	//
-	//  console.log(OgComponent);
-	//
-	//
-	return new ImageResponse(
-		`
-    <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; width: 100%; height: 100%; background-color: #101011;">
-	<h1 style="color: gray; font-size: 80px; margin: 0;">@ethercorps/sveltekit-og</h1>
-	<p style="color: gray; font-size: 36px; margin-top: 20px;">Your Raw HTML Open Graph Image!</p>
-</div>
-  `,
-		{
-			width: 1200,
-			height: 630
-		}
-	);
+	return new ImageResponse(OgImage, ogImageParams, {
+		pageTitle,
+		pageDescription,
+		extra
+	});
 };

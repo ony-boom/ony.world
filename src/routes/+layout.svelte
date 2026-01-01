@@ -16,11 +16,16 @@
 	const pageTitlePrefix = $derived(page.data?.pageTitlePrefix);
 	const pageDescription = $derived(page.data?.pageDescription);
 	const pageType = $derived(page.data?.pageType ?? 'website');
-	const pageImage = $derived(page.data?.pageImage);
 	const pageUrl = $derived(page.url.href);
 
+	const pageImage = $derived(
+		new URL(
+			`/og-image-generator?path=${page.route.id}&description=${pageDescription}&title=${pageTitle}&extra=${pageTitlePrefix}`,
+			page.url.href
+		).toString()
+	);
+
 	onMount(() => {
-		console.log(pageImage);
 		initThemeToggle();
 	});
 </script>
@@ -28,12 +33,12 @@
 <svelte:head>
 	<link rel="icon" href={favicon} />
 	<title>
-		{pageTitlePrefix ? `${pageTitlePrefix} | ` : ''}
+		{pageTitlePrefix ? `${pageTitlePrefix}` : ''}
 		{pageTitle}
 	</title>
 	<meta name="description" content={pageDescription} />
 
-	<link href="https://api.fontshare.com/v2/css?f[]=sentient@1&display=swap" rel="stylesheet" />
+	<!-- <link href="https://api.fontshare.com/v2/css?f[]=sentient@1&display=swap" rel="stylesheet" /> -->
 	{#if !dev}
 		<script
 			defer

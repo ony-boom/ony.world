@@ -1,5 +1,13 @@
 @import 'tailwindcss';
 
+@font-face {
+	font-family: 'Sentient';
+	src:
+		url('lib/assets/fonts/Sentient.woff2') format('woff2 supports variations'),
+		url('lib/assets/fonts/Sentient.woff2') format('woff2-variations');
+	font-weight: 100 900;
+}
+
 :root {
 	--light: hsl(28.24, 68%, 96.1%);
 	--dark: hsl(0, 0%, 7.02%);
