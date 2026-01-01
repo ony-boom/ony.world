@@ -7,7 +7,7 @@ tags: ["code", "css"]
 ---
 
 <p class="drop-cap">
-    Before CSS's <code>light-dark</code> function, we had to use tricks like adding a <code>.dark</code> o overwrite color variables. This led to code duplication, and I've always hated that.</p>
+    Before CSS's <code>light-dark</code> function, we had to use tricks like adding a <code>.dark</code> class to overwrite color variables. This led to code duplication, and I've always hated that.</p>
 
 CSS's `light-dark` function lets you specify which color to use based on the user's color scheme preference (light or dark mode).
 
