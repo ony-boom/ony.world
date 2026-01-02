@@ -16,16 +16,10 @@
 	const pageTitlePrefix = $derived(page.data?.pageTitlePrefix);
 	const pageDescription = $derived(page.data?.pageDescription);
 	const pageType = $derived(page.data?.pageType ?? 'website');
+
 	const pageUrl = $derived(page.url.href);
 
-	const pageImage = $derived(
-		new URL(
-			`/og-image-generator?path=${page.route.id}&description=${pageDescription}&title=${pageTitle}&extra=${pageTitlePrefix}`,
-			page.url.href
-		).toString()
-	);
-
-	onMount(() => {
+	onMount(async () => {
 		initThemeToggle();
 	});
 </script>
@@ -50,7 +44,7 @@
 	<!-- og tag -->
 	<meta property="og:title" content={pageTitle} />
 	<meta property="og:description" content={pageDescription} />
-	<meta property="og:image" content={pageImage} />
+	<!-- <meta property="og:image" content={pageImage} /> -->
 	<meta property="og:type" content={pageType} />
 	<meta property="og:url" content={pageUrl} />
 </svelte:head>

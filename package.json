@@ -34,6 +34,7 @@
 		"vite": "^7.1.10"
 	},
 	"dependencies": {
-		"@ethercorps/sveltekit-og": "^4.2.1"
+		"@ethercorps/sveltekit-og": "^4.2.1",
+		"valibot": "^1.2.0"
 	}
 }
