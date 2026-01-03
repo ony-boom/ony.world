@@ -18,6 +18,15 @@ declare global {
 		// interface Platform {}
 		//
 
+		interface PageMetadata
+			extends Partial<{
+				pageType: string;
+				pageImage: string;
+				pageTitle: string;
+				pageTitlePrefix: string;
+				pageDescription: string;
+			}> {}
+
 		interface MdsvexFile {
 			default: import('svelte/internal').SvelteComponent;
 			metadata: Record<string, string>;

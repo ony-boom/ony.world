@@ -24,4 +24,3 @@ When I got my first VPS and discovered self-hosting, I found the solution. I tri
 See, I'd been using [Otto](https://play.google.com/store/apps/details?id=com.piyush.music&hl=en&pli=1) on Android for years. It's a music player that just gets it - clean, intuitive, beautiful. I kept thinking: what if I could have that experience, but accessible from anywhere, on any device, through a web browser?
 
 So I built it. **MMS** (My Music Server). It's not perfect, but, again, it's **"mine"**.
-

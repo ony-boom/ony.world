@@ -16,10 +16,13 @@
 	const pageTitlePrefix = $derived(page.data?.pageTitlePrefix);
 	const pageDescription = $derived(page.data?.pageDescription);
 	const pageType = $derived(page.data?.pageType ?? 'website');
-	const pageImage = $derived(page.data?.pageImage);
+	const pageImage = $derived(
+		page.data?.pageImage ? new URL(page.data.pageImage, page.url.href).toString() : ''
+	);
+
 	const pageUrl = $derived(page.url.href);
 
-	onMount(() => {
+	onMount(async () => {
 		initThemeToggle();
 	});
 </script>
@@ -27,12 +30,11 @@
 <svelte:head>
 	<link rel="icon" href={favicon} />
 	<title>
-		{pageTitlePrefix ? `${pageTitlePrefix} | ` : ''}
+		{pageTitlePrefix ? `${pageTitlePrefix}` : ''}
 		{pageTitle}
 	</title>
 	<meta name="description" content={pageDescription} />
 
-	<link href="https://api.fontshare.com/v2/css?f[]=sentient@1&display=swap" rel="stylesheet" />
 	{#if !dev}
 		<script
 			defer

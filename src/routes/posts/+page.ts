@@ -6,7 +6,8 @@ export const load: PageLoad = async () => {
 
 	return {
 		posts,
+		pageTitlePrefix: "Ony's",
 		pageTitle: 'Posts',
-		pageDescription: "All my notes and experiments"
+		pageDescription: 'All my notes and experiments'
 	};
 };
