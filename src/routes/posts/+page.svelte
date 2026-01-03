@@ -8,16 +8,23 @@
 <ul class="mt-4 list-none space-y-4">
 	{#each data.posts as post}
 		{@const { metadata } = post}
-		<li class="flex items-baseline justify-between gap-4">
-			<a class="peer font-medium" href={`/posts/${metadata.slug}`}>
-				{metadata.title}
+		<li>
+			<a
+				href={`/posts/${metadata.slug}`}
+				class="group flex items-baseline justify-between gap-4 no-underline"
+			>
+				<span class="link font-medium">
+					{metadata.title}
+				</span>
+
+				<hr
+					class="h-px flex-1 border-dotted border-muted transition-colors group-hover:border-fg"
+				/>
+
+				<time class="shrink-0 text-muted transition-colors group-hover:text-fg">
+					{formatDate(metadata.date)}
+				</time>
 			</a>
-
-			<hr class="h-px flex-1 border-dotted border-muted transition-colors peer-hover:border-fg" />
-
-			<time class="shrink-0 text-muted transition-colors peer-hover:text-fg">
-				{formatDate(metadata.date)}
-			</time>
 		</li>
 	{:else}
 		<p>¯\_(ツ)_/¯</p>

@@ -97,7 +97,7 @@
 	}
 
 	button {
-		@apply inline-flex items-center justify-center gap-2 rounded-md p-2;
+		@apply inline-flex items-center justify-center gap-2 p-2;
 
 		&.link {
 			@apply rounded-none p-0;
@@ -105,7 +105,7 @@
 	}
 
 	a,
-	button.link {
+	.link {
 		@apply text-primary underline decoration-muted underline-offset-2;
 		transition: color text-decoration 250ms;
 
@@ -138,7 +138,7 @@
 	}
 
 	pre {
-		@apply overflow-auto border border-muted/50 p-4 font-mono;
+		@apply overflow-auto border border-muted/30 p-4 font-mono;
 	}
 
 	video,
