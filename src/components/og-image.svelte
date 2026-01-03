@@ -5,7 +5,7 @@
 </script>
 
 <div class="base">
-	{#if props.extra !== 'undefined'}
+	{#if props.extra && props.extra !== 'undefined'}
 		<p class="extra">~ / {props.extra}</p>
 	{/if}
 	<h1>{props.pageTitle}</h1>
@@ -38,7 +38,7 @@
 
 		h1 {
 			color: #e6af7f;
-      margin-bottom: 4px;
+			margin-bottom: 4px;
 		}
 
 		.extra {

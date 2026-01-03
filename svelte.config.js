@@ -45,17 +45,9 @@ const config = {
 	],
 	kit: {
 		adapter: adapter(),
-		experimental: {
-			remoteFunctions: true
-		},
 		alias: {
 			$components: './src/components',
 			$content: './src/content'
-		}
-	},
-	compilerOptions: {
-		experimental: {
-			async: true
 		}
 	},
 	extensions: ['.svelte', ...mdsvexExtentions]
