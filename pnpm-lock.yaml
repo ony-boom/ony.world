@@ -66,6 +66,9 @@ importers:
       vite:
         specifier: ^7.1.10
         version: 7.1.12(@types/node@24.9.2)(jiti@2.6.1)(lightningcss@1.30.2)
+      vite-plugin-arraybuffer:
+        specifier: ^0.1.1
+        version: 0.1.1
 
 packages:
 
@@ -1165,6 +1168,9 @@ packages:
   vfile@6.0.3:
     resolution: {integrity: sha512-KzIbH/9tXat2u30jf+smMwFCsno4wHVdNmzFyL+T/L3UGqqk6JKfVqOFOZEpZSHADH1k40ab6NUIXZq422ov3Q==}
 
+  vite-plugin-arraybuffer@0.1.1:
+    resolution: {integrity: sha512-j66GVZ695+k5aB/+exTXujYGiW7EfAFchV1Bp27c9JL3Dg+611T8oL9yuCX5zFcgQPCjTy/APijOjaizR/vyGw==}
+
   vite@7.1.12:
     resolution: {integrity: sha512-ZWyE8YXEXqJrrSLvYgrRP7p62OziLW7xI5HYGWFzOvupfAlrLvURSzv/FyGyy0eidogEM3ujU+kUG1zuHgb6Ug==}
     engines: {node: ^20.19.0 || >=22.12.0}
@@ -2185,6 +2191,8 @@ snapshots:
     dependencies:
       '@types/unist': 3.0.3
       vfile-message: 4.0.3
+
+  vite-plugin-arraybuffer@0.1.1: {}
 
   vite@7.1.12(@types/node@24.9.2)(jiti@2.6.1)(lightningcss@1.30.2):
     dependencies:

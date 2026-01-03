@@ -31,7 +31,8 @@
 		"svelte-check": "^4.3.3",
 		"tailwindcss": "^4.1.14",
 		"typescript": "^5.9.3",
-		"vite": "^7.1.10"
+		"vite": "^7.1.10",
+		"vite-plugin-arraybuffer": "^0.1.1"
 	},
 	"dependencies": {
 		"@ethercorps/sveltekit-og": "^4.2.1"

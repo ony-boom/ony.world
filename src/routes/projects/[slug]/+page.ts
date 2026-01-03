@@ -1,20 +1,27 @@
 import type { PageLoad } from './$types';
 import { loadContentBySlug } from '$lib/content';
 import { error } from '@sveltejs/kit';
+import { makeOgImageLink } from '$lib/og-image-generator';
 
-export const load: PageLoad = async ({ params }) => {
-	const { slug } = params;
-	const projects = await loadContentBySlug('projects', slug);
+export const _metadata = async (slug: string) => {
+	const post = await loadContentBySlug('projects', slug);
 
-	if (!projects) {
+	if (!post) {
 		throw error(404);
 	}
 
 	return {
-		...projects,
-		pageDescription: projects.metadata.description,
-		pageTitle: projects.metadata.title,
-		pageType: 'article',
-		pageTitlePrefix: "Ony's Projects |"
+		...post,
+		pageDescription: post.metadata.description,
+		pageTitle: post.metadata.title,
+		pageTitlePrefix: "Ony's Projects |",
+		pageType: 'article'
+	};
+};
+
+export const load: PageLoad = async ({ params, url }) => {
+	return {
+		...(await _metadata(params.slug)),
+		pageImage: makeOgImageLink(url)
 	};
 };

@@ -38,7 +38,7 @@
 
 		h1 {
 			color: #e6af7f;
-			margin-bottom: 4px;
+      margin-bottom: 4px;
 		}
 
 		.extra {

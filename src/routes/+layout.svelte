@@ -16,9 +16,7 @@
 	const pageTitlePrefix = $derived(page.data?.pageTitlePrefix);
 	const pageDescription = $derived(page.data?.pageDescription);
 	const pageType = $derived(page.data?.pageType ?? 'website');
-	const pageImage = $derived(
-		page.data?.pageImage ? new URL(page.data.pageImage, page.url.href).toString() : ''
-	);
+	const pageImage = $derived(page.data?.pageImage ?? '');
 
 	const pageUrl = $derived(page.url.href);
 
@@ -31,7 +29,7 @@
 	<link rel="icon" href={favicon} />
 	<title>
 		{pageTitlePrefix ? `${pageTitlePrefix}` : ''}
-		{pageTitle}
+			{pageTitle}
 	</title>
 	<meta name="description" content={pageDescription} />
 

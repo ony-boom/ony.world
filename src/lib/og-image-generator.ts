@@ -1,45 +1,61 @@
 import { ImageResponse } from '@ethercorps/sveltekit-og';
 import OgImage from '$components/og-image.svelte';
 import { CustomFont, resolveFonts } from '@ethercorps/sveltekit-og/fonts';
-import path from 'node:path';
-import fs from 'node:fs/promises';
+import type { RequestHandler, RequestEvent } from '@sveltejs/kit';
+import SentientFont from '../lib/assets/fonts/Sentient-Bold.ttf?arraybuffer';
+
+type OgImageMetadata = {
+	pageDescription?: string;
+	pageTitle?: string;
+	extra?: string;
+};
+
+type OgImageMetadataFunctionLoader = () => Promise<OgImageMetadata> | OgImageMetadata;
 
 const sentientFont = new CustomFont(
 	'Sentient',
-	async () => {
-		const fontFilePath = path.resolve(
-			import.meta.dirname,
-			'assets',
-			'fonts',
-			'Sentient-Bold.ttf'
-		);
-		const fontFile = await fs.readFile(fontFilePath);
-		return fontFile.buffer;
+	() => {
+		return SentientFont;
 	},
-
 	{
 		weight: 700,
 		style: 'normal'
 	}
 );
 
-export const generateOgImage = async (meta: {
-	pageDescription?: string;
-	pageTitle?: string;
-	extra?: string;
-}) => {
-	const { pageDescription, pageTitle, extra } = meta;
-	const resolvedFontOptions = await resolveFonts([sentientFont]);
+export const makeOgImageLink = (url: URL) => {
+	return new URL(`${url.pathname}/og-image`, url.href).toString();
+};
 
-	const ogImageParams = {
-		width: 1200,
-		height: 630,
-		fonts: resolvedFontOptions
+export const generateOgImage = async (meta: OgImageMetadata | OgImageMetadataFunctionLoader) => {
+	const metadata = typeof meta === 'function' ? await meta() : meta;
+	return new ImageResponse(
+		OgImage,
+		{
+			width: 1200,
+			height: 630,
+			fonts: await resolveFonts([sentientFont])
+		},
+		metadata
+	);
+};
+
+export const createOgImageHandler = (
+	metadataLoader:
+		| OgImageMetadata
+		| ((event: RequestEvent) => Promise<OgImageMetadata> | OgImageMetadata)
+): RequestHandler => {
+	return async (event) => {
+		try {
+			const metadata =
+				typeof metadataLoader === 'function' ? await metadataLoader(event) : metadataLoader;
+			return generateOgImage(metadata);
+		} catch (error) {
+			console.error('Error generating OG image:', error);
+			return new Response('Failed to generate OG image', {
+				status: 500,
+				statusText: 'Failed to generate OG image'
+			});
+		}
 	};
-
-	return new ImageResponse(OgImage, ogImageParams, {
-		pageTitle,
-		pageDescription,
-		extra
-	});
 };

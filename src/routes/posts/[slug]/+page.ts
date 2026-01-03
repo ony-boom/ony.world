@@ -1,9 +1,9 @@
 import type { PageLoad } from './$types';
 import { loadContentBySlug } from '$lib/content';
 import { error } from '@sveltejs/kit';
+import { makeOgImageLink } from '$lib/og-image-generator';
 
-export const load: PageLoad = async ({ params }) => {
-	const { slug } = params;
+export const _metadata = async (slug: string) => {
 	const post = await loadContentBySlug('posts', slug);
 
 	if (!post) {
@@ -15,6 +15,13 @@ export const load: PageLoad = async ({ params }) => {
 		pageDescription: post.metadata.description,
 		pageTitle: post.metadata.title,
 		pageTitlePrefix: "Ony's Blog |",
-		pageType: 'article',
+		pageType: 'article'
+	};
+};
+
+export const load: PageLoad = async ({ params, url }) => {
+	return {
+		...(await _metadata(params.slug)),
+		pageImage: makeOgImageLink(url)
 	};
 };
