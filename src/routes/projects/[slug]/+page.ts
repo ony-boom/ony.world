@@ -1,7 +1,7 @@
 import type { PageLoad } from './$types';
 import { loadContentBySlug } from '$lib/content';
 import { error } from '@sveltejs/kit';
-import { makeOgImageLink } from '$lib/og-image-generator';
+import { makeOgImageLink } from '$lib/og-image-generator/utils';
 
 export const _metadata = async (slug: string) => {
 	const post = await loadContentBySlug('projects', slug);

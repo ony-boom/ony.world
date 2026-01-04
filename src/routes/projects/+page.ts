@@ -1,6 +1,6 @@
 import { loadContent } from '$lib/content';
+import { makeOgImageLink } from '$lib/og-image-generator/utils';
 import type { PageLoad } from './$types';
-import { makeOgImageLink } from '$lib/og-image-generator';
 
 export const _metadata: App.PageMetadata = {
 	pageTitle: 'Projects',
