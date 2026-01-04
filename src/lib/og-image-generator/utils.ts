@@ -3,7 +3,7 @@ import { render } from 'svelte/server';
 import { html } from 'satori-html';
 
 export const makeOgImageLink = (url: URL) => {
-	return new URL(`${url.pathname}/og-image`, url.href).toString();
+	return `${url.origin}${url.pathname}/og-image`;
 };
 
 export function svelteComponentToHTML<T extends Record<string, any> = {}>(

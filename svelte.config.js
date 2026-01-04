@@ -45,6 +45,9 @@ const config = {
 	],
 	kit: {
 		adapter: adapter(),
+		prerender: {
+			origin: 'https://ony.world'
+		},
 		alias: {
 			$components: './src/components',
 			$content: './src/content'
