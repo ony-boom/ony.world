@@ -1,166 +1,167 @@
 @import 'tailwindcss';
 
 @font-face {
-	font-family: 'Sentient';
-	src:
-		url('lib/assets/fonts/Sentient.woff2') format('woff2 supports variations'),
-		url('lib/assets/fonts/Sentient.woff2') format('woff2-variations');
-	font-weight: 100 900;
- font-display: swap;
+    font-family: 'Sentient';
+    src: url('lib/assets/fonts/Sentient.woff2') format('woff2 supports variations'),
+    url('lib/assets/fonts/Sentient.woff2') format('woff2-variations');
+    font-weight: 100 900;
+    font-display: swap;
 }
 
 :root {
-	--light: hsl(28.24, 68%, 96.1%);
-	--dark: hsl(0, 0%, 7.02%);
+    --light: hsl(28.24, 68%, 96.1%);
+    --dark: hsl(0, 0%, 7.02%);
 
-	--bg: light-dark(var(--light), var(--dark));
-	--fg: light-dark(var(--dark), var(--light));
+    --bg: light-dark(var(--light), var(--dark));
+    --fg: light-dark(var(--dark), var(--light));
 
-	--muted: --alpha(var(--fg) / 40%);
-	--muted-fg: --alpha(var(--fg) / 50%);
-	--border: --alpha(var(--fg) / 10%);
+    --muted: --alpha(var(--fg) / 40%);
+    --muted-fg: --alpha(var(--fg) / 50%);
+    --border: --alpha(var(--fg) / 10%);
 
-	--primary: light-dark(hsl(27.79, 66.67%, 40%), hsl(27.96, 67.32%, 70%));
+    --primary: light-dark(hsl(27.79, 66.67%, 40%), hsl(27.96, 67.32%, 70%));
 
-	--ff-serif: 'Sentient', serif;
+    --ff-serif: 'Sentient', serif;
 }
 
 @theme {
-	--font-serif: var(--ff-serif);
+    --font-serif: var(--ff-serif);
 
-	--color-bg: var(--bg);
-	--color-fg: var(--fg);
-	--color-muted: var(--muted);
-	--color-border: var(--border);
-	--color-muted-fg: var(--muted-fg);
-	--color-primary: var(--primary);
+    --color-bg: var(--bg);
+    --color-fg: var(--fg);
+    --color-muted: var(--muted);
+    --color-border: var(--border);
+    --color-muted-fg: var(--muted-fg);
+    --color-primary: var(--primary);
 }
 
 ::selection {
-	@apply bg-fg/10;
+    @apply bg-fg/10;
 }
 
 @layer base {
-	html {
-		@apply bg-bg text-fg;
-		color-scheme: light dark;
+    html {
+        @apply bg-bg text-fg;
+        color-scheme: light dark;
 
-		--noise-opacity: 0.1;
+        --noise-opacity: 0.1;
 
-		&[style='color-scheme: dark;'] {
-			--noise-opacity: 0.5;
-		}
-	}
+        &[style='color-scheme: dark;'] {
+            --noise-opacity: 0.5;
+        }
+    }
 
-	body {
-		@apply font-serif;
-	}
+    body {
+        @apply font-serif;
+    }
 
-	article {
-		h2,
-		h3,
-		h4,
-		h5,
-		h6 {
-			@apply mt-6! mb-3!;
-		}
+    article {
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            @apply mt-6! mb-3! font-semibold text-primary;
+        }
 
-		h2 {
-			@apply text-lg;
-		}
+        h2 {
+            @apply text-lg;
+        }
 
-		ul,
-		ol {
-			@apply list-inside pl-1;
+        ul,
+        ol {
+            @apply list-inside pl-1;
 
-			&:is(ul) {
-				@apply list-disc;
-			}
+            &:is(ul) {
+                @apply list-disc;
+            }
 
-			&:is(ol) {
-				@apply list-decimal;
-			}
+            &:is(ol) {
+                @apply list-decimal;
+            }
 
-			li::marker {
-				@apply text-muted-fg;
-			}
-		}
-	}
+            li::marker {
+                @apply text-muted-fg;
+            }
+        }
+    }
 }
 
 @utility container {
-	@apply mx-auto max-w-lg px-6 sm:px-0;
+    @apply mx-auto max-w-lg px-6 sm:px-0;
 }
 
 @layer components {
-	select {
-		@apply rounded-md p-2 transition;
-	}
+    select {
+        @apply rounded-md p-2 transition;
+    }
 
-	button {
-		@apply inline-flex items-center justify-center gap-2 p-2;
+    button {
+        @apply inline-flex items-center justify-center gap-2 p-2;
 
-		&.link {
-			@apply rounded-none p-0;
-		}
-	}
+        &.link {
+            @apply rounded-none p-0;
+        }
+    }
 
-	a,
-	.link {
-		@apply text-primary underline decoration-muted underline-offset-2;
-		transition: color text-decoration 250ms;
+    a,
+    .link {
+        @apply text-primary underline decoration-muted underline-offset-2;
+        transition: color, text-decoration 250ms;
 
-		&:hover {
-			@apply decoration-primary;
-		}
+        &:hover {
+            @apply decoration-primary;
+        }
 
-		&.ghost-link {
-			@apply text-muted-fg;
-			&:hover {
-				@apply text-primary decoration-primary;
-			}
-		}
-	}
+        &.ghost-link {
+            @apply text-muted-fg;
 
-	ul {
-		@apply space-y-1;
-	}
+            &:hover {
+                @apply text-primary decoration-primary;
+            }
+        }
+    }
 
-	p {
-		line-height: 1.7em;
-		text-wrap: pretty;
-		&:not(:last-of-type) {
-			@apply mb-4;
-		}
+    ul {
+        @apply space-y-1;
+    }
 
-		code {
-			@apply border border-muted/50 px-1;
-		}
-	}
+    p {
+        line-height: 1.7em;
+        text-wrap: pretty;
 
-	pre {
-		@apply overflow-auto border border-muted/30 p-4 font-mono;
-	}
+        &:not(:last-of-type) {
+            @apply mb-4;
+        }
 
-	video,
-	img {
-		@apply mx-auto;
-		z-index: 0;
-	}
+        code {
+            @apply border border-muted/50 px-1;
+        }
+    }
 
-	.drop-cap {
-		@supports (initial-letter: 2) {
-			&::first-letter {
-				initial-letter: 2;
-				margin: 4px;
-				color: var(--primary);
-			}
-		}
+    pre {
+        @apply overflow-auto border border-muted/30 p-4 font-mono;
+    }
 
-		@supports not (initial-letter: 2) {
-			&::first-letter {
-				@apply float-start mr-2 pt-2.5 text-5xl text-primary;
-			}
-		}
-	}
+    video,
+    img {
+        @apply mx-auto;
+        z-index: 0;
+    }
+
+    .drop-cap {
+        @supports (initial-letter: 2) {
+            &::first-letter {
+                initial-letter: 2;
+                margin: 4px;
+                color: var(--primary);
+            }
+        }
+
+        @supports not (initial-letter: 2) {
+            &::first-letter {
+                @apply float-start mr-2 pt-2.5 text-5xl text-primary;
+            }
+        }
+    }
 }

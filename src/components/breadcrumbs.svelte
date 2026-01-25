@@ -44,7 +44,7 @@
 			</a>
 			<span class="text-muted-fg">/</span>
 		{:else}
-			<span class="font-medium text-muted-fg">
+			<span class="font-medium text-muted-fg max-w-36 md:max-w-64 truncate" title={crumb.label}>
 				{crumb.label}
 			</span>
 		{/if}

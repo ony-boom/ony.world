@@ -8,12 +8,12 @@
 <ul class="mt-4 list-none space-y-4">
 	{#each data.posts as post}
 		{@const { metadata } = post}
-		<li>
+		<li title={metadata.title}>
 			<a
 				href={`/posts/${metadata.slug}`}
 				class="group flex items-baseline justify-between gap-4 no-underline"
 			>
-				<span class="link font-medium">
+				<span class="link font-medium max-w-64 truncate">
 					{metadata.title}
 				</span>
 

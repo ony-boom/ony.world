@@ -9,7 +9,7 @@
 	const formattedDate = formatDate(date);
 </script>
 
-<h1 class="text-xl font-semibold">
+<h1 class="text-xl font-semibold mb-1">
 	{title}
 </h1>
 <time class="text-sm capitalize text-muted-fg">{formattedDate}</time>
