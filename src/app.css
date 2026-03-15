@@ -130,7 +130,7 @@
         line-height: 1.7em;
         text-wrap: pretty;
 
-        &:not(:last-of-type) {
+        &:not(:last-child) {
             @apply mb-4;
         }
 

@@ -4,18 +4,20 @@
 
 <section>
 	<p>
-		Hi, I'm <a href="/about"> Ony </a>, and I <span class="text-primary">make</span>
-		simple, useful, and easy-to-use
-		<a href="/projects"> software </a>.
+		Hi, I'm <a href="/"> Ony </a>. I
+		<a href="/projects">build software </a>.
 	</p>
 
 	<p>
-		If you're looking for help with your website, frontend engineering, fullstack JavaScript, or
-		backend with Go, feel free to <a href="mailto:ony@ony.world"><span>reach out</span></a>. I'm
-		currently taking on new projects.
+		I work remotely as a web and mobile developer. I'm always open to new projects, so feel free to
+		<a href="mailto:onyrakoto27@gmail.com"> reach out </a>. I mostly work with TypeScript/JavaScript
+		and Go.
 	</p>
 
-	<p>Sometimes <a href="/posts"> I write </a> about... well, almost everything.</p>
+	<p>
+		Recently <a href="/posts">I started writing</a> more about things I learn and my experience, mostly
+		because the site felt a bit empty to be honest.
+	</p>
 </section>
 
 <Footer class="mt-8" />

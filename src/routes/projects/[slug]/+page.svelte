@@ -3,16 +3,17 @@
 	import type { PageProps } from './$types';
 
 	let { data }: PageProps = $props();
-	const { title, date } = data.metadata;
-	const { Component: Post } = data;
-
-	const formattedDate = formatDate(date);
+	const { title, date } = $derived({
+		date: formatDate(data.metadata.date),
+		title: data.metadata.title
+	});
+	const Post = $derived(data.Component);
 </script>
 
-<h1 class="text-xl font-semibold">
+<h1 class="mb-1 text-xl font-semibold">
 	{title}
 </h1>
-<time class="text-sm capitalize text-muted-fg">{formattedDate}</time>
+<time class="text-sm text-muted-fg capitalize">{date}</time>
 
 <article class="mt-6 space-y-4">
 	<Post />

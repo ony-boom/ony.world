@@ -23,7 +23,7 @@
 				<time
 					class="shrink-0 text-sm text-muted transition-colors group-hover:text-fg sm:text-base"
 				>
-					{formatDate(metadata.date)}
+					{formatDate(metadata.date, { dateStyle: 'medium' })}
 				</time>
 			</a>
 		</li>
