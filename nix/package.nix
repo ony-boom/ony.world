@@ -30,7 +30,7 @@ in
         src
         prePnpmInstall
         ;
-      hash = "sha256-PcvLkfSIsHOclI8D52yj1q6qgjvl2rA8mk2fhQjA1Pg=";
+      hash = "sha256-kqL8uXqTWB5ehSrV9jQTv6KjpZKEyYOQVOTuBQ7BwOI=";
     };
 
     buildPhase = ''
