@@ -6,8 +6,7 @@ published: true
 tags: ["code", "css"]
 ---
 
-<p class="drop-cap">
-    Before CSS's <code>light-dark</code> function, we had to use tricks like adding a <code>.dark</code> class to overwrite color variables. This led to code duplication, and I've always hated that.</p>
+Before CSS's `light-dark` function, we had to use tricks like adding a `.dark` class to overwrite color variables. This led to code duplication, and I've always hated that.
 
 CSS's `light-dark` function lets you specify which color to use based on the user's color scheme preference (light or dark mode).
 
@@ -34,4 +33,4 @@ We could just do:
 Here it's just one color variable, but I think you got the point.
 You can learn more on [MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/color_value/light-dark).
 
-But [here's](https://shiki.matsu.io/guide/dual-themes#light-dark-function) something cool you can do with it: I'm currently using it on this website to change the code highlight theme when the color scheme changes, no extra JavaScript or complicated setup needed. You can [try it out by clicking the little circle icon](#theme-toggle) in the top right.
+But [here's](https://shiki.matsu.io/guide/dual-themes#light-dark-function) something cool you can do with it: I'm currently using it on this website to change the code highlight theme when the color scheme changes, no extra JavaScript or complicated setup needed. You can [try it out by clicking the `[dark]` / `[light]` toggle](#theme-toggle) in the sidebar.

@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { formatDate } from '$lib/date';
 	import type { PageProps } from './$types';
 
 	let { data }: PageProps = $props();
@@ -9,22 +8,26 @@
 	{#each data.posts as post}
 		{@const { metadata } = post}
 
-		<li title={metadata.title}>
+		<li>
 			<a
 				href="/posts/{metadata.slug}"
-				class="group flex flex-col-reverse gap-2 no-underline sm:flex-row sm:items-baseline sm:gap-4"
+				class="group grid grid-cols-[5rem_1fr] items-baseline gap-5 no-underline"
+				title={metadata.title}
 			>
-				<span class="link font-medium">
+				<time
+					datetime={metadata.date}
+					class="text-right text-sm text-muted-fg tabular-nums transition-colors group-hover:text-fg"
+				>
+					{new Date(metadata.date).toLocaleString('en-US', {
+						month: 'short',
+						year: 'numeric'
+					})}
+				</time>
+				<span
+					class="text-fg underline decoration-muted decoration-[1px] underline-offset-[3px] transition-colors group-hover:decoration-fg"
+				>
 					{metadata.title}
 				</span>
-				<hr
-					class="hidden h-px flex-1 border-dotted border-muted transition-colors group-hover:border-fg sm:block"
-				/>
-				<time
-					class="shrink-0 text-sm text-muted transition-colors group-hover:text-fg sm:text-base"
-				>
-					{formatDate(metadata.date, { dateStyle: 'medium' })}
-				</time>
 			</a>
 		</li>
 	{:else}

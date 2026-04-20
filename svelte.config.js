@@ -8,7 +8,7 @@ import rehypeExternalLinks from 'rehype-external-links';
 const mdsvexExtentions = ['.svx', '.md'];
 const highlighter = await createHighlighter({
 	langs: ['javascript', 'typescript', 'tsx', 'jsx', 'nix', 'css'],
-	themes: ['vitesse-light', 'vitesse-dark']
+	themes: ['one-light', 'kanagawa-dragon']
 });
 
 /** @type {import('@sveltejs/kit').Config} */
@@ -32,8 +32,8 @@ const config = {
 						highlighter.codeToHtml(code, {
 							lang,
 							themes: {
-								dark: 'vitesse-dark',
-								light: 'vitesse-light'
+								dark: 'kanagawa-dragon',
+								light: 'one-light'
 							},
 							tabindex: null,
 							defaultColor: 'light-dark()'

@@ -1,23 +1,24 @@
 <script lang="ts">
 	import { theme } from '$lib/theme';
-	import { Eclipse } from '@lucide/svelte';
 	import type { SvelteHTMLElements } from 'svelte/elements';
 
-	let { children, ...props }: SvelteHTMLElements['button'] = $props();
+	let { ...props }: SvelteHTMLElements['button'] = $props();
 
 	function switchTheme() {
 		theme.set($theme === 'dark' ? 'light' : 'dark');
 	}
+
+	const current = $derived($theme ?? 'dark');
+	const next = $derived(current === 'dark' ? 'light' : 'dark');
 </script>
 
 <button
 	id="theme-toggle"
-	aria-label="Theme switch"
-	class={[
-		props.class,
-		'cursor-pointer bg-transparent text-muted-fg outline outline-transparent transition-colors hover:bg-muted/10 hover:text-primary focus:outline-primary/40'
-	]}
+	type="button"
+	aria-label={`Switch to ${next} theme`}
+	title={`Switch to ${next} theme`}
+	class={['p-1! text-sm text-muted-fg no-underline transition-colors hover:text-fg', props.class]}
 	onclick={switchTheme}
 >
-	<Eclipse size={12} />
+	[{current}]
 </button>

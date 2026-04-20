@@ -5,9 +5,7 @@ date: '2025-12-27'
 published: true
 tags: ["slice-of-life"]
 ---
-<p class="drop-cap">
-I’ve been watching a lot of old shows lately, and I noticed that many of them name their first episode <a target="_blank" href="https://en.wikipedia.org/wiki/Television_pilot#Premise_pilot">Pilot</a>.
-</p>
+I’ve been watching a lot of old shows lately, and I noticed that many of them name their first episode [Pilot](https://en.wikipedia.org/wiki/Television_pilot#Premise_pilot).
 
 I didn’t know what it meant, so I looked it up.
 It felt like a good title for my first post too.

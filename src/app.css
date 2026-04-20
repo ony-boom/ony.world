@@ -1,167 +1,185 @@
 @import 'tailwindcss';
-
-@font-face {
-    font-family: 'Sentient';
-    src: url('lib/assets/fonts/Sentient.woff2') format('woff2 supports variations'),
-    url('lib/assets/fonts/Sentient.woff2') format('woff2-variations');
-    font-weight: 100 900;
-    font-display: swap;
-}
+@import './styles/fonts.css';
 
 :root {
-    --light: hsl(28.24, 68%, 96.1%);
-    --dark: hsl(0, 0%, 7.02%);
+	--onyx: #0f0f0f;
+	--carbon: #1a1a1a;
+	--carbon-2: #242424;
+	--silver: #c0c0c0;
+	--dust: #d1d1d1;
+	--alabaster: #e0e0e0;
+	--white-smoke: #f5f5f5;
+	--white: #ffffff;
 
-    --bg: light-dark(var(--light), var(--dark));
-    --fg: light-dark(var(--dark), var(--light));
+	--bg: light-dark(var(--white-smoke), var(--onyx));
+	--surface: light-dark(var(--white), var(--carbon));
+	--fg: light-dark(var(--onyx), var(--white-smoke));
 
-    --muted: --alpha(var(--fg) / 40%);
-    --muted-fg: --alpha(var(--fg) / 50%);
-    --border: --alpha(var(--fg) / 10%);
+	--muted-fg: light-dark(--alpha(var(--onyx) / 42%), --alpha(var(--white-smoke) / 45%));
+	--muted: light-dark(--alpha(var(--onyx) / 28%), --alpha(var(--white-smoke) / 32%));
+	--border: light-dark(var(--alabaster), var(--carbon-2));
 
-    --primary: light-dark(hsl(27.79, 66.67%, 40%), hsl(27.96, 67.32%, 70%));
+	--primary: var(--fg);
 
-    --ff-serif: 'Sentient', serif;
+	--ff-sans: 'Satoshi', ui-sans-serif, sans-serif;
 }
 
 @theme {
-    --font-serif: var(--ff-serif);
+	--font-sans: var(--ff-sans);
 
-    --color-bg: var(--bg);
-    --color-fg: var(--fg);
-    --color-muted: var(--muted);
-    --color-border: var(--border);
-    --color-muted-fg: var(--muted-fg);
-    --color-primary: var(--primary);
+	--color-bg: var(--bg);
+	--color-surface: var(--surface);
+	--color-fg: var(--fg);
+	--color-muted: var(--muted);
+	--color-border: var(--border);
+	--color-muted-fg: var(--muted-fg);
+	--color-primary: var(--primary);
 }
 
 ::selection {
-    @apply bg-fg/10;
+	@apply bg-fg/10;
+}
+
+:focus {
+	outline: none;
+}
+
+:focus-visible {
+	outline: 1px solid var(--muted);
+	border-radius: 2px;
+}
+
+.target-flash {
+	outline: 1px solid var(--muted);
+	border-radius: 2px;
+	animation: target-fade 1.4s ease-out 0.9s forwards;
+}
+
+@keyframes target-fade {
+	to {
+		outline-color: transparent;
+	}
 }
 
 @layer base {
-    html {
-        @apply bg-bg text-fg;
-        color-scheme: light dark;
+	html {
+		@apply bg-bg text-fg;
+		color-scheme: light dark;
 
-        --noise-opacity: 0.1;
+		--noise-opacity: 0.1;
 
-        &[style='color-scheme: dark;'] {
-            --noise-opacity: 0.5;
-        }
-    }
+		&[style='color-scheme: dark;'] {
+			--noise-opacity: 0.5;
+		}
+	}
 
-    body {
-        @apply font-serif;
-    }
+	body {
+		@apply font-sans;
+		font-weight: 400;
+	}
 
-    article {
-        h2,
-        h3,
-        h4,
-        h5,
-        h6 {
-            @apply mt-6! mb-3! font-semibold text-primary;
-        }
+	strong,
+	b {
+		font-weight: 700;
+	}
 
-        h2 {
-            @apply text-lg;
-        }
+	article {
+		h2,
+		h3,
+		h4,
+		h5,
+		h6 {
+			@apply mt-6! mb-3! font-bold text-primary;
+		}
 
-        ul,
-        ol {
-            @apply list-inside pl-1;
+		h2 {
+			@apply text-lg;
+		}
 
-            &:is(ul) {
-                @apply list-disc;
-            }
+		ul,
+		ol {
+			@apply list-inside pl-1;
 
-            &:is(ol) {
-                @apply list-decimal;
-            }
+			&:is(ul) {
+				@apply list-disc;
+			}
 
-            li::marker {
-                @apply text-muted-fg;
-            }
-        }
-    }
+			&:is(ol) {
+				@apply list-decimal;
+			}
+
+			li::marker {
+				@apply text-muted-fg;
+			}
+		}
+	}
 }
 
 @utility container {
-    @apply mx-auto max-w-lg px-6 sm:px-0;
+	@apply mx-auto max-w-lg px-6 sm:px-0;
 }
 
 @layer components {
-    select {
-        @apply rounded-md p-2 transition;
-    }
+	select {
+		@apply rounded-md p-2 transition;
+	}
 
-    button {
-        @apply inline-flex items-center justify-center gap-2 p-2;
+	button {
+		@apply inline-flex items-center justify-center gap-2 p-2;
 
-        &.link {
-            @apply rounded-none p-0;
-        }
-    }
+		&.link {
+			@apply rounded-none p-0;
+		}
+	}
 
-    a,
-    .link {
-        @apply text-primary underline decoration-muted underline-offset-2;
-        transition: color, text-decoration 250ms;
+	a,
+	.link {
+		color: var(--fg);
+		text-decoration: underline;
+		text-decoration-color: var(--muted);
+		text-decoration-thickness: 1px;
+		text-underline-offset: 3px;
+		transition: text-decoration-color 180ms ease;
 
-        &:hover {
-            @apply decoration-primary;
-        }
+		&:hover {
+			text-decoration-color: var(--fg);
+		}
 
-        &.ghost-link {
-            @apply text-muted-fg;
+		&.ghost-link {
+			color: var(--muted-fg);
 
-            &:hover {
-                @apply text-primary decoration-primary;
-            }
-        }
-    }
+			&:hover {
+				color: var(--fg);
+				text-decoration-color: var(--fg);
+			}
+		}
+	}
 
-    ul {
-        @apply space-y-1;
-    }
+	ul {
+		@apply space-y-1;
+	}
 
-    p {
-        line-height: 1.7em;
-        text-wrap: pretty;
+	p {
+		line-height: 1.7em;
+		text-wrap: pretty;
 
-        &:not(:last-child) {
-            @apply mb-4;
-        }
+		&:not(:last-child) {
+			@apply mb-4;
+		}
 
-        code {
-            @apply border border-muted/50 px-1;
-        }
-    }
+		code {
+			@apply border border-muted/50 px-1;
+		}
+	}
 
-    pre {
-        @apply overflow-auto border border-muted/30 p-4 font-mono;
-    }
+	pre {
+		@apply overflow-auto border border-muted/30 p-4 font-mono;
+	}
 
-    video,
-    img {
-        @apply mx-auto;
-        z-index: 0;
-    }
+	video,
+	img {
+		@apply mx-auto;
+		z-index: 0;
+	}
 
-    .drop-cap {
-        @supports (initial-letter: 2) {
-            &::first-letter {
-                initial-letter: 2;
-                margin: 4px;
-                color: var(--primary);
-            }
-        }
-
-        @supports not (initial-letter: 2) {
-            &::first-letter {
-                @apply float-start mr-2 pt-2.5 text-5xl text-primary;
-            }
-        }
-    }
 }

@@ -1,6 +1,6 @@
 import satori from 'satori';
 import { Resvg } from '@resvg/resvg-js';
-import SentientFont from '../assets/fonts/Sentient-Bold.ttf?arraybuffer';
+import SatoshiFont from '../assets/fonts/Satoshi-Bold.ttf?arraybuffer';
 import OgImage from '$components/og-image.svelte';
 import { svelteComponentToHTML } from './utils';
 
@@ -25,8 +25,8 @@ const generateOgImageSVG = async ({
 		height,
 		fonts: [
 			{
-				name: 'Sentient',
-				data: SentientFont,
+				name: 'Satoshi',
+				data: SatoshiFont,
 				weight: 700,
 				style: 'normal'
 			}

@@ -6,7 +6,7 @@ published: true
 tags: [ "code", "nix" ]
 ---
 
-<p class="drop-cap">I've talked about Nix before, but not much about using it in real-world projects.</p>
+I've talked about Nix before, but not much about using it in real-world projects.
 
 This month I set up a Nix-based dev environment for a React Native (non-Expo) app running on
 a [POS device](https://en.wikipedia.org/wiki/Payment_terminal). It solved a real pain point for my team, so I wanted to

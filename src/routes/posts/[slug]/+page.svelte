@@ -1,5 +1,7 @@
 <script lang="ts">
 	import { formatDate } from '$lib/date';
+	import { initTargetFlash } from '$lib/target-flash';
+	import { onMount } from 'svelte';
 	import type { PageProps } from './$types';
 
 	let { data }: PageProps = $props();
@@ -8,6 +10,8 @@
 		title: data.metadata.title
 	});
 	const Post = $derived(data.Component);
+
+	onMount(() => initTargetFlash());
 </script>
 
 <h1 class="text-xl font-semibold mb-1">

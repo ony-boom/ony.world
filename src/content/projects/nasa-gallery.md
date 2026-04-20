@@ -9,9 +9,7 @@ published: true
     <source src="https://file.ony.world/videos/ony.world/nasa-preview.mp4" type="video/mp4" />
 </video>
 
-<p class="drop-cap">
-    I built this project as part of a challenge when I was first learning HTML, CSS, and JavaScript.
-</p>
+I built this project as part of a challenge when I was first learning HTML, CSS, and JavaScript.
 
 The goal was simple: create a website using any public API we wanted. I chose NASA’s, and ended up building a small gallery for images and videos. It was a lot of fun to work on, and while there’s plenty I would do differently today, I’m still proud of what I built.
 

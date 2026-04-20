@@ -36,15 +36,19 @@
 	});
 </script>
 
-<nav {...props} aria-label="Breadcrumb" class={['flex items-center gap-1 text-sm', props.class]}>
+<nav
+	{...props}
+	aria-label="Breadcrumb"
+	class={['flex items-center gap-2 text-sm tracking-tight', props.class]}
+>
 	{#each breadcrumbs as crumb, i}
 		{#if i < breadcrumbs.length - 1}
 			<a href={crumb.path} class="ghost-link">
 				{crumb.label}
 			</a>
-			<span class="text-muted-fg">/</span>
+			<span class="text-muted select-none" aria-hidden="true">/</span>
 		{:else}
-			<span class="font-medium text-muted-fg max-w-36 md:max-w-64 truncate" title={crumb.label}>
+			<span class="text-fg max-w-36 md:max-w-64 truncate" title={crumb.label}>
 				{crumb.label}
 			</span>
 		{/if}

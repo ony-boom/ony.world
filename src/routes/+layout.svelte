@@ -6,9 +6,9 @@
 	import { dev } from '$app/environment';
 	import { initThemeToggle } from '$lib/theme';
 	import { onMount } from 'svelte';
-	import Breadcrumbs from '$components/breadcrumbs.svelte';
-	import { page } from '$app/state';
+	import SideNav from '$components/side-nav.svelte';
 	import ThemeSwitch from '$components/theme-switch.svelte';
+	import { page } from '$app/state';
 
 	let { children } = $props();
 
@@ -49,14 +49,17 @@
 	<meta property="og:url" content={pageUrl} />
 </svelte:head>
 
-<main class="space-y-8 py-12 sm:py-20 md:py-32">
-	<header class="sticky top-0 z-10 bg-bg/90 backdrop-blur-md">
-		<div class="container flex items-center justify-between py-4">
-			<Breadcrumbs {pageTitle} />
-			<ThemeSwitch class="text-sm" />
-		</div>
-	</header>
-	<div class="container">
+<main
+	class="mx-auto grid max-w-3xl gap-6 px-6 pt-6 pb-12 sm:py-20 md:grid-cols-[7rem_1fr] md:gap-10 md:py-32"
+>
+	<aside
+		aria-label="Primary"
+		class="flex flex-row items-center justify-between gap-4 border-b border-border pb-4 md:sticky md:top-16 md:flex-col md:items-end md:gap-4 md:self-start md:border-r md:border-b-0 md:pr-6 md:pb-0"
+	>
+		<SideNav />
+		<ThemeSwitch />
+	</aside>
+	<div class="min-w-0">
 		{@render children()}
 	</div>
 </main>

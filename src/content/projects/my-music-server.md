@@ -13,9 +13,7 @@ coverType: "video"
 
 [Source code here](https://github.com/ony-boom/mms)
 
-<p class="drop-cap">
-    I've <strong>always been a purist about my music collection</strong>. Since I was a kid, I've kept my music as MP3 files on an SD card. I don't know, there's something about owning your music files that makes you feel closer to the artists and albums I love. 
-</p>
+I've **always been a purist about my music collection**. Since I was a kid, I've kept my music as MP3 files on an SD card. I don't know, there's something about owning your music files that makes you feel closer to the artists and albums I love.
 
 But here's the problem: I have multiple devices. My phone, my desktop, maybe a laptop. Manually syncing music files across all of them? Absolute pain.
 

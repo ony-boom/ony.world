@@ -4,7 +4,7 @@
 
 <section>
 	<p>
-		Hi, I'm <a href="/"> Ony </a>. I
+		Hi, I'm  <strong>Ony</strong>. I
 		<a href="/projects">build software </a>.
 	</p>
 

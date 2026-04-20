@@ -22,7 +22,7 @@
 	.base {
 		width: 100%;
 		height: 100%;
-		font-family: 'Sentient', serif;
+		font-family: 'Satoshi', sans-serif;
 
 		font-size: 32px;
 		font-family: serif;
