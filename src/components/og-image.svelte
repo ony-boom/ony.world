@@ -23,9 +23,7 @@
 		width: 100%;
 		height: 100%;
 		font-family: 'Satoshi', sans-serif;
-
 		font-size: 32px;
-		font-family: serif;
 
 		padding: 64px 128px;
 
@@ -33,17 +31,17 @@
 		flex-direction: column;
 		justify-content: center;
 
-		color: #fcf5ee;
-		background-color: #121212;
+		color: #f5f5f5;
+		background-color: #0f0f0f;
 
 		h1 {
-			color: #e6af7f;
-      margin-bottom: 4px;
+			color: #f5f5f5;
+			margin-bottom: 4px;
 		}
 
 		.extra {
 			font-size: 18px;
-			color: #fcf5ee80;
+			color: #f5f5f573;
 			margin-bottom: 28px;
 		}
 	}
