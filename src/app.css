@@ -21,7 +21,7 @@
 
 	--primary: var(--fg);
 
-	--ff-sans: 'Satoshi', ui-sans-serif, sans-serif;
+	--ff-sans: 'Satoshi', 'Satoshi-fallback', ui-sans-serif, sans-serif;
 }
 
 @theme {
