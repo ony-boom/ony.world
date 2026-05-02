@@ -1,0 +1,23 @@
+when:
+  - event: push
+  - event: pull_request
+
+steps:
+  build:
+    image: local
+    commands:
+      - nix --accept-flake-config build .#default
+
+  deploy:
+    image: local
+    when:
+      - event: push
+        branch: main
+    commands:
+      - cd /var/lib/woodpecker-agent-local/remote-os
+      - git fetch origin main
+      - git reset --hard origin/main
+      - nix --accept-flake-config flake lock --update-input ony-world
+      - git -c user.email=ci@ony.world -c user.name=woodpecker commit -am "chore: updated ony.world to $CI_COMMIT_SHA_SHORT" || true
+      - git push origin main
+      - sudo /run/current-system/sw/bin/colmena apply --on hizuru
