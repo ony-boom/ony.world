@@ -4,7 +4,7 @@ description: 'A music server/player similar to Subsonic,Navindrome'
 date: '2025-11-05'
 published: true
 coverUrl: https://file.ony.world/videos/ony.world/mms-preview.mp4
-coverType: "video"
+coverType: 'video'
 ---
 
 <video controls muted>
