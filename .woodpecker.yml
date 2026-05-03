@@ -2,14 +2,20 @@ when:
   - event: push
   - event: pull_request
 
+clone:
+  git:
+    image: bash
+    settings:
+      lfs: false
+
 steps:
   build:
-    image: local
+    image: bash
     commands:
       - nix --accept-flake-config build .#default
 
   deploy:
-    image: local
+    image: bash
     when:
       - event: push
         branch: main
