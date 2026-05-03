@@ -3,7 +3,7 @@ title: "CSS's light-dark function"
 description: 'A simple way to handle color schemes'
 date: '2025-12-28'
 published: true
-tags: ["code", "css"]
+tags: ['code', 'css']
 ---
 
 Before CSS's `light-dark` function, we had to use tricks like adding a `.dark` class to overwrite color variables. This led to code duplication, and I've always hated that.
@@ -11,22 +11,23 @@ Before CSS's `light-dark` function, we had to use tricks like adding a `.dark` c
 CSS's `light-dark` function lets you specify which color to use based on the user's color scheme preference (light or dark mode).
 
 So, instead of:
+
 ```css
 :root {
-    --color-fg: #000;
-        
-    /* when html tag have the .dark class, overwrite colors */
-    &.dark {
-        --color-fg: #fff;
-    }
-}
+	--color-fg: #000;
 
+	/* when html tag have the .dark class, overwrite colors */
+	&.dark {
+		--color-fg: #fff;
+	}
+}
 ```
 
 We could just do:
+
 ```css
 :root {
-    --color-fg: light-dark(#000, #fff);
+	--color-fg: light-dark(#000, #fff);
 }
 ```
 
