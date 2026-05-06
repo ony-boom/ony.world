@@ -1,0 +1,46 @@
+name: Deploy
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: cachix/install-nix-action@v27
+        with:
+          nix_path: nixpkgs=channel:nixos-unstable
+
+      - uses: cachix/cachix-action@v15
+        with:
+          name: ony-boom
+          authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+
+      - run: nix build --no-link .#default
+
+  deploy:
+    needs: build
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: peter-evans/repository-dispatch@v3
+        with:
+          token: ${{ secrets.VPS_DEPLOY_TOKEN }}
+          repository: ony-boom/remote-os
+          event-type: app-updated
+          client-payload: |
+            {
+              "app_name": "ony-world",
+              "commit": "${{ github.sha }}",
+              "author": "${{ github.actor }}",
+              "repo_url": "${{ github.event.repository.html_url }}",
+              "commit_message": ${{ toJSON(github.event.head_commit.message) }}
+            }
