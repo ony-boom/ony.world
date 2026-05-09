@@ -17,7 +17,10 @@
     packages = eachSystem (system: let
       pkgs = nixpkgs.legacyPackages.${system};
     in {
-      default = pkgs.callPackage ./nix/package.nix {inherit self;};
+      default = pkgs.callPackage ./nix/package.nix {
+        inherit self;
+        srcRoot = ./.;
+      };
     });
   };
 }

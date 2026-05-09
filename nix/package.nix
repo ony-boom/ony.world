@@ -1,5 +1,7 @@
 {
   self,
+  srcRoot,
+  lib,
   stdenv,
   nodejs,
   pnpm,
@@ -10,7 +12,22 @@
 in
   stdenv.mkDerivation (finalAttrs: {
     inherit pname version;
-    src = self;
+    src = lib.fileset.toSource {
+      root = srcRoot;
+      fileset = lib.fileset.unions [
+        (srcRoot + /package.json)
+        (srcRoot + /pnpm-lock.yaml)
+        (srcRoot + /pnpm-workspace.yaml)
+        (srcRoot + /svelte.config.js)
+        (srcRoot + /vite.config.ts)
+        (srcRoot + /tsconfig.json)
+        (srcRoot + /.npmrc)
+        (srcRoot + /.prettierrc)
+        (srcRoot + /.prettierignore)
+        (srcRoot + /src)
+        (srcRoot + /static)
+      ];
+    };
 
     nativeBuildInputs = [
       nodejs
