@@ -22,8 +22,6 @@ in
         (srcRoot + /vite.config.ts)
         (srcRoot + /tsconfig.json)
         (srcRoot + /.npmrc)
-        (srcRoot + /.prettierrc)
-        (srcRoot + /.prettierignore)
         (srcRoot + /src)
         (srcRoot + /static)
       ];
