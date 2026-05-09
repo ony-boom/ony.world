@@ -96,6 +96,19 @@
 			@apply text-lg;
 		}
 
+		blockquote {
+			@apply border-l-2 border-muted pl-4 my-6 italic;
+			color: light-dark(--alpha(var(--onyx) / 75%), --alpha(var(--white-smoke) / 70%));
+
+			p {
+				@apply mb-2 last:mb-0;
+			}
+
+			cite {
+				@apply block mt-3 text-sm not-italic text-muted-fg;
+			}
+		}
+
 		ul,
 		ol {
 			@apply list-inside pl-1;
