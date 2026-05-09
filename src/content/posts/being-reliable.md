@@ -1,6 +1,6 @@
 ---
 title: 'Being reliable'
-description: 'A simple way to handle color schemes'
+description: ''
 date: '2026-05-09'
 published: true
 tags: ['slice-of-life']
