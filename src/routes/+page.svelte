@@ -20,4 +20,4 @@
 	</p>
 </section>
 
-<Footer class="mt-8" />
+<Footer class="mt-12" />

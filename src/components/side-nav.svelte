@@ -15,7 +15,7 @@
 	}
 </script>
 
-<ul class="flex flex-row gap-5 text-sm md:flex-col md:items-end md:gap-1.5 md:text-right">
+<ul class="flex flex-row gap-5 text-sm md:flex-col md:items-end md:gap-3 md:text-right">
 	{#each items as item}
 		{@const active = isActive(item.href)}
 		<li>

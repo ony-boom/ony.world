@@ -50,11 +50,11 @@
 </svelte:head>
 
 <main
-	class="mx-auto grid max-w-3xl gap-6 px-6 pt-6 pb-12 sm:py-20 md:grid-cols-[7rem_1fr] md:gap-10 md:py-32"
+	class="mx-auto grid max-w-3xl gap-8 px-6 pt-10 pb-16 sm:py-20 md:grid-cols-[7rem_1fr] md:gap-10 md:py-32"
 >
 	<aside
 		aria-label="Primary"
-		class="flex flex-row items-center justify-between gap-4 border-b border-border pb-4 md:sticky md:top-16 md:flex-col md:items-end md:gap-4 md:self-start md:border-r md:border-b-0 md:pr-6 md:pb-0"
+		class="flex flex-row items-center justify-between gap-4 border-border md:sticky md:top-16 md:flex-col md:items-end md:gap-4 md:self-start md:border-r md:pr-6"
 	>
 		<SideNav />
 		<ThemeSwitch />

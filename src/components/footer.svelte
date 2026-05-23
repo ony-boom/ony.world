@@ -24,7 +24,7 @@
 </script>
 
 <footer {...props} class={[props.class]}>
-	<ul class="flex gap-4 border-t border-border py-4">
+	<ul class="flex gap-5 border-t border-border py-4">
 		{#each LINKS as link}
 			<li class="text-sm">
 				<a class="ghost-link" href={link.url} target={link.url.startsWith('/') ? '_self' : '_blank'}

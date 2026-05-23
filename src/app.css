@@ -15,8 +15,8 @@
 	--surface: light-dark(var(--white), var(--carbon));
 	--fg: light-dark(var(--onyx), var(--white-smoke));
 
-	--muted-fg: light-dark(--alpha(var(--onyx) / 42%), --alpha(var(--white-smoke) / 45%));
-	--muted: light-dark(--alpha(var(--onyx) / 28%), --alpha(var(--white-smoke) / 32%));
+	--muted-fg: light-dark(--alpha(var(--onyx) / 60%), --alpha(var(--white-smoke) / 45%));
+	--muted: light-dark(--alpha(var(--onyx) / 42%), --alpha(var(--white-smoke) / 32%));
 	--border: light-dark(var(--alabaster), var(--carbon-2));
 
 	--primary: var(--fg);
@@ -124,6 +124,15 @@
 			li::marker {
 				@apply text-muted-fg;
 			}
+		}
+
+		img,
+		video {
+			@apply w-full;
+		}
+
+		video {
+			@apply aspect-video;
 		}
 	}
 }
