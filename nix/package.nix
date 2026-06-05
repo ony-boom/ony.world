@@ -21,7 +21,6 @@ in
         (srcRoot + /svelte.config.js)
         (srcRoot + /vite.config.ts)
         (srcRoot + /tsconfig.json)
-        (srcRoot + /.npmrc)
         (srcRoot + /src)
         (srcRoot + /static)
       ];
@@ -45,7 +44,7 @@ in
         src
         prePnpmInstall
         ;
-      hash = "sha256-qai9BPMTUoCKPfxFEdNJZvzpXc6uF5OAF7EcIUddPF8=";
+      hash = "sha256-hqZ1IcMvm52xXRSQrdepsEQxLWPhmw93AaRz7pVwiLU=";
     };
 
     buildPhase = ''
