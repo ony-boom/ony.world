@@ -29,7 +29,7 @@
 			>
 				<time
 					datetime={metadata.date}
-					class="text-sm text-fg/65 tabular-nums transition-colors group-hover:text-fg md:text-right"
+					class="text-sm text-fg/65 tabular-nums transition-colors group-hover:text-fg"
 				>
 					{formatDate(metadata.date)}
 				</time>
