@@ -4,6 +4,7 @@ import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
 import { escapeSvelte } from 'mdsvex';
 import { createHighlighter } from 'shiki';
 import rehypeExternalLinks from 'rehype-external-links';
+import rehypeSlug from 'rehype-slug';
 import { rehypeImageSize } from './src/lib/rehype-image-size.js';
 
 const mdsvexExtentions = ['.svx', '.md'];
@@ -19,6 +20,7 @@ const config = {
 		mdsvex({
 			extensions: mdsvexExtentions,
 			rehypePlugins: [
+				rehypeSlug,
 				rehypeImageSize,
 				[
 					rehypeExternalLinks,

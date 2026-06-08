@@ -65,8 +65,11 @@
 	html {
 		@apply bg-bg text-fg;
 		color-scheme: light dark;
+		scrollbar-gutter: stable;
 
 		--noise-opacity: 0.1;
+
+    scroll-behavior: smooth;
 
 		&[style='color-scheme: dark;'] {
 			--noise-opacity: 0.5;
