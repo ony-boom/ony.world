@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { env } from '$env/dynamic/public';
 	import { onMount } from 'svelte';
 
 	type Track = {
@@ -10,8 +9,10 @@
 		nowPlaying: boolean;
 	};
 
-	const KEY = env.PUBLIC_LASTFM_API_KEY;
-	const USER = env.PUBLIC_LASTFM_USER;
+	// Last.fm read-only API key — public by design (ships in the client bundle either
+	// way). Rotate at https://www.last.fm/api/account if ever needed.
+	const KEY = 'd9e5da3bf961af2f677f12c25ad241aa';
+	const USER = 'ony-rakoto';
 
 	// 'loading' shows a skeleton; 'hidden' renders nothing (no env, error, or no scrobbles).
 	let status = $state<'loading' | 'ready' | 'hidden'>('loading');
