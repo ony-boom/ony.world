@@ -5,4 +5,4 @@
 	let { data }: PageProps = $props();
 </script>
 
-<EntryList entries={data.projects} base="/projects" showDescription class="space-y-6" />
+<EntryList entries={data.projects} base="/projects" showDescription class="space-y-7" />

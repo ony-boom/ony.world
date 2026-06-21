@@ -15,6 +15,6 @@
 </h1>
 <time class="text-sm text-muted-fg capitalize">{date}</time>
 
-<article class="mt-6 space-y-4">
+<article class="mt-8 space-y-4">
 	<Post />
 </article>

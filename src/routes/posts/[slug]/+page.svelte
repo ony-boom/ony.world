@@ -14,11 +14,11 @@
 	onMount(() => initTargetFlash());
 </script>
 
-<h1 class="text-xl font-semibold mb-1">
+<h1 class="mb-1 text-xl font-semibold">
 	{title}
 </h1>
-<time class="text-sm capitalize text-muted-fg">{date}</time>
+<time class="text-sm text-muted-fg capitalize">{date}</time>
 
-<article class="mt-6 space-y-4">
+<article class="mt-8 space-y-4">
 	<Post />
 </article>

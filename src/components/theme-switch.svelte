@@ -1,6 +1,7 @@
 <script lang="ts">
 	import Icon from '@iconify/svelte';
 	import { theme } from '$lib/theme';
+	import { scale } from 'svelte/transition';
 	import type { SvelteHTMLElements } from 'svelte/elements';
 
 	let { ...props }: SvelteHTMLElements['button'] = $props();
@@ -18,8 +19,24 @@
 	type="button"
 	aria-label={`Switch to ${next} theme`}
 	title={`Switch to ${next} theme`}
-	class={['p-1! text-muted-fg no-underline transition-colors hover:text-fg', props.class]}
+	class={[
+		'grid size-9 place-items-center text-muted-fg no-underline transition-colors hover:text-fg active:scale-90',
+		props.class
+	]}
 	onclick={switchTheme}
 >
-	<Icon icon="tabler:moon-filled" width="18" height="18" aria-hidden="true" />
+	{#key current}
+		<span
+			class="col-start-1 row-start-1"
+			in:scale={{ duration: 200, start: 0.6, opacity: 0 }}
+			out:scale={{ duration: 200, start: 0.6, opacity: 0 }}
+		>
+			<Icon
+				icon={current === 'dark' ? 'tabler:sun-filled' : 'tabler:moon-filled'}
+				width="18"
+				height="18"
+				aria-hidden="true"
+			/>
+		</span>
+	{/key}
 </button>
