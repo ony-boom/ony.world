@@ -1,6 +1,5 @@
 // See https://svelte.dev/docs/kit/types#app.d.ts
 
-import type { Locale } from '$lib/paraglide/runtime';
 import type { Theme } from '$lib/theme';
 import type { Component } from 'svelte';
 
@@ -27,7 +26,7 @@ declare global {
 		}> {}
 
 		interface MdsvexFile {
-			default: import('svelte/internal').SvelteComponent;
+			default: Component;
 			metadata: Record<string, string>;
 		}
 

@@ -10,7 +10,7 @@ import { rehypeImageSize } from './src/lib/rehype-image-size.js';
 const mdsvexExtentions = ['.svx', '.md'];
 const highlighter = await createHighlighter({
 	langs: ['javascript', 'typescript', 'tsx', 'jsx', 'nix', 'css'],
-	themes: ['one-light', 'kanagawa-dragon']
+	themes: ['vitesse-light', 'vitesse-dark']
 });
 
 /** @type {import('@sveltejs/kit').Config} */
@@ -36,8 +36,8 @@ const config = {
 						highlighter.codeToHtml(code, {
 							lang,
 							themes: {
-								dark: 'kanagawa-dragon',
-								light: 'one-light'
+								dark: 'vitesse-dark',
+								light: 'vitesse-light'
 							},
 							tabindex: null,
 							defaultColor: 'light-dark()'

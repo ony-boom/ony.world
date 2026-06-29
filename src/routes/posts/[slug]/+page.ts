@@ -7,7 +7,7 @@ export const _metadata = async (slug: string) => {
 	const post = await loadContentBySlug('posts', slug);
 
 	if (!post) {
-		throw error(404);
+		error(404);
 	}
 
 	return {
