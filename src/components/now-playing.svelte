@@ -110,7 +110,7 @@
 				>
 					{track.name}
 				</span>
-				<span class="text-muted-fg transition-colors duration-[180ms] group-hover:text-fg">
+				<span class="text-muted-fg transition-colors duration-180 group-hover:text-fg">
 					· {track.artist}
 				</span>
 			</div>
