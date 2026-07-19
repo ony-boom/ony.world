@@ -5,9 +5,7 @@
 	--onyx: #0f0f0f;
 	--carbon: #1a1a1a;
 	--carbon-2: #242424;
-	--silver: #c0c0c0;
 	--dust: #d1d1d1;
-	--alabaster: #e0e0e0;
 	--white-smoke: #f5f5f5;
 	--white: #ffffff;
 
@@ -15,9 +13,15 @@
 	--surface: light-dark(var(--white), var(--carbon));
 	--fg: light-dark(var(--onyx), var(--white-smoke));
 
-	--muted-fg: light-dark(--alpha(var(--onyx) / 60%), --alpha(var(--white-smoke) / 45%));
-	--muted: light-dark(--alpha(var(--onyx) / 42%), --alpha(var(--white-smoke) / 32%));
-	--border: light-dark(var(--alabaster), var(--carbon-2));
+	/* Light mode needs more ink than dark needs light: dark text on a bright field loses
+	   contrast faster as alpha drops. Hence the asymmetric pairs. */
+	--muted-fg: light-dark(--alpha(var(--onyx) / 72%), --alpha(var(--white-smoke) / 50%));
+	--muted: light-dark(--alpha(var(--onyx) / 55%), --alpha(var(--white-smoke) / 38%));
+	--border: light-dark(var(--dust), var(--carbon-2));
+
+	/* amber: warm hue against neutral grays. two tones — one can't pass contrast on both bgs.
+	   Light tone is deep (ochre) by necessity: a bright amber on #f5f5f5 only reaches ~4:1. */
+	--amber: light-dark(oklch(0.52 0.14 63), oklch(0.79 0.13 72));
 
 	--primary: var(--fg);
 
@@ -37,7 +41,7 @@
 }
 
 ::selection {
-	@apply bg-fg/10;
+	background: --alpha(var(--amber) / 22%);
 }
 
 :focus {
@@ -45,13 +49,13 @@
 }
 
 :focus-visible {
-	outline: 1px solid var(--muted);
-	border-radius: 2px;
+	outline: 2px solid var(--amber);
+	outline-offset: 2px;
 }
 
 .target-flash {
-	outline: 1px solid var(--muted);
-	border-radius: 2px;
+	outline: 2px solid var(--amber);
+	outline-offset: 2px;
 	animation: target-fade 1.4s ease-out 0.9s forwards;
 }
 
@@ -147,17 +151,19 @@
 
 @layer components {
 	select {
-		@apply rounded-md p-2 transition;
+		@apply p-2 transition;
 	}
 
 	button {
 		@apply inline-flex items-center justify-center gap-2 p-2;
 
 		&.link {
-			@apply rounded-none p-0;
+			@apply p-0;
 		}
 	}
 
+	/* Structural links (lists, nav, cards) stay neutral so the accent means something.
+	   Amber is reserved for prose links below — the few places it aids reading. */
 	a,
 	.link {
 		color: var(--fg);
@@ -165,19 +171,32 @@
 		text-decoration-color: var(--muted);
 		text-decoration-thickness: 1px;
 		text-underline-offset: 3px;
-		transition: text-decoration-color 180ms ease;
+		transition:
+			text-decoration-color 180ms ease,
+			color 180ms ease;
 
 		&:hover {
-			text-decoration-color: var(--fg);
+			text-decoration-color: var(--amber);
 		}
 
 		&.ghost-link {
 			color: var(--muted-fg);
 
 			&:hover {
-				color: var(--fg);
-				text-decoration-color: var(--fg);
+				color: var(--amber);
+				text-decoration-color: var(--amber);
 			}
+		}
+	}
+
+	/* Prose links carry the accent: inline in a sentence, color is what makes them
+	   findable without the underline shouting. */
+	p a:not(.ghost-link) {
+		color: var(--amber);
+		text-decoration-color: --alpha(var(--amber) / 35%);
+
+		&:hover {
+			text-decoration-color: var(--amber);
 		}
 	}
 

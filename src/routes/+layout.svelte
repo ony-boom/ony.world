@@ -51,11 +51,12 @@
 </svelte:head>
 
 <div class="mx-auto flex min-h-svh max-w-2xl flex-col px-6 py-10 sm:py-14">
-	<div class="flex items-center gap-4">
+	<!-- justify-end so the toggle stays pinned right whether or not a breadcrumb renders. -->
+	<div class="flex items-center justify-end gap-3">
 		{#if !isHome}
-			<BackLink class="min-w-0" />
+			<BackLink class="mr-auto min-w-0" />
 		{/if}
-		<ThemeSwitch class="ml-auto" />
+		<ThemeSwitch class="shrink-0" />
 	</div>
 	<main class="mt-8 min-w-0 flex-1 sm:mt-10">
 		{@render children()}

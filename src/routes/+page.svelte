@@ -7,9 +7,19 @@
 <script>
 	import Footer from '$components/footer.svelte';
 	import NowPlaying from '$components/now-playing.svelte';
-	import LocalTime from '$components/local-time.svelte';
 	import { experience } from '$lib/experience';
 	import { onMount } from 'svelte';
+
+	// Hand-written, unlike the scrobbles below — this is the part that says something.
+	// Keep it specific (what you're stuck on beats what you're "exploring") and bump
+	// the date when you change it. A stale date is honest; a stale undated claim isn't.
+	const CURRENTLY = {
+		updated: 'July 2026',
+		lines: [
+			"I'm basically going back to my roots in coding. With coding agents, it doesn't feel like it did before, so I'm doing my personal things off AI lately.",
+			'Also learning more about system design and scalability.'
+		]
+	};
 
 	let reveal = $state(false);
 
@@ -23,13 +33,13 @@
 <section class:reveal>
 	<p>
 		Hi, I'm <strong>Ony</strong>. I
-		<a href="/projects">build software </a>.
+		<a href="/projects">build software</a>.
 	</p>
 
 	<p>
 		I work remotely as a web and mobile developer. I'm always open to new projects, so feel free to
-		<a href="mailto:onyrakoto27@gmail.com"> reach out </a>. I mostly work with TypeScript/JavaScript
-		and Go.
+		<a href="mailto:onyrakoto27@gmail.com">reach out</a>. I mostly work with TypeScript/JavaScript and
+		Go.
 	</p>
 
 	<p>
@@ -38,16 +48,24 @@
 	</p>
 </section>
 
-<div
-	class:reveal-late={reveal}
-	class="mt-14 flex flex-col gap-5 sm:flex-row sm:items-center sm:gap-10"
->
-	<div class="min-w-0 sm:w-80"><NowPlaying /></div>
-	<div class="hidden shrink-0 sm:block"><LocalTime /></div>
-</div>
+<section class:reveal-late={reveal} style="--delay: 0.16s" class="mt-16">
+	<h2 class="mb-5 flex items-baseline gap-3 text-sm text-muted-fg">
+		Currently
+		<span class="text-xs">{CURRENTLY.updated}</span>
+	</h2>
+	<ul class="space-y-2">
+		{#each CURRENTLY.lines as line}
+			<li class="leading-relaxed">{line}</li>
+		{/each}
+	</ul>
 
-<section class:reveal-late={reveal} class="mt-16">
-	<h2 class="mb-7 text-sm text-muted-fg">Experience</h2>
+	<!-- The one line here that writes itself. Sits with the hand-written ones because
+	     it answers the same question. -->
+	<NowPlaying class="mt-6" />
+</section>
+
+<section class:reveal-late={reveal} style="--delay: 0.2s" class="mt-16">
+	<h2 class="mb-5 text-sm text-muted-fg">Experience</h2>
 	<ul class="space-y-7">
 		{#each experience as job}
 			{@const range = job.from ? `${job.from} – ${job.to}` : job.to}
@@ -99,11 +117,12 @@
 	.reveal > :global(p:nth-child(3)) {
 		animation-delay: 0.12s;
 	}
+	/* Several blocks share .reveal-late, so each sets its own step to keep the cascade. */
 	.reveal-late {
-		animation-delay: 0.16s;
+		animation-delay: var(--delay, 0.16s);
 	}
 	:global(.reveal:is(footer)) {
-		animation-delay: 0.2s;
+		animation-delay: 0.28s;
 	}
 
 	@keyframes reveal-up {

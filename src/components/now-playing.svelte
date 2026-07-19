@@ -1,6 +1,8 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 
+	let { class: className }: { class?: string } = $props();
+
 	type Track = {
 		name: string;
 		artist: string;
@@ -14,7 +16,8 @@
 	const KEY = 'd9e5da3bf961af2f677f12c25ad241aa';
 	const USER = 'ony-rakoto';
 
-	// 'loading' shows a skeleton; 'hidden' renders nothing (no env, error, or no scrobbles).
+	// 'loading' reserves the row height; 'hidden' renders nothing (no env, error, or
+	// no scrobbles).
 	let status = $state<'loading' | 'ready' | 'hidden'>('loading');
 	let track = $state<Track | null>(null);
 
@@ -39,6 +42,7 @@
 			return;
 		}
 
+		// Last.fm returns sizes small→extralarge; take the largest non-empty one.
 		const image = (t.image ?? []).findLast?.((i: { '#text': string }) => i['#text'])?.['#text'];
 		track = {
 			name: t.name,
@@ -66,11 +70,17 @@
 	<!-- Reserve the exact row height so loading -> loaded doesn't shift layout; no skeleton. -->
 	<div class="h-10" aria-hidden="true"></div>
 {:else if status === 'ready' && track}
+	{@const label = track.nowPlaying ? 'Now playing' : 'Last played'}
 	<a
 		href={track.url}
 		target="_blank"
 		rel="noreferrer"
-		class="np-in group flex h-10 items-center gap-3 no-underline"
+		aria-label={`${label}: ${track.name} by ${track.artist}. Open on Last.fm`}
+		class={[
+			'np-in group flex h-10 items-center gap-3 no-underline',
+			'transition-transform duration-150 active:scale-[0.99]',
+			className
+		]}
 	>
 		{#if track.image}
 			<img
@@ -79,26 +89,30 @@
 				width="40"
 				height="40"
 				loading="lazy"
-				class="mx-0 size-10 shrink-0 rounded object-cover"
+				class="mx-0 size-10 shrink-0 object-cover"
 			/>
 		{:else}
 			<span
-				class="grid size-10 shrink-0 place-items-center text-3xl leading-none"
+				class="grid size-10 shrink-0 place-items-center border border-border text-lg leading-none"
 				aria-hidden="true"
 			>
-				🎵
+				♫
 			</span>
 		{/if}
 
 		<div class="min-w-0">
-			<div class="text-xs text-muted-fg">
-				{track.nowPlaying ? 'Now playing' : 'Last played'}
-			</div>
+			<div class="text-xs text-muted-fg">{label}</div>
 			<div class="truncate leading-tight">
-				<span class="text-fg decoration-muted underline-offset-[3px] group-hover:underline">
+				<!-- Underline is always present but transparent, so hover fades it in
+				     rather than snapping it on. -->
+				<span
+					class="text-fg underline decoration-transparent underline-offset-[3px] transition-colors duration-180 group-hover:decoration-muted"
+				>
 					{track.name}
 				</span>
-				<span class="text-muted-fg transition-colors group-hover:text-fg">· {track.artist}</span>
+				<span class="text-muted-fg transition-colors duration-[180ms] group-hover:text-fg">
+					· {track.artist}
+				</span>
 			</div>
 		</div>
 	</a>
