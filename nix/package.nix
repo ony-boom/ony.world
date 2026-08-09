@@ -5,6 +5,8 @@
   stdenv,
   nodejs,
   pnpm,
+  pnpmConfigHook,
+  fetchPnpmDeps,
 }: let
   pkgJson = builtins.fromJSON (builtins.readFile (self + /package.json));
   pname = pkgJson.name;
@@ -28,23 +30,19 @@ in
 
     nativeBuildInputs = [
       nodejs
-      pnpm.configHook
+      pnpm
+      pnpmConfigHook
     ];
 
-    prePnpmInstall = ''
-      pnpm config set dedupe-peer-dependents false
-    '';
-
-    pnpmDeps = pnpm.fetchDeps {
-      fetcherVersion = 1;
+    pnpmDeps = fetchPnpmDeps {
+      fetcherVersion = 4;
       inherit
         (finalAttrs)
         pname
         version
         src
-        prePnpmInstall
         ;
-      hash = "sha256-tHLRO4cNkqTrSjiJTKzaTB3ce1GQtvVYlPj+OqLHKiE=";
+      hash = "sha256-zXcXvYD0ocs74H4NH0q5JM3VdWOPvRnw3BSXFxY+1W4=";
     };
 
     buildPhase = ''
