@@ -1,6 +1,4 @@
 <script module>
-	// ponytail: module scope resets on full reload but persists across SPA nav,
-	// so the reveal plays on (re)load but not when navigating back to home.
 	let played = false;
 </script>
 
@@ -10,15 +8,9 @@
 	import { experience } from '$lib/experience';
 	import { onMount } from 'svelte';
 
-	// Hand-written, unlike the scrobbles below — this is the part that says something.
-	// Keep it specific (what you're stuck on beats what you're "exploring") and bump
-	// the date when you change it. A stale date is honest; a stale undated claim isn't.
 	const CURRENTLY = {
-		updated: 'July 2026',
-		lines: [
-			"I'm basically going back to my roots in coding. With coding agents, it doesn't feel like it did before, so I'm doing my personal things off AI lately.",
-			'Also learning more about system design and scalability.'
-		]
+		updated: 'August 2026',
+		lines: ['Re-thinking about everything. Looking at things from a different perspective']
 	};
 
 	let reveal = $state(false);
@@ -38,8 +30,8 @@
 
 	<p>
 		I work remotely as a web and mobile developer. I'm always open to new projects, so feel free to
-		<a href="mailto:onyrakoto27@gmail.com">reach out</a>. I mostly work with TypeScript/JavaScript and
-		Go.
+		<a href="mailto:onyrakoto27@gmail.com">reach out</a>. I mostly work with TypeScript/JavaScript
+		and Go.
 	</p>
 
 	<p>
@@ -105,7 +97,7 @@
 	.reveal > :global(*),
 	.reveal-late,
 	:global(.reveal:is(footer)) {
-		animation: reveal-up 0.4s cubic-bezier(0.22, 1, 0.36, 1) backwards;
+		animation: reveal-up 0.5s cubic-bezier(0.22, 1, 0.36, 1) backwards;
 	}
 
 	.reveal > :global(p:nth-child(1)) {

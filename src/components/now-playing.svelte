@@ -3,6 +3,10 @@
 
 	let { class: className }: { class?: string } = $props();
 
+	// Skeleton and loaded row share these: identical boxes are the whole no-shift guarantee.
+	const ROW = 'flex h-10 items-center gap-3';
+	const THUMB = 'size-10 shrink-0';
+
 	type Track = {
 		name: string;
 		artist: string;
@@ -67,8 +71,13 @@
 </script>
 
 {#if status === 'loading'}
-	<!-- Reserve the exact row height so loading -> loaded doesn't shift layout; no skeleton. -->
-	<div class="h-10" aria-hidden="true"></div>
+	<div class={['np-skel', ROW, className]} aria-hidden="true">
+		<div class={[THUMB, 'border border-border']}></div>
+		<div class="space-y-2">
+			<div class="h-1.5 w-12 bg-border"></div>
+			<div class="h-1.5 w-32 bg-border"></div>
+		</div>
+	</div>
 {:else if status === 'ready' && track}
 	{@const label = track.nowPlaying ? 'Now playing' : 'Last played'}
 	<a
@@ -77,7 +86,8 @@
 		rel="noreferrer"
 		aria-label={`${label}: ${track.name} by ${track.artist}. Open on Last.fm`}
 		class={[
-			'np-in group flex h-10 items-center gap-3 no-underline',
+			'np-in group no-underline',
+			ROW,
 			'transition-transform duration-150 active:scale-[0.99]',
 			className
 		]}
@@ -89,11 +99,11 @@
 				width="40"
 				height="40"
 				loading="lazy"
-				class="mx-0 size-10 shrink-0 object-cover"
+				class={[THUMB, 'mx-0 object-cover']}
 			/>
 		{:else}
 			<span
-				class="grid size-10 shrink-0 place-items-center border border-border text-lg leading-none"
+				class={[THUMB, 'grid place-items-center border border-border text-lg leading-none']}
 				aria-hidden="true"
 			>
 				♫
@@ -119,9 +129,15 @@
 {/if}
 
 <style>
-	/* Entrance when the track mounts after fetch: ease-out, <300ms, reduced-motion safe. */
-	.np-in {
+	/* Entrance when the row mounts after fetch: ease-out, <300ms, reduced-motion safe. */
+	.np-in,
+	.np-skel {
 		animation: np-in 0.28s cubic-bezier(0.22, 1, 0.36, 1) backwards;
+	}
+
+	/* Delayed, so a fast fetch resolves before the skeleton is ever visible. */
+	.np-skel {
+		animation-delay: 0.4s;
 	}
 
 	@keyframes np-in {
@@ -132,7 +148,8 @@
 	}
 
 	@media (prefers-reduced-motion: reduce) {
-		.np-in {
+		.np-in,
+		.np-skel {
 			animation: none;
 		}
 	}

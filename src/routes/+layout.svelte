@@ -21,9 +21,9 @@
 
 	const pageUrl = $derived(page.url.href);
 
-	onMount(async () => {
-		initThemeToggle();
-	});
+	// Sync, not async: onMount only honours a returned teardown from a sync callback,
+	// and initThemeToggle returns one that drops its media-query listener.
+	onMount(() => initThemeToggle());
 </script>
 
 <svelte:head>
