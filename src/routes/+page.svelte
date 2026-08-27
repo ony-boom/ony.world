@@ -9,16 +9,13 @@
 	import { onMount } from 'svelte';
 
 	const CURRENTLY = {
-		updated: 'August 2026',
-		lines: ['Re-thinking about everything. Looking at things from a different perspective']
+		lines: ['Learning about decentralized social networks, and experimenting with them.']
 	};
 
-	let reveal = $state(false);
+	const reveal = !played;
 
 	onMount(() => {
-		if (played) return;
 		played = true;
-		reveal = true;
 	});
 </script>
 
@@ -41,10 +38,7 @@
 </section>
 
 <section class:reveal-late={reveal} style="--delay: 0.16s" class="mt-16">
-	<h2 class="mb-5 flex items-baseline gap-3 text-sm text-muted-fg">
-		Currently
-		<span class="text-xs">{CURRENTLY.updated}</span>
-	</h2>
+	<h2 class="mb-5 text-sm text-muted-fg">Currently</h2>
 	<ul class="space-y-2">
 		{#each CURRENTLY.lines as line}
 			<li class="leading-relaxed">{line}</li>
