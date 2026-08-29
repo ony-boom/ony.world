@@ -1,0 +1,75 @@
+# yaml-language-server: $schema=https://unpkg.com/@sveltia/cms/schema/sveltia-cms.json
+
+backend:
+  name: github
+  repo: ony-boom/ony.world
+  branch: main
+
+# Media lives on file.ony.world today, so uploads here are just a fallback.
+# NOTE: rehype-image-size only probes `http`-prefixed sources, so images
+# uploaded to /uploads won't get width/height and will cause layout shift.
+media_folder: /static/uploads
+public_folder: /uploads
+
+collections:
+  - name: posts
+    label: Posts
+    label_singular: Post
+    folder: /src/content/posts
+    create: true
+    extension: md
+    format: yaml-frontmatter
+    slug: '{{title}}'
+    sortable_fields: [date, title]
+    view_groups:
+      - label: Status
+        field: published
+    fields:
+      - { name: title, label: Title, widget: string }
+      - { name: description, label: Description, widget: string, required: false, default: '' }
+      - { name: date, label: Date, widget: datetime, type: date, format: YYYY-MM-DD }
+      - { name: published, label: Published, widget: boolean, default: false }
+      - { name: tags, label: Tags, widget: list, required: false }
+      - { name: coverUrl, label: Cover URL, widget: string, required: false }
+      - name: coverType
+        label: Cover type
+        widget: select
+        options: [image, video]
+        default: image
+        required: false
+      # Rich text first (Ghost-ish), raw markdown one click away in the toolbar.
+      - name: body
+        label: Body
+        widget: richtext
+        modes: [rich_text, raw]
+        editor_components: [code-block, image]
+
+  - name: projects
+    label: Projects
+    label_singular: Project
+    folder: /src/content/projects
+    create: true
+    extension: md
+    format: yaml-frontmatter
+    slug: '{{title}}'
+    sortable_fields: [date, title]
+    view_groups:
+      - label: Status
+        field: published
+    fields:
+      - { name: title, label: Title, widget: string }
+      - { name: description, label: Description, widget: string, required: false, default: '' }
+      - { name: date, label: Date, widget: datetime, type: date, format: YYYY-MM-DD }
+      - { name: published, label: Published, widget: boolean, default: false }
+      - { name: coverUrl, label: Cover URL, widget: string, required: false }
+      - name: coverType
+        label: Cover type
+        widget: select
+        options: [image, video]
+        default: image
+        required: false
+      - name: body
+        label: Body
+        widget: richtext
+        modes: [rich_text, raw]
+        editor_components: [code-block, image]

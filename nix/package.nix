@@ -58,9 +58,15 @@ in
       runHook preInstall
 
       dist=$out/var/www/${pname}
+      cms=$out/var/www/cms.${pname}
 
       mkdir -p $dist
       cp -r build/* $dist
+
+      # The CMS is served from its own vhost root, so /admin must not exist
+      # under the site itself. Fails loudly if static/admin went missing —
+      # e.g. left untracked, which hides it from the flake source.
+      mv $dist/admin $cms
 
       runHook postInstall
     '';
