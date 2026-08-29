@@ -6,7 +6,7 @@ published: true
 ---
 
 <video controls muted>
-    <source src="https://file.ony.world/videos/ony.world/nasa-preview.mp4" type="video/mp4" />
+    <source src="https://media.ony.world/nasa-preview.mp4" type="video/mp4" />
 </video>
 
 I built this project as part of a challenge when I was first learning HTML, CSS, and JavaScript.

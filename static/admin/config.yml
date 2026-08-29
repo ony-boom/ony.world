@@ -5,9 +5,19 @@ backend:
   repo: ony-boom/ony.world
   branch: main
 
-# Media lives on file.ony.world today, so uploads here are just a fallback.
-# NOTE: rehype-image-size only probes `http`-prefixed sources, so images
-# uploaded to /uploads won't get width/height and will cause layout shift.
+# Media lives in Garage (self-hosted S3) on hizuru. `endpoint` and `acl` are
+# undocumented but supported; see garage.md in the remote-os repo. The Secret
+# Access Key is not stored here, Sveltia prompts for it.
+media_libraries:
+  aws_s3:
+    endpoint: https://s3.ony.world
+    public_url: https://media.ony.world
+    bucket: media
+    region: garage
+    access_key_id: GKfa7ea7b8163058d4a871619b
+    acl: false
+
+# Git-backed fallback, for the odd small asset that belongs in the repo.
 media_folder: /static/uploads
 public_folder: /uploads
 

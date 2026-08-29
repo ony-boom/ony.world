@@ -11,7 +11,7 @@ I've talked about Nix before, but not much about using it in real-world projects
 This month I set up a Nix-based dev environment for a React Native (non-Expo) app running on
 a [POS device](https://en.wikipedia.org/wiki/Payment_terminal). Thought it was worth sharing.
 
-![POS device](https://file.ony.world/pictures/ony.world/blog/nix-devenv/pos.webp)
+![POS device](https://media.ony.world/nix-devenv-pos.webp)
 
 ## The problem
 
