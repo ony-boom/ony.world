@@ -5,9 +5,7 @@ date: '2025-08-05'
 published: true
 ---
 
-<video controls muted>
-    <source src="https://media.ony.world/nasa-preview.mp4" type="video/mp4" />
-</video>
+<video src="https://media.ony.world/nasa-preview.mp4" controls muted playsinline preload="metadata"></video>
 
 I built this project as part of a challenge when I was first learning HTML, CSS, and JavaScript.
 

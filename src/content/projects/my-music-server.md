@@ -7,9 +7,7 @@ coverUrl: https://media.ony.world/mms-preview.mp4
 coverType: 'video'
 ---
 
-<video controls muted>
-    <source src="https://media.ony.world/mms-preview.mp4" type="video/mp4" />
-</video>
+<video src="https://media.ony.world/mms-preview.mp4" controls muted playsinline preload="metadata"></video>
 
 [Source code here](https://github.com/ony-boom/mms)
 

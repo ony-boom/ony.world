@@ -40,7 +40,7 @@ collections:
       - { name: date, label: Date, widget: datetime, type: date, format: YYYY-MM-DD }
       - { name: published, label: Published, widget: boolean, default: false }
       - { name: tags, label: Tags, widget: list, required: false }
-      - { name: coverUrl, label: Cover URL, widget: string, required: false }
+      - { name: coverUrl, label: Cover, widget: file, required: false }
       - name: coverType
         label: Cover type
         widget: select
@@ -52,7 +52,7 @@ collections:
         label: Body
         widget: richtext
         modes: [rich_text, raw]
-        editor_components: [code-block, image]
+        editor_components: [code-block, image, video]
 
   - name: projects
     label: Projects
@@ -71,7 +71,7 @@ collections:
       - { name: description, label: Description, widget: string, required: false, default: '' }
       - { name: date, label: Date, widget: datetime, type: date, format: YYYY-MM-DD }
       - { name: published, label: Published, widget: boolean, default: false }
-      - { name: coverUrl, label: Cover URL, widget: string, required: false }
+      - { name: coverUrl, label: Cover, widget: file, required: false }
       - name: coverType
         label: Cover type
         widget: select
@@ -82,4 +82,4 @@ collections:
         label: Body
         widget: richtext
         modes: [rich_text, raw]
-        editor_components: [code-block, image]
+        editor_components: [code-block, image, video]

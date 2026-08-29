@@ -8,5 +8,27 @@
 	</head>
 	<body>
 		<script src="https://unpkg.com/@sveltia/cms/dist/sveltia-cms.js"></script>
+		<script>
+			// Sveltia ships no video block, and the rich text editor drops raw HTML it
+			// doesn't recognise. This teaches it the one-line <video> markup the site
+			// renders, so pasted-in videos survive a round trip through rich text mode.
+			CMS.registerEditorComponent({
+				id: 'video',
+				label: 'Video',
+				icon: 'movie',
+				fields: [
+					{ name: 'src', label: 'Video file', widget: 'file' },
+					{ name: 'poster', label: 'Poster image', widget: 'image', required: false }
+				],
+				pattern: /^<video\s+src="(?<src>[^"]*)"(?:\s+poster="(?<poster>[^"]*)")?[^>]*><\/video>$/m,
+				fromBlock: ({ groups: { src, poster } = {} }) => ({ src, poster }),
+				toBlock: ({ src, poster }) =>
+					`<video src="${src ?? ''}"${poster ? ` poster="${poster}"` : ''} controls muted playsinline preload="metadata"></video>`,
+				toPreview: ({ src, poster }) =>
+					src
+						? `<video src="${src}"${poster ? ` poster="${poster}"` : ''} controls muted playsinline></video>`
+						: ''
+			});
+		</script>
 	</body>
 </html>
