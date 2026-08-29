@@ -8,6 +8,10 @@ backend:
 # Media lives in Garage (self-hosted S3) on hizuru. `endpoint` and `acl` are
 # undocumented but supported; see garage.md in the remote-os repo. The Secret
 # Access Key is not stored here, Sveltia prompts for it.
+# The secret is 40 base64-alphabet chars on purpose: Sveltia validates it in
+# the browser against /^[A-Za-z0-9\/+=]{40}$/ before it ever signs a request, so
+# a stock 64-hex Garage secret is rejected as "invalid" without touching S3.
+# Imported with `garage key import`.
 media_libraries:
   # Internal (git-backed) storage is the default target, and the Asset Library
   # page only ever writes there -- that is how watercolorswirls.png ended up
@@ -15,11 +19,10 @@ media_libraries:
   default: false
   aws_s3:
     endpoint: https://s3.ony.world
-    force_path_style: true
     public_url: https://media.ony.world
     bucket: media
     region: garage
-    access_key_id: GKfa7ea7b8163058d4a871619b
+    access_key_id: GK7d5c6bde0269c77623f54192
     acl: false
 
 # Unused while `default: false` above, kept so re-enabling internal storage is
