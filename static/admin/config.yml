@@ -9,6 +9,10 @@ backend:
 # undocumented but supported; see garage.md in the remote-os repo. The Secret
 # Access Key is not stored here, Sveltia prompts for it.
 media_libraries:
+  # Internal (git-backed) storage is the default target, and the Asset Library
+  # page only ever writes there -- that is how watercolorswirls.png ended up
+  # committed to the repo. Turn it off so every upload goes to Garage.
+  default: false
   aws_s3:
     endpoint: https://s3.ony.world
     public_url: https://media.ony.world
@@ -17,7 +21,8 @@ media_libraries:
     access_key_id: GKfa7ea7b8163058d4a871619b
     acl: false
 
-# Git-backed fallback, for the odd small asset that belongs in the repo.
+# Unused while `default: false` above, kept so re-enabling internal storage is
+# a one-line change.
 media_folder: /static/uploads
 public_folder: /uploads
 
