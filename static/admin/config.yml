@@ -15,6 +15,7 @@ media_libraries:
   default: false
   aws_s3:
     endpoint: https://s3.ony.world
+    force_path_style: true
     public_url: https://media.ony.world
     bucket: media
     region: garage
