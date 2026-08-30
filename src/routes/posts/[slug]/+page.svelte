@@ -2,6 +2,7 @@
 	import { formatDate } from '$lib/date';
 	import { initTargetFlash } from '$lib/target-flash';
 	import { onMount } from 'svelte';
+	import Cover from '$components/cover.svelte';
 	import type { PageProps } from './$types';
 
 	let { data }: PageProps = $props();
@@ -18,6 +19,8 @@
 	{title}
 </h1>
 <time class="text-sm text-muted-fg capitalize">{date}</time>
+
+<Cover src={data.metadata.coverUrl} alt={data.metadata.coverAlt ?? ''} />
 
 <article class="mt-8 space-y-4">
 	<Post />

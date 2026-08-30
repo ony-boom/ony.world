@@ -42,6 +42,7 @@ declare global {
 				date: string;
 				published: boolean;
 				coverUrl?: string;
+				coverAlt?: string;
 				tags?: string[];
 			};
 		}
