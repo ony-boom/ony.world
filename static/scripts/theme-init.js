@@ -26,3 +26,19 @@ updateTheme(theme);
 
 window.theme = theme;
 window.updateTheme = updateTheme;
+
+// Accent is independent of light/dark: it sets the hue every colour in the ramp is
+// expressed in. Stamped here, before first paint, so a stored accent never flashes.
+// No list of valid accents lives here — an unknown value simply matches no
+// :root[data-accent] rule and falls through to the default hue, and $lib/accent.ts
+// validates before the store ever hands it out.
+const ACCENT_KEY = 'accent';
+const storedAccent = localStorage.getItem(ACCENT_KEY);
+
+if (storedAccent) document.documentElement.dataset.accent = storedAccent;
+
+window.accent = storedAccent;
+window.updateAccent = (newAccent) => {
+	document.documentElement.dataset.accent = newAccent;
+	localStorage.setItem(ACCENT_KEY, newAccent);
+};

@@ -1,6 +1,7 @@
 // See https://svelte.dev/docs/kit/types#app.d.ts
 
 import type { Theme } from '$lib/theme';
+import type { Accent } from '$lib/accent';
 import type { Component } from 'svelte';
 
 // for information about these interfaces
@@ -8,6 +9,10 @@ declare global {
 	interface Window {
 		theme: Theme;
 		updateTheme: (newTheme: Theme) => void;
+		// Unvalidated: theme-init.js stamps whatever localStorage held. $lib/accent.ts
+		// narrows it to Accent.
+		accent: string | null;
+		updateAccent: (newAccent: Accent) => void;
 	}
 	namespace App {
 		// interface Error {}

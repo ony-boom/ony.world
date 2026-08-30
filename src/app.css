@@ -2,30 +2,46 @@
 @import './styles/fonts.css';
 
 :root {
-	--onyx: #0f0f0f;
-	--carbon: #1a1a1a;
-	--carbon-2: #242424;
-	--dust: #d1d1d1;
-	--white-smoke: #f5f5f5;
-	--white: #ffffff;
+	/* One hue drives the whole ramp, neutrals included, at low chroma. Switching accent
+	   then changes the light in the room rather than swapping a highlight. Chroma climbs
+	   with lightness: a tint that reads on paper turns to mud in the near-blacks.
+	   Lightness values match the greys these replaced (#0f0f0f, #1a1a1a, #f5f5f5...). */
+	--hue: 63;
 
-	--bg: light-dark(var(--white-smoke), var(--onyx));
-	--surface: light-dark(var(--white), var(--carbon));
-	--fg: light-dark(var(--onyx), var(--white-smoke));
+	--ink: oklch(0.168 0.005 var(--hue));
+	--ink-2: oklch(0.218 0.01 var(--hue));
+	--ink-3: oklch(0.26 0.013 var(--hue));
+	--paper-3: oklch(0.861 0.032 var(--hue));
+	--paper: oklch(0.97 0.04 var(--hue));
+	--paper-2: oklch(0.995 0.028 var(--hue));
+
+	--bg: light-dark(var(--paper), var(--ink));
+	--surface: light-dark(var(--paper-2), var(--ink-2));
+	--fg: light-dark(var(--ink), var(--paper));
 
 	/* Light mode needs more ink than dark needs light: dark text on a bright field loses
 	   contrast faster as alpha drops. Hence the asymmetric pairs. */
-	--muted-fg: light-dark(--alpha(var(--onyx) / 72%), --alpha(var(--white-smoke) / 50%));
-	--muted: light-dark(--alpha(var(--onyx) / 55%), --alpha(var(--white-smoke) / 38%));
-	--border: light-dark(var(--dust), var(--carbon-2));
+	--muted-fg: light-dark(--alpha(var(--ink) / 72%), --alpha(var(--paper) / 50%));
+	--muted: light-dark(--alpha(var(--ink) / 55%), --alpha(var(--paper) / 38%));
+	--border: light-dark(var(--paper-3), var(--ink-3));
 
-	/* amber: warm hue against neutral grays. two tones — one can't pass contrast on both bgs.
-	   Light tone is deep (ochre) by necessity: a bright amber on #f5f5f5 only reaches ~4:1. */
-	--amber: light-dark(oklch(0.52 0.14 63), oklch(0.79 0.13 72));
+	/* Two tones — one cannot pass contrast on both grounds. The light tone is deep by
+	   necessity: a bright accent on near-white only reaches ~4:1. */
+	--accent: light-dark(oklch(0.52 0.14 var(--hue)), oklch(0.79 0.13 var(--hue)));
 
 	--primary: var(--fg);
 
-	--ff-sans: 'Satoshi', 'Satoshi-fallback', ui-sans-serif, sans-serif;
+	--ff-sans: 'Instrument Sans', 'Instrument Sans-fallback', ui-sans-serif, sans-serif;
+}
+
+/* Accents are nothing but a hue: every ramp step above is expressed in it. amber is the
+   default and lives on :root above, so it needs no block of its own. */
+:root[data-accent='mint'] {
+	--hue: 165;
+}
+
+:root[data-accent='iris'] {
+	--hue: 285;
 }
 
 @theme {
@@ -38,10 +54,11 @@
 	--color-border: var(--border);
 	--color-muted-fg: var(--muted-fg);
 	--color-primary: var(--primary);
+	--color-accent: var(--accent);
 }
 
 ::selection {
-	background: --alpha(var(--amber) / 22%);
+	background: --alpha(var(--accent) / 22%);
 }
 
 :focus {
@@ -49,12 +66,12 @@
 }
 
 :focus-visible {
-	outline: 2px solid var(--amber);
+	outline: 2px solid var(--accent);
 	outline-offset: 2px;
 }
 
 .target-flash {
-	outline: 2px solid var(--amber);
+	outline: 2px solid var(--accent);
 	outline-offset: 2px;
 	animation: target-fade 1.4s ease-out 0.9s forwards;
 }
@@ -73,7 +90,7 @@
 
 		--noise-opacity: 0.1;
 
-    scroll-behavior: smooth;
+		scroll-behavior: smooth;
 
 		&[style='color-scheme: dark;'] {
 			--noise-opacity: 0.5;
@@ -106,7 +123,7 @@
 
 		blockquote {
 			@apply my-6 border-l-2 border-muted pl-4 italic;
-			color: light-dark(--alpha(var(--onyx) / 75%), --alpha(var(--white-smoke) / 70%));
+			color: light-dark(--alpha(var(--ink) / 75%), --alpha(var(--paper) / 70%));
 
 			p {
 				@apply mb-2 last:mb-0;
@@ -162,8 +179,14 @@
 		}
 	}
 
+	/* Header and overlay icon buttons: one size, one press feedback, three call sites. */
+	.icon-button {
+		@apply grid size-9 place-items-center text-muted-fg no-underline transition duration-150;
+		@apply hover:text-fg active:scale-95;
+	}
+
 	/* Structural links (lists, nav, cards) stay neutral so the accent means something.
-	   Amber is reserved for prose links below — the few places it aids reading. */
+	   The accent is reserved for prose links below — the few places it aids reading. */
 	a,
 	.link {
 		color: var(--fg);
@@ -176,15 +199,15 @@
 			color 180ms ease;
 
 		&:hover {
-			text-decoration-color: var(--amber);
+			text-decoration-color: var(--accent);
 		}
 
 		&.ghost-link {
 			color: var(--muted-fg);
 
 			&:hover {
-				color: var(--amber);
-				text-decoration-color: var(--amber);
+				color: var(--accent);
+				text-decoration-color: var(--accent);
 			}
 		}
 	}
@@ -192,11 +215,11 @@
 	/* Prose links carry the accent: inline in a sentence, color is what makes them
 	   findable without the underline shouting. */
 	p a:not(.ghost-link) {
-		color: var(--amber);
-		text-decoration-color: --alpha(var(--amber) / 35%);
+		color: var(--accent);
+		text-decoration-color: --alpha(var(--accent) / 35%);
 
 		&:hover {
-			text-decoration-color: var(--amber);
+			text-decoration-color: var(--accent);
 		}
 	}
 
@@ -218,7 +241,10 @@
 	}
 
 	pre {
-		@apply overflow-auto border border-muted/30 p-4 font-mono;
+		@apply overflow-auto border border-muted/30 bg-surface p-4 font-mono;
+		/* Wide code scrolls sideways often enough that the OS bar is part of the design. */
+		scrollbar-width: thin;
+		scrollbar-color: var(--muted) transparent;
 	}
 
 	video,
@@ -226,4 +252,28 @@
 		@apply mx-auto;
 		z-index: 0;
 	}
+}
+
+/* Mirrors the lightbox predicate in lightbox.svelte: any image inside a post or a cover,
+   unless it is already a link. Keep the two in step. */
+:is(article, figure) img {
+	cursor: zoom-in;
+}
+
+:is(article, figure) a img {
+	cursor: pointer;
+}
+
+html:has(dialog[data-lightbox][open]) {
+	overflow: hidden;
+}
+
+/* Site-wide view-transition timing: the lightbox morph and the accent cross-fade both ride
+   this. Ease-in-out, since a transition reads as a view change rather than an entrance, and
+   inside the 300ms budget for a user action. */
+::view-transition-group(lightbox-media),
+::view-transition-old(root),
+::view-transition-new(root) {
+	animation-duration: 260ms;
+	animation-timing-function: ease-in-out;
 }

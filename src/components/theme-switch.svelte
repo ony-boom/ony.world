@@ -19,10 +19,7 @@
 	type="button"
 	aria-label={`Switch to ${next} theme`}
 	title={`Switch to ${next} theme`}
-	class={[
-		'grid size-9 place-items-center text-muted-fg no-underline transition duration-150 hover:text-fg active:scale-95',
-		props.class
-	]}
+	class={['icon-button', props.class]}
 	onclick={switchTheme}
 >
 	{#key current}

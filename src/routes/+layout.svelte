@@ -5,9 +5,12 @@
 
 	import { dev } from '$app/environment';
 	import { initThemeToggle } from '$lib/theme';
+	import { initAccent } from '$lib/accent';
 	import { onMount } from 'svelte';
 	import ThemeSwitch from '$components/theme-switch.svelte';
+	import AccentSwitch from '$components/accent-switch.svelte';
 	import BackLink from '$components/back-link.svelte';
+	import Lightbox from '$components/lightbox.svelte';
 	import { page } from '$app/state';
 
 	let { children } = $props();
@@ -21,9 +24,10 @@
 
 	const pageUrl = $derived(page.url.href);
 
-	// Sync, not async: onMount only honours a returned teardown from a sync callback,
-	// and initThemeToggle returns one that drops its media-query listener.
+	// Sync, not async: onMount only honours a returned teardown from a sync callback, and
+	// both of these return one.
 	onMount(() => initThemeToggle());
+	onMount(() => initAccent());
 </script>
 
 <svelte:head>
@@ -52,13 +56,16 @@
 
 <div class="mx-auto flex min-h-svh max-w-2xl flex-col px-6 py-10 sm:py-14">
 	<!-- justify-end so the toggle stays pinned right whether or not a breadcrumb renders. -->
-	<div class="flex items-center justify-end gap-3">
+	<div class="flex items-center justify-end gap-1">
 		{#if !isHome}
 			<BackLink class="mr-auto min-w-0" />
 		{/if}
+		<AccentSwitch class="shrink-0" />
 		<ThemeSwitch class="shrink-0" />
 	</div>
 	<main class="mt-8 min-w-0 flex-1 sm:mt-10">
 		{@render children()}
 	</main>
 </div>
+
+<Lightbox />

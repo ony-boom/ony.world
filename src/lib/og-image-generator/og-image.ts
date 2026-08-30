@@ -1,6 +1,6 @@
 import satori from 'satori';
 import { Resvg } from '@resvg/resvg-js';
-import SatoshiFont from '../assets/fonts/Satoshi-Bold.ttf?arraybuffer';
+import InstrumentSansFont from '../assets/fonts/InstrumentSans-Bold.ttf?arraybuffer';
 import OgImage from '$components/og-image.svelte';
 import { svelteComponentToHTML } from './utils';
 
@@ -25,8 +25,8 @@ const generateOgImageSVG = async ({
 		height,
 		fonts: [
 			{
-				name: 'Satoshi',
-				data: SatoshiFont,
+				name: 'Instrument Sans',
+				data: InstrumentSansFont,
 				weight: 700,
 				style: 'normal'
 			}

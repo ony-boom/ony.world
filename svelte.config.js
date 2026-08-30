@@ -40,6 +40,10 @@ const config = {
 								light: 'vitesse-light'
 							},
 							tabindex: null,
+							// Token colours only. The theme's own ground is a flat #ffffff, the one
+							// thing on the page outside the accent ramp — a hard white block on a
+							// tinted page. app.css gives <pre> the site's surface instead.
+							rootStyle: false,
 							defaultColor: 'light-dark()'
 						})
 					);

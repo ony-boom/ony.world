@@ -22,7 +22,7 @@
 	.base {
 		width: 100%;
 		height: 100%;
-		font-family: 'Satoshi', sans-serif;
+		font-family: 'Instrument Sans', sans-serif;
 		font-size: 32px;
 
 		padding: 64px 128px;
