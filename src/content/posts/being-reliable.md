@@ -6,7 +6,6 @@ published: true
 tags:
   - slice-of-life
 coverUrl: ''
-coverType: image
 ---
 
 > Someone or something that is reliable can be trusted or believed because he, she, or it works or behaves well in the way you expect.

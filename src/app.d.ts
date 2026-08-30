@@ -42,7 +42,6 @@ declare global {
 				date: string;
 				published: boolean;
 				coverUrl?: string;
-				coverType?: 'image' | 'video';
 				tags?: string[];
 			};
 		}

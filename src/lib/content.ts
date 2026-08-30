@@ -26,8 +26,7 @@ export async function loadContent(
 			metadata: {
 				...metadata,
 				slug,
-				path,
-				coverType: metadata?.coverType ?? 'image'
+				path
 			}
 		} as App.BlogPost;
 	};

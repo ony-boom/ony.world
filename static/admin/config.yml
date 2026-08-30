@@ -50,12 +50,6 @@ collections:
       - { name: published, label: Published, widget: boolean, default: false }
       - { name: tags, label: Tags, widget: list, required: false }
       - { name: coverUrl, label: Cover, widget: file, required: false }
-      - name: coverType
-        label: Cover type
-        widget: select
-        options: [image, video]
-        default: image
-        required: false
       # Rich text first (Ghost-ish), raw markdown one click away in the toolbar.
       - name: body
         label: Body
@@ -81,12 +75,6 @@ collections:
       - { name: date, label: Date, widget: datetime, type: date, format: YYYY-MM-DD }
       - { name: published, label: Published, widget: boolean, default: false }
       - { name: coverUrl, label: Cover, widget: file, required: false }
-      - name: coverType
-        label: Cover type
-        widget: select
-        options: [image, video]
-        default: image
-        required: false
       - name: body
         label: Body
         widget: richtext
