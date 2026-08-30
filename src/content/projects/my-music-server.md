@@ -1,9 +1,9 @@
 ---
-title: 'My music server'
-description: 'A music server/player similar to Subsonic,Navindrome'
-date: '2025-11-05'
+title: My music server
+description: A music server/player similar to Subsonic,Navindrome
+date: 2025-11-05
 published: true
-coverUrl: https://media.ony.world/mms-preview.mp4
+coverUrl: ''
 ---
 
 <video src="https://media.ony.world/mms-preview.mp4" controls muted playsinline preload="metadata"></video>
