@@ -5,7 +5,7 @@ date: 2026-08-30
 published: true
 tags:
   - slice-of-life
-coverUrl: https://media.ony.world/20260204_052215.jpg
+coverUrl: https://media.ony.world/20260204_052234.jpg
 coverAlt: ''
 ---
 
