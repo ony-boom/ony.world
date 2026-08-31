@@ -5,7 +5,8 @@ date: 2026-08-30
 published: true
 tags:
   - slice-of-life
-coverUrl: https://media.ony.world/20260308_074009.jpg
+coverUrl: https://media.ony.world/20260204_052215.jpg
+coverAlt: ''
 ---
 
 It's really hard to differentiate them, to be honest. And I don't know if right now I am even trying, but I know deep down inside that for now I should focus more on the first, and the latter will come back later, **_maybe_**.
