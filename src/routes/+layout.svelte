@@ -6,6 +6,7 @@
 	import { dev } from '$app/environment';
 	import { initThemeToggle } from '$lib/theme';
 	import { initAccent } from '$lib/accent';
+	import { initBlurUp } from '$lib/blur-up';
 	import { onMount } from 'svelte';
 	import ThemeSwitch from '$components/theme-switch.svelte';
 	import AccentSwitch from '$components/accent-switch.svelte';
@@ -25,9 +26,10 @@
 	const pageUrl = $derived(page.url.href);
 
 	// Sync, not async: onMount only honours a returned teardown from a sync callback, and
-	// both of these return one.
+	// each of these returns one.
 	onMount(() => initThemeToggle());
 	onMount(() => initAccent());
+	onMount(() => initBlurUp());
 </script>
 
 <svelte:head>

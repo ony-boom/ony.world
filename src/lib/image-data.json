@@ -1,0 +1,17 @@
+{
+	"https://media.ony.world/20260204_052234.jpg": {
+		"width": 4000,
+		"height": 3000,
+		"lqip": "data:image/webp;base64,UklGRmYAAABXRUJQVlA4IFoAAADQAwCdASoYABIAPu1kqU2ppaOmMAgBMB2JYwDBzBVG+d22h42sSjwA/jLvE96CyAD8fTcJXDQYtOPraKv07qCt7BXTn+TjHgPl0aNyiPNiy8W+J2qIZC4AAAA="
+	},
+	"https://media.ony.world/nix-devenv-pos.webp": {
+		"width": 1600,
+		"height": 1200,
+		"lqip": "data:image/webp;base64,UklGRmgAAABXRUJQVlA4IFwAAABQBACdASoYABIAPu1qr1CppaQiqAqpMB2JaQAAJZzKLTzjClQJBsrRR1QAAP5lZ86cv11opsYG2GHOScnWyQWN6RcCw/tjoPx9uCjh2emoXEvTonDycbfiIAAAAA=="
+	},
+	"https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExZXg0aXY5M3MybnQ2dnZpdW9tZzB1NXh6aDE3bnczbGlvajU2dmNmNSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/mwKJ0P6AN4yddpKhr1/giphy.gif": {
+		"width": 500,
+		"height": 281,
+		"lqip": "data:image/webp;base64,UklGRmAAAABXRUJQVlA4IFQAAACwAwCdASoYAA0APu1mqk4ppaOiMAgBMB2JQBYdg9I88ahIaVdEAAD+7qGWk4X2xN06+p4U3DO7DefdkV4f+REUgi7o6BB6+iq2iX1Kigobp2J1QAA="
+	}
+}

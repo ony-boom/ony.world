@@ -254,6 +254,32 @@
 	}
 }
 
+/* Blur-up: an image carries a ~24px preview of itself as its background (put there by
+   $lib/rehype-image-data.js or $lib/blur-up.ts), so the space it will occupy is never
+   blank. The element is transparent until the real bytes decode, which lets the preview
+   show through; then the blur lifts and the picture resolves in place.
+
+   The blur is baked into the preview, so what this filter adds is only the part that has
+   to animate. clip-path holds it inside the border box — a filter otherwise bleeds a soft
+   transparent edge past it, and the picture would appear to shrink as the blur came off. */
+img[data-blur-up] {
+	background: center / cover no-repeat;
+	clip-path: inset(0);
+	/* Long and evenly paced: the preview holds a moment before it starts to resolve, so
+	   the arriving detail reads as the picture coming into focus rather than a swap. */
+	transition: filter 900ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+img[data-blur-up][data-loading] {
+	filter: blur(12px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+	img[data-blur-up] {
+		transition: none;
+	}
+}
+
 /* Mirrors the lightbox predicate in lightbox.svelte: any image inside a post or a cover,
    unless it is already a link. Keep the two in step. */
 :is(article, figure) img {

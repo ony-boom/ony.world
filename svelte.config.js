@@ -5,7 +5,7 @@ import { escapeSvelte } from 'mdsvex';
 import { createHighlighter } from 'shiki';
 import rehypeExternalLinks from 'rehype-external-links';
 import rehypeSlug from 'rehype-slug';
-import { rehypeImageSize } from './src/lib/rehype-image-size.js';
+import { rehypeImageData } from './src/lib/rehype-image-data.js';
 
 const mdsvexExtentions = ['.svx', '.md'];
 const highlighter = await createHighlighter({
@@ -21,7 +21,7 @@ const config = {
 			extensions: mdsvexExtentions,
 			rehypePlugins: [
 				rehypeSlug,
-				rehypeImageSize,
+				rehypeImageData,
 				[
 					rehypeExternalLinks,
 					{

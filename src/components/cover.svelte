@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { blurUp } from '$lib/blur-up';
+
 	let {
 		src,
 		alt = '',
@@ -10,6 +12,9 @@
 	const url = $derived(src?.trim() ?? '');
 	const isVideo = $derived(/\.(mp4|webm|ogv|mov|m4v)$/i.test(url));
 	const caption = $derived(alt.trim());
+
+	// Size and blurred preview from the build-time cache, if this cover is in it.
+	const preview = $derived(blurUp(url));
 
 	// One ratio for every cover, whatever the source orientation: a portrait left at its
 	// own ratio runs too tall to sit above the post. Cropped from the centre, and the
@@ -32,7 +37,7 @@
 				preload="metadata"
 			></video>
 		{:else}
-			<img class={fit} {src} {alt} decoding="async" fetchpriority="high" />
+			<img class={fit} {src} {alt} decoding="async" fetchpriority="high" {...preview} />
 		{/if}
 		{#if caption}
 			<!-- Same text as the alt/aria-label above, so hide this copy from AT rather than

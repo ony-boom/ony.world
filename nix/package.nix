@@ -42,7 +42,7 @@ in
         version
         src
         ;
-      hash = "sha256-MOgdwoSyBPLKitLPu4U/pxe0zJRfxMQMe+jkGU9Ud7Y=";
+      hash = "sha256-u7Ibjfp4fHUaXP6TgP46AHEWxDv2lsAYv41Eqd6PR+k=";
     };
 
     buildPhase = ''
