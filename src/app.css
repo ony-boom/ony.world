@@ -25,8 +25,11 @@
 	--fg: light-dark(var(--ink), var(--paper));
 
 	/* Light mode needs more ink than dark needs light: dark text on a bright field loses
-	   contrast faster as alpha drops. Hence the asymmetric pairs. */
-	--muted-fg: light-dark(--alpha(var(--ink) / 72%), --alpha(var(--paper) / 50%));
+	   contrast faster as alpha drops. Hence the asymmetric pairs — each is picked so the
+	   tone lands at the same contrast on either ground, which is the point of the pair.
+	   --muted-fg is 7.5:1 both ways; --muted is decoration only (borders, underlines,
+	   scrollbar) and is the one tone deliberately below text contrast. */
+	--muted-fg: light-dark(--alpha(var(--ink) / 72%), --alpha(var(--paper) / 64%));
 	--muted: light-dark(--alpha(var(--ink) / 55%), --alpha(var(--paper) / 38%));
 	--border: light-dark(var(--paper-3), var(--ink-3));
 
@@ -180,7 +183,6 @@
 
 		blockquote {
 			@apply my-6 border-l-2 border-muted pl-4 italic;
-			color: light-dark(--alpha(var(--ink) / 75%), --alpha(var(--paper) / 70%));
 
 			p {
 				@apply mb-2 last:mb-0;
