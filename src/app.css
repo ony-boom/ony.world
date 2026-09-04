@@ -127,6 +127,24 @@
 		font-weight: 400;
 	}
 
+	/* Body copy sits a step below full ink on every page, not just in posts: the home page
+	   and the lists are prose too, and it is that step that makes a link visible. Set on
+	   main so the header above it keeps its own chrome. */
+	main {
+		color: var(--prose-fg);
+	}
+
+	/* Headings hold full ink against it. With the accent drained to grey that step is the
+	   hierarchy, so it cannot be left to inherit. */
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6 {
+		color: var(--fg);
+	}
+
 	/* Emphasis returns to full ink. Against muted prose that is what marks it, so bold
 	   still reads on a ground where colour means nothing. */
 	strong,
@@ -140,7 +158,6 @@
 		   multiples of this line: half a line between paragraphs, one under a heading,
 		   two above it. */
 		line-height: 1.75;
-		color: var(--prose-fg);
 
 		/* balance is for headings, a line or two long; pretty is the body-copy counterpart,
 		   which only pulls the last line up to avoid leaving one word alone. */
@@ -269,7 +286,7 @@
 	   findable without the underline shouting. */
 	p a:not(.ghost-link) {
 		color: var(--accent);
-		text-decoration-color: --alpha(var(--accent) / 35%);
+		text-decoration-color: --alpha(var(--accent) / 60%);
 
 		&:hover {
 			text-decoration-color: var(--accent);
