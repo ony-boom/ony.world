@@ -14,23 +14,32 @@
  */
 import { readdir, readFile, writeFile } from 'node:fs/promises';
 import { join } from 'node:path';
-import sharp from 'sharp';
+import { fileURLToPath } from 'node:url';
 
-const CONTENT = new URL('../src/content/', import.meta.url);
+const CONTENT = fileURLToPath(new URL('../src/content/', import.meta.url));
 const CACHE = new URL('../src/lib/image-data.json', import.meta.url);
 
 // Wide enough to keep the shape of the subject, small enough that the base64
 // costs less than the request an external placeholder would have made.
 const LQIP_WIDTH = 24;
 
-/** Every markdown file under src/content, at any depth. */
+// Loaded on demand: importing the native binary costs ~170ms, and a run that finds
+// every URL already cached never encodes anything.
+/** @type {typeof import('sharp') | undefined} */
+let sharp;
+
+// The extensions mdsvex is registered for; $lib/content.ts globs the same set and is
+// the source of truth for what counts as content. (`.svelte.md` ends in `.md`.)
+const CONTENT_FILE = /\.(md|svx)$/;
+
+/** Every content file under src/content, at any depth. */
 async function contentFiles(dir) {
 	const entries = await readdir(dir, { withFileTypes: true });
 	const files = await Promise.all(
 		entries.map((entry) => {
-			const path = join(entry.parentPath, entry.name);
+			const path = join(dir, entry.name);
 			if (entry.isDirectory()) return contentFiles(path);
-			return entry.name.endsWith('.md') ? [path] : [];
+			return CONTENT_FILE.test(entry.name) ? [path] : [];
 		})
 	);
 	return files.flat();
@@ -46,11 +55,13 @@ function imageUrls(source) {
 	return found.filter((url) => url.startsWith('http'));
 }
 
-/** Dimensions plus an inlineable blurred preview, or null if the image can't be read. */
+/** Dimensions plus an inlineable blurred preview. Throws if the image can't be read. */
 async function describe(url) {
 	const response = await fetch(url);
 	if (!response.ok) throw new Error(`HTTP ${response.status}`);
 	const bytes = Buffer.from(await response.arrayBuffer());
+
+	sharp ??= (await import('sharp')).default;
 
 	// An animated source is read as its first frame; a preview only needs the one.
 	const image = sharp(bytes);

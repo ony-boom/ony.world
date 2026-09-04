@@ -1,6 +1,11 @@
 import imageData from './image-data.json';
+import { imageAttrs } from './image-attrs.js';
 
-type ImageData = { width: number; height: number; lqip: string };
+/** Named for the file, not `ImageData` — that one is the DOM's canvas pixel buffer. */
+type ImageEntry = { width: number; height: number; lqip: string };
+
+/** Matched in two places below, so it lives in one. Mirrored by app.css. */
+const BLUR_UP = 'img[data-blur-up]';
 
 /**
  * The size and blurred preview `scripts/image-data.js` recorded for a remote image,
@@ -8,16 +13,9 @@ type ImageData = { width: number; height: number; lqip: string };
  * seen — it just renders without the effect. $lib/rehype-image-data.js does the same
  * for images that come out of markdown.
  */
-export function blurUp(src?: string) {
-	const data: ImageData | undefined = (imageData as Record<string, ImageData>)[src?.trim() ?? ''];
-	if (!data) return {};
-
-	return {
-		width: data.width,
-		height: data.height,
-		'data-blur-up': '',
-		style: `background-image:url(${data.lqip})`
-	};
+export function blurUp(src: string) {
+	const data: ImageEntry | undefined = (imageData as Record<string, ImageEntry>)[src];
+	return data ? imageAttrs(data) : {};
 }
 
 /**
@@ -31,15 +29,22 @@ export function blurUp(src?: string) {
  */
 export function initBlurUp() {
 	const mark = (img: HTMLImageElement) => {
-		if (img.complete) return;
+		// Already painted, or already being watched — a re-inserted node arrives here twice.
+		if (img.complete || img.dataset.loading !== undefined) return;
 		img.dataset.loading = '';
-		img.addEventListener('load', () => delete img.dataset.loading, { once: true });
-		img.addEventListener('error', () => delete img.dataset.loading, { once: true });
+
+		// decode() rather than the load event: load fires before the picture is paintable,
+		// so the blur would lift a frame early. A broken image rejects; either way the mark
+		// comes off, because an image that will never arrive must not stay blurred.
+		img
+			.decode()
+			.catch(() => {})
+			.finally(() => delete img.dataset.loading);
 	};
 
 	const sweep = (root: ParentNode) => {
-		if (root instanceof HTMLImageElement && root.dataset.blurUp !== undefined) mark(root);
-		root.querySelectorAll?.<HTMLImageElement>('img[data-blur-up]').forEach(mark);
+		if (root instanceof HTMLImageElement && root.matches(BLUR_UP)) mark(root);
+		root.querySelectorAll<HTMLImageElement>(BLUR_UP).forEach(mark);
 	};
 
 	sweep(document);

@@ -1,4 +1,5 @@
 import { readFileSync } from 'node:fs';
+import { imageAttrs } from './image-attrs.js';
 
 /**
  * What `scripts/image-data.js` recorded about every remote image in the content.
@@ -30,11 +31,11 @@ export function rehypeImageData() {
 			const data = imageData[String(node.properties.src).trim()];
 			if (!data) return;
 
-			node.properties.width ??= data.width;
-			node.properties.height ??= data.height;
-			node.properties['data-blur-up'] = '';
-			// Inline rather than a class: the preview is per-image data, not styling.
-			node.properties.style = `background-image:url(${data.lqip})`;
+			// Assigned only where the markdown said nothing, so a hand-written width or
+			// style on a raw <img> in a post still wins.
+			for (const [key, value] of Object.entries(imageAttrs(data))) {
+				node.properties[key] ??= value;
+			}
 		});
 	};
 }
