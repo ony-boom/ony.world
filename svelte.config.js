@@ -6,6 +6,7 @@ import { createHighlighter } from 'shiki';
 import rehypeExternalLinks from 'rehype-external-links';
 import rehypeSlug from 'rehype-slug';
 import { rehypeImageData } from './src/lib/rehype-image-data.js';
+import { rehypeImageFigure } from './src/lib/rehype-image-figure.js';
 
 const mdsvexExtentions = ['.svx', '.md'];
 const highlighter = await createHighlighter({
@@ -22,6 +23,8 @@ const config = {
 			rehypePlugins: [
 				rehypeSlug,
 				rehypeImageData,
+				// After rehypeImageData: it is what settles whether an image has an alt at all.
+				rehypeImageFigure,
 				[
 					rehypeExternalLinks,
 					{

@@ -22,6 +22,6 @@
 
 <Cover src={data.metadata.coverUrl} alt={data.metadata.coverAlt ?? ''} />
 
-<article class="mt-8 space-y-4">
+<article class="mt-8 space-y-3.5">
 	<Post />
 </article>

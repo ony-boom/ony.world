@@ -8,12 +8,17 @@
 	   Lightness values match the greys these replaced (#0f0f0f, #1a1a1a, #f5f5f5...). */
 	--hue: 63;
 
-	--ink: oklch(0.168 0.005 var(--hue));
-	--ink-2: oklch(0.218 0.01 var(--hue));
-	--ink-3: oklch(0.26 0.013 var(--hue));
-	--paper-3: oklch(0.861 0.032 var(--hue));
-	--paper: oklch(0.97 0.04 var(--hue));
-	--paper-2: oklch(0.995 0.028 var(--hue));
+	/* Scales every chroma below, so one value can drain the colour from the whole ramp at
+	   once. At 0 the lightnesses are all that survive — which is exactly the grey palette
+	   those values were taken from. See the `ash` accent. */
+	--tint: 1;
+
+	--ink: oklch(0.168 calc(0.005 * var(--tint)) var(--hue));
+	--ink-2: oklch(0.218 calc(0.01 * var(--tint)) var(--hue));
+	--ink-3: oklch(0.26 calc(0.013 * var(--tint)) var(--hue));
+	--paper-3: oklch(0.861 calc(0.032 * var(--tint)) var(--hue));
+	--paper: oklch(0.97 calc(0.04 * var(--tint)) var(--hue));
+	--paper-2: oklch(0.995 calc(0.028 * var(--tint)) var(--hue));
 
 	--bg: light-dark(var(--paper), var(--ink));
 	--surface: light-dark(var(--paper-2), var(--ink-2));
@@ -25,9 +30,18 @@
 	--muted: light-dark(--alpha(var(--ink) / 55%), --alpha(var(--paper) / 38%));
 	--border: light-dark(var(--paper-3), var(--ink-3));
 
+	/* Prose sits one step below full ink, so links, headings and bold — which stay at full
+	   contrast — are found by weight of colour alone rather than by hue. That step is what
+	   keeps a link findable under `ash`, where there is no hue to find it by. Both grounds
+	   land near 10:1 against a full-ink 17.6:1, so the step costs no legibility. */
+	--prose-fg: light-dark(--alpha(var(--ink) / 80%), --alpha(var(--paper) / 74%));
+
 	/* Two tones — one cannot pass contrast on both grounds. The light tone is deep by
 	   necessity: a bright accent on near-white only reaches ~4:1. */
-	--accent: light-dark(oklch(0.52 0.14 var(--hue)), oklch(0.79 0.13 var(--hue)));
+	--accent: light-dark(
+		oklch(0.52 calc(0.14 * var(--tint)) var(--hue)),
+		oklch(0.79 calc(0.13 * var(--tint)) var(--hue))
+	);
 
 	--primary: var(--fg);
 
@@ -42,6 +56,17 @@
 
 :root[data-accent='iris'] {
 	--hue: 285;
+}
+
+/* The one accent that is not a hue. Draining the chroma leaves the greys the ramp was
+   drawn from — where this site started, before any of this was tintable. Colour then
+   carries no meaning on the page, so the accent stops being colour: it goes to ink, and a
+   prose link is marked the way print marks one, by contrast against the muted body rather
+   than by hue. Both tones sit ~15.7:1 on their ground against prose at ~10:1, so the step
+   that finds a link is the same size in either mode. */
+:root[data-accent='ash'] {
+	--tint: 0;
+	--accent: light-dark(oklch(0.22 0 0), oklch(0.93 0 0));
 }
 
 @theme {
@@ -102,18 +127,33 @@
 		font-weight: 400;
 	}
 
+	/* Emphasis returns to full ink. Against muted prose that is what marks it, so bold
+	   still reads on a ground where colour means nothing. */
 	strong,
 	b {
 		font-weight: 700;
+		color: var(--fg);
 	}
 
 	article {
+		/* A long measure is only readable on open leading. Everything below is spaced in
+		   multiples of this line: half a line between paragraphs, one under a heading,
+		   two above it. */
+		line-height: 1.75;
+		color: var(--prose-fg);
+
+		/* balance is for headings, a line or two long; pretty is the body-copy counterpart,
+		   which only pulls the last line up to avoid leaving one word alone. */
+		p {
+			text-wrap: pretty;
+		}
+
 		h2,
 		h3,
 		h4,
 		h5,
 		h6 {
-			@apply mt-6! mb-3! font-bold text-primary;
+			@apply mt-14! mb-7! font-bold text-primary;
 			text-wrap: balance;
 		}
 
@@ -158,6 +198,19 @@
 
 		video {
 			@apply aspect-video;
+		}
+
+		/* A line of air above and below, against the half-line between paragraphs, so an
+		   image reads as its own beat rather than another block of the text. Important
+		   because space-y on the article would otherwise flatten both edges. */
+		figure {
+			@apply my-7!;
+		}
+
+		/* Matches the caption <Cover> renders above the post, so an image in the body and
+		   the one at the top of the page are captioned the same way. */
+		figcaption {
+			@apply mt-2 text-right text-xs text-muted-fg;
 		}
 	}
 }

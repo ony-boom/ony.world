@@ -1,11 +1,12 @@
 import { browser } from '$app/environment';
 import { writable } from 'svelte/store';
 
-export type Accent = 'amber' | 'mint' | 'iris';
+export type Accent = 'amber' | 'mint' | 'iris' | 'ash';
 
-// Order is the cycle order: pressing the switch walks this list and wraps. The hues
-// themselves live in app.css as :root[data-accent='…']; adding one means editing both.
-const ACCENTS: Accent[] = ['amber', 'mint', 'iris'];
+// Order is the cycle order: pressing the switch walks this list and wraps. Mostly hues,
+// but ash drains the chroma instead; either way what an accent means lives in app.css as
+// :root[data-accent='…'], so adding one means editing both.
+const ACCENTS: Accent[] = ['amber', 'mint', 'iris', 'ash'];
 
 const isAccent = (value: unknown): value is Accent => ACCENTS.includes(value as Accent);
 
