@@ -3,10 +3,10 @@ import { writable } from 'svelte/store';
 
 export type Accent = 'amber' | 'mint' | 'iris' | 'ash';
 
-// Order is the cycle order: pressing the switch walks this list and wraps. Mostly hues,
-// but ash drains the chroma instead; either way what an accent means lives in app.css as
-// :root[data-accent='…'], so adding one means editing both.
-const ACCENTS: Accent[] = ['amber', 'mint', 'iris', 'ash'];
+// Order is the palette's order, left to right. Mostly hues, but ash drains the chroma
+// instead; either way what an accent means lives in app.css as [data-accent='…'], so
+// adding one means editing both.
+export const ACCENTS: Accent[] = ['amber', 'mint', 'iris', 'ash'];
 
 const isAccent = (value: unknown): value is Accent => ACCENTS.includes(value as Accent);
 
@@ -15,10 +15,6 @@ const isAccent = (value: unknown): value is Accent => ACCENTS.includes(value as 
 export const accent = writable<Accent>(
 	browser && isAccent(window.accent) ? window.accent : ACCENTS[0]
 );
-
-export function nextAccent(current: Accent): Accent {
-	return ACCENTS[(ACCENTS.indexOf(current) + 1) % ACCENTS.length];
-}
 
 export function initAccent() {
 	if (!browser) return;
