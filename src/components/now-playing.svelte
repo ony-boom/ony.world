@@ -5,7 +5,7 @@
 
 	// Skeleton and loaded row share these: identical boxes are the whole no-shift guarantee.
 	const ROW = 'flex h-10 items-center gap-3';
-	const THUMB = 'size-10 shrink-0';
+	const THUMB = 'size-10 shrink-0 rounded-(--radius-box)';
 
 	type Track = {
 		name: string;
@@ -74,8 +74,8 @@
 	<div class={['np-skel', ROW, className]} aria-hidden="true">
 		<div class={[THUMB, 'border border-border']}></div>
 		<div class="space-y-2">
-			<div class="h-1.5 w-12 bg-border"></div>
-			<div class="h-1.5 w-32 bg-border"></div>
+			<div class="h-1.5 w-12 rounded-(--radius-line) bg-border"></div>
+			<div class="h-1.5 w-32 rounded-(--radius-line) bg-border"></div>
 		</div>
 	</div>
 {:else if status === 'ready' && track}

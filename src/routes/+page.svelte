@@ -21,19 +21,18 @@
 
 <section class:reveal>
 	<p>
-		Hi, I'm <strong>Ony</strong>. I
-		<a href="/projects">build software</a>.
+		Hi, I'm <strong>Ony</strong>. I <a href="/projects">build software</a>.
 	</p>
 
 	<p>
-		I work remotely as a web and mobile developer. I'm always open to new projects, so feel free to
-		<a href="mailto:onyrakoto27@gmail.com">reach out</a>. I mostly work with TypeScript/JavaScript
-		and Go.
+		Web and mobile, for about four years now, usually the whole thing, from the interface down to
+		the server. Mostly TypeScript and Go, if that matters to you.
 	</p>
 
 	<p>
-		Recently <a href="/posts">I started writing</a> more about things I learn and my experience, mostly
-		because the site felt a bit empty to be honest.
+		I'm open to new projects, so <a href="mailto:ony@ony.world">reach out</a> if you have one. I
+		also
+		<a href="/posts">write</a> sometimes, about code and whatever else I'm figuring out.
 	</p>
 </section>
 
@@ -72,6 +71,14 @@
 						{/if}
 					</span>
 					{#if job.location}
+						<!-- Leader: ties the location back to its role across the gap, as a
+						     table of contents would. Empty, so its baseline is its bottom
+						     edge and the dots sit on the text's baseline. Drawn rather than
+						     a dotted border, which renders as specks at 1px. -->
+						<span
+							aria-hidden="true"
+							class="hidden h-0.5 min-w-4 flex-1 bg-[radial-gradient(circle,var(--muted)_0.75px,transparent_1px)] bg-size-[6px_2px] bg-repeat-x sm:block"
+						></span>
 						<span class="hidden text-sm text-muted-fg sm:block">{job.location}</span>
 					{/if}
 				</div>

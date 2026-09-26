@@ -115,7 +115,12 @@
 			close();
 		}}
 	>
-		<img bind:this={media} {src} {alt} class="max-h-full max-w-full object-contain" />
+		<img
+			bind:this={media}
+			{src}
+			{alt}
+			class="max-h-full max-w-full rounded-(--radius-box) object-contain"
+		/>
 
 		<button
 			type="button"

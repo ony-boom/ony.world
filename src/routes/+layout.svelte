@@ -62,8 +62,9 @@
 		{#if !isHome}
 			<BackLink class="mr-auto min-w-0" />
 		{/if}
-		<AccentSwitch class="shrink-0" />
-		<ThemeSwitch class="shrink-0" />
+		<AccentSwitch class="shrink-0">
+			<ThemeSwitch />
+		</AccentSwitch>
 	</div>
 	<main class="mt-8 min-w-0 flex-1 sm:mt-10">
 		{@render children()}

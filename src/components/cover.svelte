@@ -19,7 +19,7 @@
 	// One ratio for every cover, whatever the source orientation: a portrait left at its
 	// own ratio runs too tall to sit above the post. Cropped from the centre, and the
 	// fixed box means no shift when the image lands.
-	const fit = 'aspect-video w-full bg-surface object-cover';
+	const fit = 'aspect-video w-full rounded-(--radius-box) bg-surface object-cover';
 </script>
 
 {#if url}

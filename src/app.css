@@ -8,11 +8,6 @@
 	   Lightness values match the greys these replaced (#0f0f0f, #1a1a1a, #f5f5f5...). */
 	--hue: 63;
 
-	/* Scales every chroma below, so one value can drain the colour from the whole ramp at
-	   once. At 0 the lightnesses are all that survive — which is exactly the grey palette
-	   those values were taken from. See the `ash` accent. */
-	--tint: 1;
-
 	--ink: oklch(0.168 calc(0.005 * var(--tint)) var(--hue));
 	--ink-2: oklch(0.218 calc(0.01 * var(--tint)) var(--hue));
 	--ink-3: oklch(0.26 calc(0.013 * var(--tint)) var(--hue));
@@ -39,25 +34,57 @@
 	   land near 10:1 against a full-ink 17.6:1, so the step costs no legibility. */
 	--prose-fg: light-dark(--alpha(var(--ink) / 80%), --alpha(var(--paper) / 74%));
 
+	--primary: var(--fg);
+
+	--ff-sans: 'Instrument Sans', 'Instrument Sans-fallback', ui-sans-serif, sans-serif;
+
+	/* Corners scale with what they round: a fifth of the element's size, never more than
+	   the header pill's round end (accent-switch.svelte), which is where --radius comes
+	   from — half the pill's height. A fixed curve reads differently at every size: what
+	   is a soft corner on a code block is nearly a circle on a 40px thumbnail.
+
+	   --radius       controls: the pill, icon buttons, colour chips. Fully round by
+	                  design — at their size this clamps to a pill or a circle.
+	   --radius-box   boxes of any size — pictures, thumbnails, code blocks. A percentage
+	                  radius is taken from the element itself, so it follows the size;
+	                  the cap holds large boxes at the pill's curve.
+	   --radius-line  things one line of text tall — inline code, placeholder bars, a
+	                  link's focus ring. The same fifth, of a 1.5rem line. */
+	--radius: 1.125rem;
+	--radius-box: min(var(--radius), 20%);
+	--radius-line: 0.3rem;
+}
+
+/* The accent is derived again wherever data-accent is set, not only on the root, so an
+   element can wear an accent the page is not in — the palette's swatches each preview
+   their own this way (accent-switch.svelte). */
+:root,
+[data-accent] {
+	/* Scales every chroma in the ramp, so one value can drain the colour from all of it at
+	   once. At 0 the lightnesses are all that survive — which is exactly the grey palette
+	   those values were taken from. See the `ash` accent. Restated per element so a hued
+	   swatch keeps its colour while the page around it is `ash`. */
+	--tint: 1;
+
 	/* Two tones — one cannot pass contrast on both grounds. The light tone is deep by
 	   necessity: a bright accent on near-white only reaches ~4:1. */
 	--accent: light-dark(
 		oklch(0.52 calc(0.14 * var(--tint)) var(--hue)),
 		oklch(0.79 calc(0.13 * var(--tint)) var(--hue))
 	);
-
-	--primary: var(--fg);
-
-	--ff-sans: 'Instrument Sans', 'Instrument Sans-fallback', ui-sans-serif, sans-serif;
 }
 
 /* Accents are nothing but a hue: every ramp step above is expressed in it. amber is the
-   default and lives on :root above, so it needs no block of its own. */
-:root[data-accent='mint'] {
+   default and lives on :root above; its block is only for a swatch inside another accent. */
+[data-accent='amber'] {
+	--hue: 63;
+}
+
+[data-accent='mint'] {
 	--hue: 165;
 }
 
-:root[data-accent='iris'] {
+[data-accent='iris'] {
 	--hue: 285;
 }
 
@@ -66,8 +93,9 @@
    carries no meaning on the page, so the accent stops being colour: it goes to ink, and a
    prose link is marked the way print marks one, by contrast against the muted body rather
    than by hue. Both tones sit ~15.7:1 on their ground against prose at ~10:1, so the step
-   that finds a link is the same size in either mode. */
-:root[data-accent='ash'] {
+   that finds a link is the same size in either mode. Comes after the rule above, which it
+   ties on specificity. */
+[data-accent='ash'] {
 	--tint: 0;
 	--accent: light-dark(oklch(0.22 0 0), oklch(0.93 0 0));
 }
@@ -82,6 +110,12 @@
 	--color-border: var(--border);
 	--color-muted-fg: var(--muted-fg);
 	--color-primary: var(--primary);
+}
+
+/* Inline, so `bg-accent` and friends read var(--accent) where they are used rather than a
+   copy Tailwind resolves once on :root — which would pin every swatch to the page's
+   accent instead of the one its own data-accent derives. */
+@theme inline {
 	--color-accent: var(--accent);
 }
 
@@ -101,6 +135,8 @@
 .target-flash {
 	outline: 2px solid var(--accent);
 	outline-offset: 2px;
+	/* Its targets are headings and footnotes: a line of text. */
+	border-radius: var(--radius-line);
 	animation: target-fade 1.4s ease-out 0.9s forwards;
 }
 
@@ -115,19 +151,28 @@
 		@apply bg-bg text-fg;
 		color-scheme: light dark;
 		scrollbar-gutter: stable;
-
-		--noise-opacity: 0.1;
-
 		scroll-behavior: smooth;
-
-		&[style='color-scheme: dark;'] {
-			--noise-opacity: 0.5;
-		}
 	}
 
 	body {
 		@apply font-sans;
 		font-weight: 400;
+
+		/* Grain, held still: a moving one competes with the page's own reveal. It is ink
+		   seen through a noise mask rather than a grey image, so it follows light/dark and
+		   takes the hue like every other tone — and drains to neutral under `ash`. Behind
+		   the content (body is no stacking context, so -1 lands above html's background):
+		   laid over the text it wears into the glyphs and costs contrast. */
+		&::before {
+			content: '';
+			position: fixed;
+			inset: 0;
+			z-index: -1;
+			pointer-events: none;
+			background: var(--fg);
+			opacity: 0.05;
+			mask: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+		}
 	}
 
 	/* Body copy sits a step below full ink on every page, not just in posts: the home page
@@ -212,7 +257,7 @@
 
 		img,
 		video {
-			@apply w-full;
+			@apply w-full rounded-(--radius-box);
 		}
 
 		video {
@@ -240,7 +285,7 @@
 
 @layer components {
 	select {
-		@apply p-2 transition;
+		@apply rounded-(--radius) p-2 transition;
 	}
 
 	button {
@@ -253,7 +298,7 @@
 
 	/* Header and overlay icon buttons: one size, one press feedback, three call sites. */
 	.icon-button {
-		@apply grid size-9 place-items-center text-muted-fg no-underline transition duration-150;
+		@apply grid size-9 place-items-center rounded-(--radius) text-muted-fg no-underline transition duration-150;
 		@apply hover:text-fg active:scale-95;
 	}
 
@@ -266,6 +311,8 @@
 		text-decoration-color: var(--muted);
 		text-decoration-thickness: 1px;
 		text-underline-offset: 3px;
+		/* Unseen but for the focus ring, which the outline draws along this corner. */
+		border-radius: var(--radius-line);
 		transition:
 			text-decoration-color 180ms ease,
 			color 180ms ease;
@@ -308,12 +355,12 @@
 		}
 
 		code {
-			@apply border border-muted/50 px-1;
+			@apply rounded-(--radius-line) border border-muted/50 px-1;
 		}
 	}
 
 	pre {
-		@apply overflow-auto border border-muted/30 bg-surface p-4 font-mono;
+		@apply overflow-auto rounded-(--radius-box) border border-muted/30 bg-surface p-4 font-mono;
 		/* Wide code scrolls sideways often enough that the OS bar is part of the design. */
 		scrollbar-width: thin;
 		scrollbar-color: var(--muted) transparent;
@@ -333,10 +380,11 @@
 
    The blur is baked into the preview, so what this filter adds is only the part that has
    to animate. clip-path holds it inside the border box — a filter otherwise bleeds a soft
-   transparent edge past it, and the picture would appear to shrink as the blur came off. */
+   transparent edge past it, and the picture would appear to shrink as the blur came off.
+   Rounded like the image itself, or the bleed would fill in its corners. */
 img[data-blur-up] {
 	background: center / cover no-repeat;
-	clip-path: inset(0);
+	clip-path: inset(0 round var(--radius-box));
 	/* Long and evenly paced: the preview holds a moment before it starts to resolve, so
 	   the arriving detail reads as the picture coming into focus rather than a swap. */
 	transition: filter 900ms cubic-bezier(0.4, 0, 0.2, 1);
